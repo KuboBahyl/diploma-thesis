@@ -1,2 +1,3 @@
-# diploma-thesis
-LaTeX files of my diploma thesis
+# Diploma thesis - Quantum turbulence
+
+Run LaTeX file `main.tex` with any LaTeX compiler.
