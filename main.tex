@@ -30,13 +30,13 @@
 \usepackage{enumerate}
 \usepackage{epigraph}
 \usepackage{graphicx}
-\usepackage{setspace}
+\usepackage{setspace} % setup various spaces
 \usepackage{titlesec}
 \usepackage[titles]{tocloft}
 \usepackage[labelfont={sf,bf}]{caption}
 \usepackage{url}
-\usepackage{wrapfig}
-\usepackage{hyperref}
+\usepackage{wrapfig} % image wrapper
+\usepackage{hyperref} % hyperlinks
 
 
 %% MACROS
@@ -51,11 +51,12 @@
 \renewcommand{\dot}{\!\cdot\!} % scalar product
 \newcommand{\todo}[1]{ {\bf !!TODO!!}\qquad{#1} } % TODO marker
 
+% optimal spacings
 \setlength{\parskip}{9pt}
 \setlength{\parindent}{0pt}
-\setlength{\baselineskip}{1.2\baselineskip} %distances under equations
+\setlength{\baselineskip}{1.2\baselineskip} % extend distance under equations
 
-% The following part convinces Latex to be not so dumb while making Chapters...
+% The following part convinces Latex to not mess with the chapters...
 \makeatletter
 \def\@makechapterhead#1{
   {\parindent \z@ \raggedright \normalfont
@@ -68,7 +69,7 @@
    \Huge\bfseries #1
    \par\nobreak
    \vskip 20\p@
-}}
+}}\newpage
 \makeatother
 
 % Defining a non-numbered chapter (but included in Summary)
@@ -83,47 +84,55 @@
 {\thesubsection}{1.4em}{}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%						              BEGIN                                         %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FRONT PAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{document}
 \pagestyle{empty}
 
+% Cover page
+\todo{}
 \include{docs/cover}
+
+% Front page
+\todo{}
 \include{docs/frontpage}
 
+% Formal ENG
 \todo{}
 \includegraphics[width=0.7\textwidth]{docs/zadanie_Bahyl_EN.pdf}
-
 \newpage
 
+% Formal SVK
 \todo{}
 \includegraphics[width=0.7\textwidth]{docs/zadanie_Bahyl_SVK.pdf}
-
 \newpage
 
+% Acnkowledgements
 \include{docs/acknowledgement}
-\include{docs/summary}
 
+% Summary
+\include{docs/summary}
 \newpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%						              THESIS                                        %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% THESIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagenumbering{arabic}
 \pagestyle{plain}
 \setcounter{page}{1}
 
+% Content
 \tableofcontents
 
-%\input{chap1_theory}
-%\input{chap2_setup}
-%\input{chap3_results}
-%\input{chap4_conclusion}
-%\input{chap5_bibliography}
-
+% Chapters
+\input{chap1_theory}
+\input{chap2_setup}
+\input{chap3_results}
+\input{chap4_conclusion}
+\input{chap5_bibliography}
 
 \end{document}

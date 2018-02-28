@@ -1,90 +1,3 @@
-\documentclass[a4paper, 12pt]{report}
-
-% Margins: ľavý 40mm, pravý 25mm, horný a dolný 25mm
-% Dimensions: 210mm x 297mm
-% (warning, Latex default from left: 1in~25mm)
-
-\usepackage{fullpage}
-\addtolength{\hoffset}{0cm}
-\addtolength{\textwidth}{0.5cm}
-
-% Everything about geometry:
-%https://www.sharelatex.com/learn/Page_size_and_margins
-%\let\openright=\clearpage - text only on right pages
-
-%% ENCODINGS
-\usepackage[utf8]{inputenc}
-\usepackage[IL2]{fontenc}
-\usepackage[english]{babel}
-
-
-%% PACKAGES
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage[font={footnotesize}]{caption}
-\usepackage{csquotes}
-\usepackage{enumerate}
-\usepackage{epigraph}
-\usepackage{graphicx}
-\usepackage{setspace}
-\usepackage{titlesec}  
-\usepackage[titles]{tocloft}
-\usepackage[labelfont={sf,bf}]{caption}
-\usepackage{url}
-\usepackage{wrapfig}
-\usepackage{hyperref}
-
-
-%% MACROS
-\newcommand{\unit}[1]{\,\mathrm{#1}}
-\newcommand{\ind}[1]{\mathrm{#1}}
-\newcommand{\He}{{}^4\mathrm{He}}
-\renewcommand{\Re}{\mathrm{Re}}
-\newcommand{\eps}{\varepsilon}
-\newcommand{\<}{\langle}
-\renewcommand{\>}{\rangle}
-\renewcommand{\vec}[1]{\mathbf{#1}}
-\renewcommand{\dot}{\!\cdot\!}
-\newcommand{\todo}[1]{ {\bf !!TODO!!}\qquad{#1} }
-
-\setlength{\parskip}{9pt}
-\setlength{\parindent}{0pt}
-\setlength{\baselineskip}{1.2\baselineskip} %distances under equations
-
-% The following part convinces Latex to be not so dumb while making Chapters...
-\makeatletter
-\def\@makechapterhead#1{
-	{\parindent \z@ \raggedright \normalfont
-		\Huge\bfseries \thechapter. #1
-		\par\nobreak
-		\vskip 20\p@
-}}
-\def\@makeschapterhead#1{
-	{\parindent \z@ \raggedright \normalfont
-		\Huge\bfseries #1
-		\par\nobreak
-		\vskip 20\p@
-}}
-\makeatother
-
-% Defining a non-numbered chapter (but included in Summary)
-\def\chapwithtoc#1{
-	\chapter*{#1}
-	\addcontentsline{toc}{chapter}{#1}
-}
-
-% Changing font of subsection
-\titleformat{\subsection}
-{\large\sffamily\bfseries}
-{\thesubsection}{1.4em}{}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%						              BEGIN                                         %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{document}
-
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
@@ -98,9 +11,6 @@ The phenomenological description of these effects, the \textit{two-fluid model},
 
 Moreover, superfluidity allows for the existence of vortices with discretely quantized circulation. These vortices are composed of circulating superfluid around a narrow core and can tangle to produce quantum turbulence (QT). QT is measurable using specific experimental methods, some of which will be described later in this work.
 
-
-
-
 \newpage
 \chapter{Theoretical Background}
 
@@ -108,9 +18,9 @@ The theoretical part of this Thesis is composed of three chapters:
 
 \begin{itemize}
 	\item[1.] The first serves as a brief introduction to the topic of superfluidity using  Bose-Einstein statistical physics and basic hydrodynamics.
-	
+
 	\item[2.] The second chapter focuses on macroscopic quantum effects of superfluids, and introduces the concept of quantized vortices using quantum mechanics.
-	
+
 	\item[3.] The last theoretical chapter deals with fluid dynamics; particularly the drag coefficients for various structures in fluid flows. We will also introduce the Reynolds number for oscillating objects immersed in both classical and quantum fluids.
 \end{itemize}
 All of the ideas discussed in this chapter can be found in standard textbooks \cite{skrbek}, \cite{landau} except for the derivation of the vortex line density at the end of second part, where the original papers of Feynman, Vinen and Hall are required \cite{feynman}, \cite{vinen1}, \cite{vinen2}.
@@ -132,54 +42,4 @@ We can therefore describe the whole He-II fluid as two inter-penetrating fluids,
 \section{Helium-II as a Bose-Einstein Condensate}
 The total spin of $\He$ is zero, so gaseous helium may be classified as a Bose gas. Additionally, if we assume no interactions between the particles, we may use the \textit{ideal Bose gas} model. This of course cannot provide a perfect description of helium's behaviour (due to its weak interactions), but it will suffice. The thermodynamic limit of the ideal Bose model provides an intuitive insight to helium's special properties, such as superfluidity.
 
-
-
-
-
-% Norma citácii: ISO 690
-
-\def\bibname{Bibliography}
-\begin{thebibliography}{99}
-	\addcontentsline{toc}{chapter}{\bibname}
-	
-	\bibitem{kapitsa}
-	{\sc Kapitsa, P.}
-	\emph{The Super-Fluidity of Liquid Helium II}.
-	Nature \textbf{141}, 74 (1938)
-	
-	\bibitem{tong}
-	{\sc Tong, D.}
-	\emph{Statistical physics}.
-	University of Cambridge Part II
-	
-	\bibitem{tisza}
-	{\sc Tisza, L.}
-	\emph{The viscosity of liquid helium and the Bose-Einstein statistics.}\\
-	Comptes Rendus Acad. Sciences, \textbf{207}:1186-1189 (1952)
-	
-	\bibitem{landau}
-	{\sc Landau, L.D.} \text{and} {\sc Lifshitz, E.M.}
-	\emph{Fluid Mechanics}, Second English Edition.\\
-	Pergamon Books Ltd., (1987). \mbox{ISBN~0-08-033933-6}
-	
-	\bibitem{landau_superfluid}
-	{\sc Landau, L.D.}
-	\emph{The theory of superfluidity of helium II}.\\
-	J. Phys. USSR, Vol. \textbf{11}, 91 (1947)
-	
-	\bibitem{andro}
-	{\sc Andronikashvili, E.L.}
-	J. Phys. USSR, \textbf{10}, 201 (1946)
-	
-	
-	\bibitem{skrbek}
-	{\sc Skrbek, L.} et al.
-	\emph{Fyzika nízkých teplot}, 1. vydání.\\
-	Praha: {\sl MatfyzPress}, (2011). \mbox{ISBN~978-80-7378-168-2}.
-	
-	
-	
-	
-\end{thebibliography}
-
-\end{document}
+\newpage
