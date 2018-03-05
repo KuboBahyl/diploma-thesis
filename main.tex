@@ -17,7 +17,7 @@
 
 %% ENCODINGS
 \usepackage[utf8]{inputenc}
-\usepackage[IL2]{fontenc}
+%\usepackage[IL2]{fontenc}
 \usepackage[english]{babel}
 
 
@@ -93,21 +93,17 @@
 \pagestyle{empty}
 
 % Cover page
-\todo{}
 \include{docs/cover}
 
 % Front page
-\todo{}
 \include{docs/frontpage}
 
 % Formal ENG
-\todo{}
-\includegraphics[width=0.7\textwidth]{docs/zadanie_Bahyl_EN.pdf}
+\includegraphics[width=0.9\textwidth]{docs/zadanie_Bahyl_EN.pdf}
 \newpage
 
 % Formal SVK
-\todo{}
-\includegraphics[width=0.7\textwidth]{docs/zadanie_Bahyl_SVK.pdf}
+\includegraphics[width=0.9\textwidth]{docs/zadanie_Bahyl_SVK.pdf}
 \newpage
 
 % Acnkowledgements
@@ -129,10 +125,107 @@
 \tableofcontents
 
 % Chapters
-\input{chap1_theory}
-\input{chap2_setup}
-\input{chap3_results}
-\input{chap4_conclusion}
+%\input{chap1_theory}
+%\input{chap2_setup}
+%\input{chap3_results}
+%\input{chap4_conclusion}
+%\input{chap5_bibliography}
+
+\chapter*{Introduction / Motivation (3 pgs)}
+\addcontentsline{toc}{chapter}{Introduction}
+
+\begin{itemize}
+	\item helium backround, phase diagram, superfluid transition, interesting properties
+	\item quantum turbulence, comparison with classical turbulence
+	\item overview on experiments with QT
+	\item overview on numerical simulations of QT
+	\item motivations, goals of this work
+\end{itemize}
+
+\newpage
+\chapter{Theoretical Background (15 pgs)}
+
+The theoretical part of this Thesis is composed of three chapters:
+
+\begin{itemize}
+	\item[1.] Microscopic view - wave function, collapse, quantum vortices
+
+	\item[2.] Mesoscopic view - filaments, drag and magnus force, dynamics of vortex, Schwarz equation, Kelvin waves (?)
+
+	\item[3.] Macroscopic view - hydrodynamics, two-fluid model, 
+
+\end{itemize}
+\vspace{1cm}
+
+\newpage
+
+{\Huge \bfseries Microscopic model}
+\addcontentsline{toc}{chapter}{Microscopic model}
+\vspace{0.3cm}
+
+\section{Bose-Einstein condensate}
+
+\section{Quantum vortex properties}
+
+{\Huge \bfseries Mesoscopic model}
+\addcontentsline{toc}{chapter}{Mesoscopic model}
+\vspace{0.3cm}
+
+\section{Filaments theory}
+
+\section{Filaments dynamics}
+
+{\Huge \bfseries Macroscopic model}
+\addcontentsline{toc}{chapter}{Macroscopic model}
+\vspace{0.3cm}
+
+\section{Two-fluid model}
+
+\section{Oscillatory motion}
+
+\section{Quantum turbulence}
+
+\section{Quantum rings}
+
+\newpage
+
+\chapter{Experimental Setup (20 pgs)}
+
+\section{Apparatus}
+
+\section{QT Generators}
+
+\subsection*{Quartz Tuning Fork}
+
+\section{Measurements and Processing}
+
+\section{Scaling, Second Sound}
+
+\newpage
+
+\chapter{Simulations (15 pgs)}
+
+\section{Codebase}
+
+\section{Finite differences}
+
+\section{Stepping}
+
+\section{Resegmentation}
+
+\section{Vortex ring}
+
+\newpage
+
+\chapter{Results (10 pgs)}
+
+\section{Experiments}
+
+\section{Simulations}
+
+\newpage
+
 \input{chap5_bibliography}
+
 
 \end{document}

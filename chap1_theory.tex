@@ -1,45 +1,161 @@
-\chapter*{Introduction}
+\documentclass[a4paper, 12pt]{report}
+
+% Margins: left 40mm, right 25mm, up and down 25mm
+% Dimensions: 210mm x 297mm
+% (warning, Latex default from left: 1in~25mm)
+
+\usepackage{fullpage}
+\addtolength{\hoffset}{0cm} % extends height of page
+\addtolength{\textwidth}{0.5cm} % extends lenght of written text
+
+% Everything about page geometry:
+%https://www.sharelatex.com/learn/Page_size_and_margins
+
+%% PRINTED VERSION
+% uncomment this below to render text only on pages on the right side - for printed version
+%\let\openright=\clearpage
+
+%% ENCODINGS
+\usepackage[utf8]{inputenc}
+%\usepackage[IL2]{fontenc}
+\usepackage[english]{babel}
+
+
+%% PACKAGES
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[font={footnotesize}]{caption}
+\usepackage{csquotes}
+\usepackage{enumerate}
+\usepackage{epigraph}
+\usepackage{graphicx}
+\usepackage{setspace} % setup various spaces
+\usepackage{titlesec}
+\usepackage[titles]{tocloft}
+\usepackage[labelfont={sf,bf}]{caption}
+\usepackage{url}
+\usepackage{wrapfig} % image wrapper
+\usepackage{hyperref} % hyperlinks
+
+
+%% MACROS
+\newcommand{\unit}[1]{\,\mathrm{#1}} % nice units
+\newcommand{\ind}[1]{\mathrm{#1}}
+\newcommand{\He}{{}^4\mathrm{He}} % special Helium
+\renewcommand{\Re}{\mathrm{Re}} % Reynolds number
+\newcommand{\eps}{\varepsilon} % standard epsilon
+\newcommand{\<}{\langle} % closed left
+\renewcommand{\>}{\rangle} % closed right
+\renewcommand{\vec}[1]{\mathbf{#1}} % nice bold vector
+\renewcommand{\dot}{\!\cdot\!} % scalar product
+\newcommand{\todo}[1]{ {\bf !!TODO!!}\qquad{#1} } % TODO marker
+
+% optimal spacings
+\setlength{\parskip}{9pt}
+\setlength{\parindent}{0pt}
+\setlength{\baselineskip}{1.2\baselineskip} % extend distance under equations
+
+% The following part convinces Latex to not mess with the chapters...
+\makeatletter
+\def\@makechapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+   \Huge\bfseries \thechapter. #1
+   \par\nobreak
+   \vskip 20\p@
+}}
+\def\@makeschapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+   \Huge\bfseries #1
+   \par\nobreak
+   \vskip 20\p@
+}}\newpage
+\makeatother
+
+% Defining a non-numbered chapter (but included in Summary)
+\def\chapwithtoc#1{
+\chapter*{#1}
+\addcontentsline{toc}{chapter}{#1}
+}
+
+% Changing font of subsection
+\titleformat{\subsection}
+{\large\sffamily\bfseries}
+{\thesubsection}{1.4em}{}
+
+\begin{document}
+
+\pagenumbering{arabic}
+\pagestyle{plain}
+\setcounter{page}{1}
+
+% Content
+\tableofcontents
+
+
+\chapter*{Introduction / Motivation (3 pgs)}
 \addcontentsline{toc}{chapter}{Introduction}
 
-The discovery of helium's liquid state kick-started modern experimental  low temperature physics. In 1908, the Dutch physicist Heike Kamerlingh Onnes reached the liquid state of helium at 4.2K for the very first time. With this, the last known gas was finally liquefied. Later, in 1913, Onnes was awarded the Nobel Prize for \textit{"his investigations on the properties of matter at low temperatures which led to the production of liquid helium"}.
-
-Later studies proved the existence of a new liquid state of $ \He $ - the superfluid phase, known as He-II. The transition (known as the $ \lambda$ transition) occurs at $ T_{\lambda} \approx 2.17\unit{K} $. The full phase diagram is shown in {\sffamily\textbf{Figure 1}}.
-
-While the properties and behaviour of He-I are similar to classical viscous fluids, He-II exhibits significantly different properties. For example, the thermal conductivity is amongst the highest of any known material. Later, in 1937 Pyotr Kapitsa\cite{kapitsa} conducted a few experiments on superfluid flow through narrow capillaries. He observed that He-II was able to flow with negligible viscosity. This research was also recognized by a Nobel prize in 1978.
-
-The phenomenological description of these effects, the \textit{two-fluid model}, was provided by Tisza and Landau. Together with the theory of Bose-Einstein condensation and quantum mechanics, these theories provide a basic understanding of superfluidity.
-
-Moreover, superfluidity allows for the existence of vortices with discretely quantized circulation. These vortices are composed of circulating superfluid around a narrow core and can tangle to produce quantum turbulence (QT). QT is measurable using specific experimental methods, some of which will be described later in this work.
+\begin{itemize}
+	\item helium backround, phase diagram, superfluid transition, interesting properties
+	\item quantum turbulence, comparison with classical turbulence
+	\item overview on experiments with QT
+	\item overview on numerical simulations of QT
+	\item motivations, goals of this work
+\end{itemize}
 
 \newpage
-\chapter{Theoretical Background}
+\chapter{Theoretical Background (15 pgs)}
 
 The theoretical part of this Thesis is composed of three chapters:
 
 \begin{itemize}
-	\item[1.] The first serves as a brief introduction to the topic of superfluidity using  Bose-Einstein statistical physics and basic hydrodynamics.
+	\item[1.] Microscopic view - wave function, collapse, quantum vortices
 
-	\item[2.] The second chapter focuses on macroscopic quantum effects of superfluids, and introduces the concept of quantized vortices using quantum mechanics.
+	\item[2.] Mesoscopic view - filaments, drag and magnus force, dynamics of vortex, Schwarz equation, Kelvin waves (?)
 
-	\item[3.] The last theoretical chapter deals with fluid dynamics; particularly the drag coefficients for various structures in fluid flows. We will also introduce the Reynolds number for oscillating objects immersed in both classical and quantum fluids.
+	\item[3.] Macroscopic view - hydrodynamics, two-fluid model, 
+
 \end{itemize}
-All of the ideas discussed in this chapter can be found in standard textbooks \cite{skrbek}, \cite{landau} except for the derivation of the vortex line density at the end of second part, where the original papers of Feynman, Vinen and Hall are required \cite{feynman}, \cite{vinen1}, \cite{vinen2}.
-
 \vspace{1cm}
-{\Huge \bfseries Superfluidity}
-\addcontentsline{toc}{chapter}{Superfluidity}
+{\Huge \bfseries Microscopic model}
+\addcontentsline{toc}{chapter}{Microscopic model}
 \vspace{0.3cm}
 
+\section{Bose-Einstein condensate}
+London's theory, macroscopic wave function, vorticity
 
-Among all chemical substances, helium is special and unique at low temperatures. Under normal conditions (room temperature and atmospheric pressure), helium gas behaves as an ideal gas and the most common isotope is $\He$, formed by 2 protons, 2 neutrons and 2 electrons.\footnote{There is another stable isotope of Helium, ${}^3\mathrm{He}$, which has one less neutron in the nucleus. In this Thesis, we will only focus on the isotope $\He$.} Due to the composition of the $\He$ atom, the resulting nuclear spin is equal to zero. Therefore, $\He$  is a boson and obeys Bose-Einstein quantum statistics. This will be discussed in more detail in {\sffamily\textbf{Section 1.1}}.
+\section{Quantum vortex properties}
+quantized circulation, properties of quantum vortex (velocity field, energy)
 
-When cooled below $ T_{\lambda}=2.17\unit{K} $, $\He$ undergoes a second-order phase transition to the superfluid state and quantum effects become much more significant. Since the quantum mechanical wave function for bosons is symmetric, two arbitrary atoms can occupy the same quantum state. The Pauli exclusion principle does not apply to bosons, so the global state of He-II at low temperatures can be described as a considerable amount of particles sitting in the energy ground state.
 
-We can therefore describe the whole He-II fluid as two inter-penetrating fluids, one composed of ground-state particles (and described by the macroscopic wave function) - the condensate or superfluid component, and a second classical-like fluid composed of thermally excited atoms - the normal fluid component. In the following sections, this \emph{two-fluid model} will be used to describe the rotational motion of the superfluid and consequently, the existence of quantum turbulence.
+{\Huge \bfseries Mesoscopic model}
+\addcontentsline{toc}{chapter}{Mesoscopic model}
+\vspace{0.3cm}
 
-\newpage
+\section{Filaments theory}
 
-\section{Helium-II as a Bose-Einstein Condensate}
-The total spin of $\He$ is zero, so gaseous helium may be classified as a Bose gas. Additionally, if we assume no interactions between the particles, we may use the \textit{ideal Bose gas} model. This of course cannot provide a perfect description of helium's behaviour (due to its weak interactions), but it will suffice. The thermodynamic limit of the ideal Bose model provides an intuitive insight to helium's special properties, such as superfluidity.
+segments, biot-savart, local induction approximation
 
-\newpage
+\section{Filaments dynamics}
+
+{\Huge \bfseries Macroscopic model}
+\addcontentsline{toc}{chapter}{Macroscopic model}
+\vspace{0.3cm}
+
+hydrodynamics
+
+\section{Two-fluid model}
+
+second sound, mutual friction
+
+
+\section{Oscillatory motion}
+
+oscillatory flow, 
+
+\section{Quantum turbulence}
+
+
+
+\end{document}
