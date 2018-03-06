@@ -135,11 +135,20 @@
 \addcontentsline{toc}{chapter}{Introduction}
 
 \begin{itemize}
-	\item helium backround, phase diagram, superfluid transition, interesting properties
-	\item quantum turbulence, comparison with classical turbulence
+
+	\item history
+	\item phase diagram (+pic)
+	\item superfluid transition
+	\item unconventional properties
+	\item theories from Landau, London
+	\item quantum vortices
+	\item QT (+pic)
+	\item QT vs CT
 	\item overview on experiments with QT
 	\item overview on numerical simulations of QT
-	\item motivations, goals of this work
+	\item motivations
+	\item goals - CT -> QT transition, simulations
+	
 \end{itemize}
 
 \newpage
@@ -148,11 +157,11 @@
 The theoretical part of this Thesis is composed of three chapters:
 
 \begin{itemize}
-	\item[1.] Microscopic view - wave function, collapse, quantum vortices
+	\item[1.] Microscopic view
 
-	\item[2.] Mesoscopic view - filaments, drag and magnus force, dynamics of vortex, Schwarz equation, Kelvin waves (?)
+	\item[2.] Mesoscopic view
 
-	\item[3.] Macroscopic view - hydrodynamics, two-fluid model, 
+	\item[3.] Macroscopic view
 
 \end{itemize}
 \vspace{1cm}
@@ -163,65 +172,223 @@ The theoretical part of this Thesis is composed of three chapters:
 \addcontentsline{toc}{chapter}{Microscopic model}
 \vspace{0.3cm}
 
-\section{Bose-Einstein condensate}
+\section{Statistical physics}
+\begin{itemize}
+	\item Bose-Einstein gas
+	\item critical temperature
+\end{itemize}
 
-\section{Quantum vortex properties}
+\section{Two-fluid model}
+\begin{itemize}
+	\item Landau's assumptions
+	\item two densities, velocities (+pic)
+\end{itemize}
 
-{\Huge \bfseries Mesoscopic model}
+\section{Wave function}
+\begin{itemize}
+	\item London's theory
+	\item NLSE (Schr eq)
+	\item macroscopic wave function
+	\item no vorticity
+	\item quantized circulation
+\end{itemize}
+
+\section{Quantum vortex}
+\begin{itemize}
+	\item definition
+	\item induced velocity
+	\item energy
+	\item quantized circulation
+	\item quantum turbulence
+\end{itemize}
+
+\newpage
+
+{\Huge \bfseries Mesoscopic view}
 \addcontentsline{toc}{chapter}{Mesoscopic model}
 \vspace{0.3cm}
 
-\section{Filaments theory}
+\section{Vortex parametrisation}
+\begin{itemize}
+	\item curve coordinates
+	\item derivatives
+	\item self-induced velocity
+	\item LIA approximation
+\end{itemize}
 
-\section{Filaments dynamics}
+\section{Vortex dynamics}
+\begin{itemize}
+	\item magnus force
+	\item mutual friction
+	\item Schwarz's equation
+	\item Kelvis waves (?)
+\end{itemize}
 
-{\Huge \bfseries Macroscopic model}
+\newpage
+
+{\Huge \bfseries Macroscopic view}
 \addcontentsline{toc}{chapter}{Macroscopic model}
 \vspace{0.3cm}
 
-\section{Two-fluid model}
+\section{Hydrodynamics of two-fluid}
+\begin{itemize}
+	\item updated hydrodynamical equations - HVBK
+	\item dynamical similarity
+	\item Reynolds number
+\end{itemize}
 
-\section{Oscillatory motion}
+\section{Second sound}
+\begin{itemize}
+	\item mode 1 - classical
+	\item mode 2 - unusual
+	\item velocity of second sound
+	\item attenuation
+	\item vortex line density estimate
+\end{itemize}
+
+\section{Oscillatory motion in superfluid}
+\begin{itemize}
+	\item penetration depth
+	\item Re for oscillations
+	\item defining depth and Re separately for normal and superfluid components
+\end{itemize}
 
 \section{Quantum turbulence}
+\begin{itemize}
+	\item critical velocity according to landau
+	\item critical velocity scaling in oscillatory case
+	\item T dependence of critical velocities (Bc. results)
+\end{itemize}
 
 \section{Quantum rings}
+\begin{itemize}
+	\item definition (+pic)
+	\item generation methods
+	\item dynamics
+\end{itemize}
 
 \newpage
 
-\chapter{Experimental Setup (20 pgs)}
+\chapter{Experimental Setup (15 pgs)}
 
 \section{Apparatus}
+\begin{itemize}
+	\item cryostat
+	\item cooling system
+	\item insert
+	\item resonator
+\end{itemize}
 
 \section{QT Generators}
+\begin{itemize}
+	\item quartz tuning fork
+	\item other oscillators
+\end{itemize}
 
-\subsection*{Quartz Tuning Fork}
+\section{QT Detection}
+\begin{itemize}
+	\item Second sound generating
+	\item SS detection
+\end{itemize}
 
-\section{Measurements and Processing}
+\section{Measurement methods and Processing}
+\begin{itemize}
+	\item fork modes - fund, overtone
+	\item SS modes - working with ??-th mode
+	\item frequency sweeps
+	\item amp sweeps
+	\item constant drives with SS on/off
+\end{itemize}
 
-\section{Scaling, Second Sound}
+\section{Universal Scaling}
+\begin{itemize}
+	\item Donnely number
+	\item universal scaling
+\end{itemize}
 
 \newpage
 
-\chapter{Simulations (15 pgs)}
+\chapter{Simulations (10 pgs)}
 
-\section{Codebase}
+\section{Graph model}
+\begin{itemize}
+	\item graph description
+	\item data structure
+	\item state
+\end{itemize}
 
 \section{Finite differences}
+\begin{itemize}
+	\item FD order, radius
+	\item Vandermonde vs analytical method
+	\item comp complexities of LIA and Biot-Savart
+	\item coords and velocities updating
+\end{itemize}
 
-\section{Stepping}
+\section{Running in time}
+\begin{itemize}
+	\item Euler vs. RK4 step
+	\item time stepping
+	\item stability
+\end{itemize}
 
 \section{Resegmentation}
+\begin{itemize}
+	\item adding and removing segments
+	\item local spline
+\end{itemize}
 
 \section{Vortex ring}
+\begin{itemize}
+	\item initialisation
+	\item movement, decreasing radius
+	\item comparison with theory
+	\item Kelvin waves (?)
+\end{itemize}
 
 \newpage
 
 \chapter{Results (10 pgs)}
 
-\section{Experiments}
+\section{Vortex line density}
+\begin{itemize}
+	\item steps made for achieving results
+	\item graphs for fundamental and overtone
+\end{itemize}
+
+\section{Drag force graphs}
+\begin{itemize}
+	\item velocity vs force
+	\item C vs velocity
+	\item Cn vs Reynolds
+\end{itemize}
+
+\section{Correlations}
+\begin{itemize}
+	\item compare vortex generating with drag force graphs
+	\item fund and overtone
+\end{itemize}
 
 \section{Simulations}
+\begin{itemize}
+	\item compare rings with various radii 
+	\item theoretical vs simulation velocity / range
+	\item stability tests
+	\item Kelvin waves(?)
+\end{itemize}
+
+\newpage
+
+\chapter{Conclusions (2 pgs)}
+
+\begin{itemize}
+	\item summarize main what have we done
+	\item repeat motivations and goals
+	\item list of achievements
+	\item list of failures
+	\item list of improvements
+	\item last words
+\end{itemize}
 
 \newpage
 
