@@ -1,0 +1,294 @@
+%%% The main file. Here are defined all parameters and links to other parts of thesis.%%%
+
+\documentclass[a4paper, 12pt]{report}
+
+% Okraje: ľavý 40mm, pravý 25mm, horný a dolný 25mm
+% Rozmery: 210mm x 297mm
+% (pozor, LaTeX zľava sám pridáva 1in~25mm)
+
+\usepackage{fullpage}			% určuje text cez celú stranu
+\addtolength{\hoffset}{0cm}		% určuje odsadenie textu zľava
+\addtolength{\textwidth}{0.5cm}	% určuje dlžku riadku
+
+
+%\setlength\oddsidemargin{15mm}
+%\setlength\evensidemargin{15mm}
+%\setlength\textwidth{145mm}
+%\setlength\textheight{247mm}
+%\setlength\topmargin{0mm}
+%\setlength\headsep{0mm}
+%\setlength\headheight{0mm}
+%https://www.sharelatex.com/learn/Page_size_and_margins
+
+\let\openright=\clearpage %text bude len na pravej strane knihy
+
+%% Kódovanie znakov
+\usepackage[utf8]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage[english]{babel}
+
+
+
+%% Packages
+\usepackage{amsfonts}  %math
+\usepackage{amsmath}   %math
+\usepackage{amssymb}   %math
+\usepackage[font={footnotesize}]{caption}   %captions
+\usepackage{csquotes}  %quotation
+\usepackage{enumerate} %číslovanie
+\usepackage{epigraph}  %pekná citácia na úvod
+\usepackage{graphicx}  %pridavanie obrazkov
+\usepackage{setspace}  %spacing between lines
+\usepackage{titlesec}  
+\usepackage[titles]{tocloft}
+\usepackage[labelfont={sf,bf}]{caption}
+\usepackage{url}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+
+
+% Makra
+\newcommand{\unit}[1]{\,\mathrm{#1}} %jednotky normalne
+\newcommand{\He}{{}^4\mathrm{He}} %Helium
+\newcommand{\TODO}[1]{\\{}\\ \indent {\bf !TODO!}\qquad{#1}}
+\newcommand{\eps}{\varepsilon} %pekny epsilon
+\newcommand{\<}{\langle} %kvacka vlavo
+\renewcommand{\>}{\rangle} %kvacka vpravo
+\renewcommand{\vec}[1]{\mathbf{#1}} %vektor hruby bez sipky
+\renewcommand{\dot}{\!\cdot\!} %dot product blizsie
+\newcommand{\ind}[1]{\mathrm{#1}}
+\renewcommand{\Re}{\mathrm{Re}}
+
+\hyphenation{Bose-Einstein} %nastaví (ne)delenie slova
+
+\setlength{\parskip}{9pt}
+\setlength{\parindent}{0pt}
+\setlength{\baselineskip}{1.2\baselineskip}%vzdialenosti nad a pod rovnicami
+
+% Nasledujuca cast je na to, aby Latex trochu inteligentnejsie robil medzery nad kapitolami a nepisal zbytocne veci ako "chapter"...
+\makeatletter
+\def\@makechapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+   \Huge\bfseries \thechapter. #1
+   \par\nobreak
+   \vskip 20\p@
+}}
+\def\@makeschapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+   \Huge\bfseries #1
+   \par\nobreak
+   \vskip 20\p@
+}}
+\makeatother
+
+% Toto makro definuje kapitolu, ktorá nie je očíslovaná, ale je uvedená v obsahu.
+\def\chapwithtoc#1{
+\chapter*{#1}
+\addcontentsline{toc}{chapter}{#1}
+}
+
+\titleformat{\subsection}
+{\large\sffamily\bfseries}
+{\thesubsection}{1.4em}{}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\pagestyle{empty}
+
+\begin{center}
+	\Large\sf
+	Comenius University
+	
+	\Large
+	Faculty of Mathematics, Physics and Informatics
+	\bigskip
+	
+	{\Huge \bfseries \sffamily BACHELOR THESIS}
+	\vspace*{1cm}
+	
+	
+	
+	\includegraphics[width=0.5\textwidth]{graphics/fmfi_logo.jpg} 
+	
+	\vspace{1.5cm}
+	
+	{\Huge\sf Jakub Bahyl}
+	
+	\vspace{15mm}
+	
+	{\Huge \bfseries \sffamily
+		\mbox{Measurement of quantum turbulence}
+		\mbox{in superfluid Helium}
+		\mbox{using second sound attenuation}
+	}
+	
+	\vfill
+	
+
+	
+	
+	
+{\Large\sf Bratislava, 2016}
+
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\begin{center}
+{\large\sf
+	Comenius University}
+
+{\large\sf
+Faculty of Mathematics, Physics and Informatics}
+\bigskip
+
+{\Large \bfseries \sffamily BACHELOR THESIS}
+\vspace*{1cm}
+
+
+
+\includegraphics[width=0.5\textwidth]{graphics/fmfi_logo.jpg} 
+
+\vfill
+\vspace{5mm}
+
+{\LARGE\sf Jakub Bahyl}
+
+\vspace{10mm}
+
+{\LARGE \bfseries \sffamily
+\mbox{Measurement of quantum turbulence}
+\mbox{in superfluid Helium}
+\mbox{using second sound attenuation}
+}
+
+\vfill
+
+Department of Low Temperature Physics, Charles University in Prague
+
+\vfill
+
+\begin{tabular}{rl}
+
+Study programme: & Physics \\
+\noalign{\vspace{2mm}}
+Study programme number: & 1160 \\
+\noalign{\vspace{2mm}}
+Supervisor of the bachelor thesis: & RNDr. David Schmoranzer, Ph.D. \\
+\noalign{\vspace{2mm}}
+Consultant of the bachelor thesis: & Dr. Martin James Jackson, Ph.D. \\
+
+\end{tabular}
+
+\vfill
+
+
+{\Large\sf Bratislava, 2016}
+
+
+
+
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{zadanie_Bahyl.pdf}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\pagenumbering{gobble}
+
+
+
+\chapter*{Acknowledgments}
+
+My special thanks go to my supervisor, David Schmoranzer, who gave me a  lot of experiences, knowledge and much more of his time, without which I definitely could not write this Thesis. Together with consultant Martin Jackson, they guided me during the whole experiment and helped me to understand all the important aspects included in this work. Moreover, I am thankful to Ladislav Skrbek and Patrik Švančara for giving me such a great opportunity to find out how astounding the experimental physics can be and to work with Superfluidity group within Charles University in Prague.
+
+In the end, I would like to hugely thank my friends and family for all their \textit{„Good luck"} and \textit{„Keep going"} motivational quotes and other sort of supports, which I deeply appreciated.
+
+
+
+\vglue 0pt plus 1fill
+
+\noindent
+I declare that I carried out this bachelor thesis independently, and only with the cited
+sources, literature and other professional sources.
+
+
+\vspace{10mm}
+
+\hbox{\hbox to 0.5\hsize{%
+		In \parbox[b]{2.5cm}{\dotfill} date \parbox[b]{2.5cm}{\dotfill}
+		\hss}\hbox to 0.5\hsize{%
+		Signature of the author:
+		\hss}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\vbox to \vsize{
+\setlength\parindent{0mm}
+\setlength\parskip{5mm}
+
+{\bfseries \sffamily Abstrakt}\\
+
+\input{abstract_svk}
+
+{\bfseries \sffamily Kľúčové slová}\\
+fyzika nízkých teplôt $\bullet$ supratekutosť $ \He $ $\bullet$ kvantová turbulencia $\bullet$ hydrodynamika
+
+
+{\bfseries \sffamily Abstract}\\
+
+\input{abstract_eng}
+
+{\bfseries \sffamily Keywords}\\
+low temperature physics $\bullet$ superfluidity $\bullet$ quantum turbulence $\bullet$ hydrodynamics
+
+\vss}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
+
+
+\spacing{0.5}
+\openright
+\pagenumbering{arabic}
+\pagestyle{plain}
+\setcounter{page}{1}
+\tableofcontents
+
+\begin{spacing}{1.0}
+\input{chap1_theory}
+\input{chap2_setup}
+\input{chap3_results}
+\input{chap4_conclusion}
+\end{spacing}
+\spacing{1.2}
+\input{chap5_bibliography}
+
+
+\openright
+
+\end{document}

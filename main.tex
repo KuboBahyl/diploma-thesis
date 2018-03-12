@@ -90,28 +90,28 @@
 
 
 \begin{document}
-\pagestyle{empty}
-
-% Cover page
-\include{docs/cover}
-
-% Front page
-\include{docs/frontpage}
-
-% Formal ENG
-\includegraphics[width=0.9\textwidth]{docs/zadanie_Bahyl_EN.pdf}
-\newpage
-
-% Formal SVK
-\includegraphics[width=0.9\textwidth]{docs/zadanie_Bahyl_SVK.pdf}
-\newpage
-
-% Acnkowledgements
-\include{docs/acknowledgement}
-
-% Summary
-\include{docs/summary}
-\newpage
+% \pagestyle{empty}
+%
+% % Cover page
+% \include{docs/cover}
+%
+% % Front page
+% \include{docs/frontpage}
+%
+% % Formal ENG
+% \includegraphics[width=0.9\textwidth]{docs/zadanie_Bahyl_EN.pdf}
+% \newpage
+%
+% % Formal SVK
+% \includegraphics[width=0.9\textwidth]{docs/zadanie_Bahyl_SVK.pdf}
+% \newpage
+%
+% % Acnkowledgements
+% \include{docs/acknowledgement}
+%
+% % Summary
+% \include{docs/summary}
+% \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% THESIS
@@ -125,134 +125,11 @@
 \tableofcontents
 
 % Chapters
-%\input{chap1_theory}
+\input{chap1_theory}
 %\input{chap2_setup}
 %\input{chap3_results}
 %\input{chap4_conclusion}
 %\input{chap5_bibliography}
-
-\chapter*{Introduction / Motivation (3 pgs)}
-\addcontentsline{toc}{chapter}{Introduction}
-
-\begin{itemize}
-
-	\item history
-	\item phase diagram (+pic)
-	\item superfluid transition
-	\item unconventional properties
-	\item theories from Landau, London
-	\item quantum vortices
-	\item QT (+pic)
-	\item QT vs CT
-	\item overview on experiments with QT
-	\item overview on numerical simulations of QT
-	\item motivations
-	\item goals - CT to QT transition, simulations
-	
-\end{itemize}
-
-\newpage
-\chapter{Theoretical Background (15 pgs)}
-
-The theoretical part of this Thesis is composed of two chapters:
-
-\begin{itemize}
-	\item[1.] Mesoscopic view
-
-	\item[3.] Macroscopic view
-
-\end{itemize}
-
-Content:
-
-\begin{itemize}
-	\item Bose-Einstein gas
-	\item critical temperature
-\end{itemize}
-
-\vspace{1cm}
-
-\newpage
-
-{\Huge \bfseries Mesoscopic view}
-\addcontentsline{toc}{chapter}{Mesoscopic model}
-\vspace{0.3cm}
-
-\section{London's theory}
-\begin{itemize}
-	\item London's theory
-	\item NLSE (Schr eq)
-	\item macroscopic wave function
-	\item no vorticity
-	\item quantized circulation
-\end{itemize}
-
-\section{Quantum vortex}
-\begin{itemize}
-	\item definition
-	\item induced velocity
-	\item energy
-	\item quantized circulation
-	\item quantum turbulence
-\end{itemize}
-
-\section{Vortex filament model}
-\begin{itemize}
-	\item graph model
-	\item state definition
-	\item curve coordinates
-	\item derivatives
-	\item self-induced velocity
-	\item LIA approximation
-\end{itemize}
-
-\section{Vortex dynamics}
-\begin{itemize}
-	\item magnus force
-	\item mutual friction
-	\item Schwarz's equation
-	\item special case - quantum ring (properties)
-	\item Kelvis waves (?)
-\end{itemize}
-
-\newpage
-
-{\Huge \bfseries Macroscopic view}
-\addcontentsline{toc}{chapter}{Macroscopic model}
-\vspace{0.3cm}
-
-\section{Hydrodynamics of two-fluid}
-\begin{itemize}
-	\item Landau's assumptions
-	\item two densities, velocities (+pic)
-	\item updated hydrodynamical equations - HVBK
-	\item dynamical similarity
-	\item Reynolds number
-\end{itemize}
-
-\section{Oscillatory motion in superfluid}
-\begin{itemize}
-	\item penetration depth
-	\item Re for oscillations
-	\item defining depth and Re separately for normal and superfluid components
-\end{itemize}
-
-\section{Quantum turbulence}
-\begin{itemize}
-	\item critical velocity according to landau
-	\item critical velocity scaling in oscillatory case
-	\item T dependence of critical velocities (Bc. results)
-\end{itemize}
-
-\section{Second sound}
-\begin{itemize}
-	\item what it is
-	\item velocity of second sound
-	\item attenuation
-	\item vortex line density estimate
-\end{itemize}
-
-\newpage
 
 \chapter{Experimental Approach (10 pgs)}
 
@@ -349,7 +226,7 @@ Content:
 
 \section{Simulations}
 \begin{itemize}
-	\item compare rings with various radii 
+	\item compare rings with various radii
 	\item theoretical vs simulation velocity / range
 	\item stability tests
 	\item Kelvin waves(?)

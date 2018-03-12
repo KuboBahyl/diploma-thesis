@@ -1,161 +1,145 @@
-\documentclass[a4paper, 12pt]{report}
-
-% Margins: left 40mm, right 25mm, up and down 25mm
-% Dimensions: 210mm x 297mm
-% (warning, Latex default from left: 1in~25mm)
-
-\usepackage{fullpage}
-\addtolength{\hoffset}{0cm} % extends height of page
-\addtolength{\textwidth}{0.5cm} % extends lenght of written text
-
-% Everything about page geometry:
-%https://www.sharelatex.com/learn/Page_size_and_margins
-
-%% PRINTED VERSION
-% uncomment this below to render text only on pages on the right side - for printed version
-%\let\openright=\clearpage
-
-%% ENCODINGS
-\usepackage[utf8]{inputenc}
-%\usepackage[IL2]{fontenc}
-\usepackage[english]{babel}
-
-
-%% PACKAGES
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage[font={footnotesize}]{caption}
-\usepackage{csquotes}
-\usepackage{enumerate}
-\usepackage{epigraph}
-\usepackage{graphicx}
-\usepackage{setspace} % setup various spaces
-\usepackage{titlesec}
-\usepackage[titles]{tocloft}
-\usepackage[labelfont={sf,bf}]{caption}
-\usepackage{url}
-\usepackage{wrapfig} % image wrapper
-\usepackage{hyperref} % hyperlinks
-
-
-%% MACROS
-\newcommand{\unit}[1]{\,\mathrm{#1}} % nice units
-\newcommand{\ind}[1]{\mathrm{#1}}
-\newcommand{\He}{{}^4\mathrm{He}} % special Helium
-\renewcommand{\Re}{\mathrm{Re}} % Reynolds number
-\newcommand{\eps}{\varepsilon} % standard epsilon
-\newcommand{\<}{\langle} % closed left
-\renewcommand{\>}{\rangle} % closed right
-\renewcommand{\vec}[1]{\mathbf{#1}} % nice bold vector
-\renewcommand{\dot}{\!\cdot\!} % scalar product
-\newcommand{\todo}[1]{ {\bf !!TODO!!}\qquad{#1} } % TODO marker
-
-% optimal spacings
-\setlength{\parskip}{9pt}
-\setlength{\parindent}{0pt}
-\setlength{\baselineskip}{1.2\baselineskip} % extend distance under equations
-
-% The following part convinces Latex to not mess with the chapters...
-\makeatletter
-\def\@makechapterhead#1{
-  {\parindent \z@ \raggedright \normalfont
-   \Huge\bfseries \thechapter. #1
-   \par\nobreak
-   \vskip 20\p@
-}}
-\def\@makeschapterhead#1{
-  {\parindent \z@ \raggedright \normalfont
-   \Huge\bfseries #1
-   \par\nobreak
-   \vskip 20\p@
-}}\newpage
-\makeatother
-
-% Defining a non-numbered chapter (but included in Summary)
-\def\chapwithtoc#1{
-\chapter*{#1}
-\addcontentsline{toc}{chapter}{#1}
-}
-
-% Changing font of subsection
-\titleformat{\subsection}
-{\large\sffamily\bfseries}
-{\thesubsection}{1.4em}{}
-
-\begin{document}
-
-\pagenumbering{arabic}
-\pagestyle{plain}
-\setcounter{page}{1}
-
-% Content
-\tableofcontents
-
-
 \chapter*{Introduction / Motivation (3 pgs)}
 \addcontentsline{toc}{chapter}{Introduction}
 
-\begin{itemize}
-	\item helium backround, phase diagram, superfluid transition, interesting properties
-	\item quantum turbulence, comparison with classical turbulence
-	\item overview on experiments with QT
-	\item overview on numerical simulations of QT
-	\item motivations, goals of this work
-\end{itemize}
+	liquid helium discovery, 1908, Heike Onnes, liquid state at 4.2K, superfluid state below 2.17K, full phase diagram:
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\textwidth]{graphics/phase_diag}
+		\caption{p-T diagram}
+		\label{phase}
+	\end{figure}
+
+	labelling He-I, He-II, no solid state at 0K (weak van der Waals), only at 2.5MPa
+
+	strange properties, thermal conductivity, negligible viscosity through capillaries
+
+	Landau, Tisza: phenomenology, two-fluid model, proved bz rotating discs:
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\textwidth]{graphics/densities}
+		\caption{temperature dependence of densities}
+		\label{densities}
+	\end{figure}
+
+	London: similarity of superfluid component with orbiting electorns, macroscopic wave func
+
+	irrotational fluid, quantum vortices, tangle:
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\textwidth]{graphics/QT-tangle}
+		\caption{Quantum Turbulence}
+		\label{QT}
+	\end{figure}
+
+	CT experiments: transition to turbulence, drag coeffs
+
+	QT experiments: coflow, counterflow, second sound
+
+	QT vs CT: complicated N-S equations, critical velocity or Reynolds number, QT has probably more critical velocities
+
+	Simulations: filament model, boundaries
+
+	Motivations: investigate critical velocities and vortex density, create numeric model
+
+	Goals: measure hydrodynamic profiles for more temperatures with oscillating object, transition from CT to QT, investifate numerically vortex rings
 
 \newpage
 \chapter{Theoretical Background (15 pgs)}
 
-The theoretical part of this Thesis is composed of three chapters:
+The theoretical part of this Thesis is composed of two chapters:
 
 \begin{itemize}
-	\item[1.] Microscopic view - wave function, collapse, quantum vortices
+	\item[1.] Mesoscopic view - theoretically cover London's theory, creation and numerical modelling of quantum vortex, vortex dynamics.
 
-	\item[2.] Mesoscopic view - filaments, drag and magnus force, dynamics of vortex, Schwarz equation, Kelvin waves (?)
-
-	\item[3.] Macroscopic view - hydrodynamics, two-fluid model, 
+	\item[3.] Macroscopic view - hydrodynamics of two-fluid model, oscillatory motion in such fluid, creation of QT, existence and usage of second sound
 
 \end{itemize}
-\vspace{1cm}
-{\Huge \bfseries Microscopic model}
-\addcontentsline{toc}{chapter}{Microscopic model}
-\vspace{0.3cm}
 
-\section{Bose-Einstein condensate}
-London's theory, macroscopic wave function, vorticity
+Many of this is covered in textbooks and papers.
 
-\section{Quantum vortex properties}
-quantized circulation, properties of quantum vortex (velocity field, energy)
+He properties, total spin, Bose gas, critical temperature, heat capacity
 
+\newpage
 
-{\Huge \bfseries Mesoscopic model}
+{\Huge \bfseries Mesoscopic view}
 \addcontentsline{toc}{chapter}{Mesoscopic model}
 \vspace{0.3cm}
 
-\section{Filaments theory}
+\section{London's theory}
+\begin{itemize}
+	\item London's theory
+	\item NLSE (Schr eq)
+	\item macroscopic wave function
+	\item no vorticity
+	\item quantized circulation
+\end{itemize}
 
-segments, biot-savart, local induction approximation
+\section{Quantum vortex}
+\begin{itemize}
+	\item definition
+	\item induced velocity
+	\item energy
+	\item quantized circulation
+	\item quantum turbulence
+\end{itemize}
 
-\section{Filaments dynamics}
+\section{Vortex filament model}
+\begin{itemize}
+	\item graph model
+	\item state definition
+	\item curve coordinates
+	\item derivatives
+	\item self-induced velocity
+	\item LIA approximation
+\end{itemize}
 
-{\Huge \bfseries Macroscopic model}
+\section{Vortex dynamics}
+\begin{itemize}
+	\item magnus force
+	\item mutual friction
+	\item Schwarz's equation
+	\item special case - quantum ring (properties)
+	\item Kelvis waves (?)
+\end{itemize}
+
+\newpage
+
+{\Huge \bfseries Macroscopic view}
 \addcontentsline{toc}{chapter}{Macroscopic model}
 \vspace{0.3cm}
 
-hydrodynamics
+\section{Hydrodynamics of two-fluid}
+\begin{itemize}
+	\item Landau's assumptions
+	\item two densities, velocities (+pic)
+	\item updated hydrodynamical equations - HVBK
+	\item dynamical similarity
+	\item Reynolds number
+\end{itemize}
 
-\section{Two-fluid model}
-
-second sound, mutual friction
-
-
-\section{Oscillatory motion}
-
-oscillatory flow, 
+\section{Oscillatory motion in superfluid}
+\begin{itemize}
+	\item penetration depth
+	\item Re for oscillations
+	\item defining depth and Re separately for normal and superfluid components
+\end{itemize}
 
 \section{Quantum turbulence}
+\begin{itemize}
+	\item critical velocity according to landau
+	\item critical velocity scaling in oscillatory case
+	\item T dependence of critical velocities (Bc. results)
+\end{itemize}
 
+\section{Second sound}
+\begin{itemize}
+	\item what it is
+	\item velocity of second sound
+	\item attenuation
+	\item vortex line density estimate
+\end{itemize}
 
-
-\end{document}
+\newpage
