@@ -5,7 +5,7 @@
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.5\textwidth]{graphics/phase_diag}
+		\includegraphics[width=0.5\textwidth]{graphics/theory/phase_diag}
 		\caption{p-T diagram}
 		\label{phase}
 	\end{figure}
@@ -18,7 +18,7 @@
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.5\textwidth]{graphics/densities}
+		\includegraphics[width=0.5\textwidth]{graphics/theory/densities}
 		\caption{temperature dependence of densities}
 		\label{densities}
 	\end{figure}
@@ -29,7 +29,7 @@
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.5\textwidth]{graphics/QT-tangle}
+		\includegraphics[width=0.5\textwidth]{graphics/theory/QT-tangle}
 		\caption{Quantum Turbulence}
 		\label{QT}
 	\end{figure}
@@ -77,6 +77,19 @@ He properties, total spin, Bose gas, critical temperature, heat capacity
 	\item quantized circulation
 \end{itemize}
 
+Non-linear Schrodinger equation:
+
+$$
+i \hbar \frac{\partial \psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2 \psi - m\eps \psi + V_0 \psi \vert \psi \vert^2
+$$
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/singularity}
+	\caption{singularities within fluid}
+	\label{singularity}
+\end{figure}
+
 \section{Quantum vortex}
 \begin{itemize}
 	\item definition
@@ -85,6 +98,21 @@ He properties, total spin, Bose gas, critical temperature, heat capacity
 	\item quantized circulation
 	\item quantum turbulence
 \end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/rotating-helium}
+	\caption{Quantized vortices in rotating container}
+	\label{rotating-helium}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/vortex_velocity}
+	\caption{decrease of rotational velocity around vortex}
+	\label{vortex_velocity}
+\end{figure}
+
 
 \section{Vortex filament model}
 \begin{itemize}
@@ -105,6 +133,28 @@ He properties, total spin, Bose gas, critical temperature, heat capacity
 	\item Kelvis waves (?)
 \end{itemize}
 
+$$
+\vec{f}_M = \rho_s \Gamma \vec{s}^{\prime} \times (\vec{v}_L - \vec{v}_{tot})
+$$
+
+$$
+\vec{v}_{tot} = \vec{v}_s + \vec{v}_i
+$$
+
+$$
+\vec{v}_i(\vec{s}) = \frac{\Gamma}{4\pi} \int_{\text{line}} \frac{(\vec{r} - \vec{s}) \times \text{d}\vec{r}}{\vert \vec{r} - \vec{s} \vert^3}
+$$
+
+$$
+\vec{v}_i \approx \beta \vec{s}^{\prime} \times \vec{s}^{\prime \prime}
+$$
+
+$$
+\vec{v}_i \approx \frac{\Gamma}{4pi} \ln\Big(\frac{R}{a_0}\Big) \vec{\hat{b}}
+$$
+
+
+
 \newpage
 
 {\Huge \bfseries Macroscopic view}
@@ -120,6 +170,21 @@ He properties, total spin, Bose gas, critical temperature, heat capacity
 	\item Reynolds number
 \end{itemize}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/laminar-turbulent}
+	\caption{transition from laminar to turbulent flow}
+	\label{laminar-turbulent}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/C-Re}
+	\caption{drag coeffs of different objects}
+	\label{C-Re}
+\end{figure}
+
+
 \section{Oscillatory motion in superfluid}
 \begin{itemize}
 	\item penetration depth
@@ -134,6 +199,13 @@ He properties, total spin, Bose gas, critical temperature, heat capacity
 	\item T dependence of critical velocities (Bc. results)
 \end{itemize}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/C-Re_normal}
+	\caption{drag coeffs vs Reynolds number of normal component}
+	\label{C-Re_normal}
+\end{figure}
+
 \section{Second sound}
 \begin{itemize}
 	\item what it is
@@ -141,5 +213,34 @@ He properties, total spin, Bose gas, critical temperature, heat capacity
 	\item attenuation
 	\item vortex line density estimate
 \end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/ss_1}
+	\caption{first mode of second sound}
+	\label{ss_1}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/ss_2}
+	\caption{second mode of second sound}
+	\label{ss_2}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/ss_1}
+	\caption{first mode of second sound}
+	\label{ss_1}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/ss_velocity}
+	\caption{velocity of ss with temperature}
+	\label{ss_velocity}
+\end{figure}
+
 
 \newpage
