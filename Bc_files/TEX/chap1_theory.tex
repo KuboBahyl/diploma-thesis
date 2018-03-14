@@ -30,9 +30,9 @@ The theoretical part of this Thesis is composed of three chapters:
 
 \begin{itemize}
 	\item[1.] The first serves as a brief introduction to the topic of superfluidity using  Bose-Einstein statistical physics and basic hydrodynamics.
-	
+
 	\item[2.] The second chapter focuses on macroscopic quantum effects of superfluids, and introduces the concept of quantized vortices using quantum mechanics.
-	
+
 	\item[3.] The last theoretical chapter deals with fluid dynamics; particularly the drag coefficients for various structures in fluid flows. We will also introduce the Reynolds number for oscillating objects immersed in both classical and quantum fluids.
 \end{itemize}
 All of the ideas discussed in this chapter can be found in standard textbooks \cite{skrbek}, \cite{landau} except for the derivation of the vortex line density at the end of second part, where the original papers of Feynman, Vinen and Hall are required \cite{feynman}, \cite{vinen1}, \cite{vinen2}.
@@ -56,12 +56,12 @@ The total spin of $\He$ is zero, so gaseous helium may be classified as a Bose g
 
 \subsection*{Quantum Statistics}
 
-We choose to work with a scaled inverted temperature $\beta\equiv 1/kT $ and chemical potential $\mu$, denoting the number of particles sitting in the state $\vert n\>$ as $N_n$ and corresponding energy as $\eps_n$.\footnote{The entire set of energies are positive $\{\eps_n\} > 0$ except for the ground state, for which we choose $\eps_0 = 0$.} 
+We choose to work with a scaled inverted temperature $\beta\equiv 1/kT $ and chemical potential $\mu$, denoting the number of particles sitting in the state $\vert n\>$ as $N_n$ and corresponding energy as $\eps_n$.\footnote{The entire set of energies are positive $\{\eps_n\} > 0$ except for the ground state, for which we choose $\eps_0 = 0$.}
 A mathematical description of such a quantum system can be done through Bose-Einstein statistics. In this statistical model of a grand canonical ensemble, a given state can be independently occupied by an arbitrary number of particles. Hence, we write the grand canonical potential $ \Phi $ as:
 
 
 \begin{equation}
-\Phi (T, V, \mu) 
+\Phi (T, V, \mu)
 =-\beta^{-1} \ln \bigg[\displaystyle \prod_{n}
   \displaystyle \sum_{N_n=0}^{\infty}
   e^{-\beta N_n (\eps_n - \mu) } \bigg]
@@ -72,14 +72,14 @@ A mathematical description of such a quantum system can be done through Bose-Ein
 where we assumed $\mu<0$ for the purpose of convergence. If we think of each particle as a de Broglie wave with wavelength $\lambda \sim \hbar/p \sim \hbar/(\eps m)^{1/2}$, one can calculate the mean value of the total number of particles sitting in all thermal levels by replacing the sum with an integral over all possible wave numbers:
 
 \begin{equation}
-\<N\> = -\frac{\partial\Phi}{\partial\mu} 
+\<N\> = -\frac{\partial\Phi}{\partial\mu}
 = \sum_n \frac{1}{e^{\beta(\eps_n-\mu)}-1}
 \approx
 \frac{V}{(2\pi)^3}\int \text{d}^3k \frac{1}{e^{\beta(\eps_k-\mu)}-1} + N_0\,,
 \label{integral}
 \end{equation}
 
-where the term $N_0$, representing the number of ground state particles, has been added as a correction. 
+where the term $N_0$, representing the number of ground state particles, has been added as a correction.
 By integrating (\ref{integral}), this correction appears to be relevant only when the temperature of system reach the critical value (as shown in \cite{tong}):
 
 \begin{equation}
@@ -87,7 +87,7 @@ T_c = \frac{2\pi \hbar^2}{mk} \bigg ( \frac{N}{V \zeta(3/2)}\bigg)^{2/3}\,,
 \label{tc}
 \end{equation}
 
-where $\zeta(3/2)\approx 2.612$ is the value of Riemann zeta-function. If we substitute to (\ref{tc}) the values of $ N, V$ and $ m $, specific for $ \He $, we would predict that the critical temperature  should be $ T_c \approx 3.15\unit{K} $, which is not far from the observed superfluid transition at $ T_{\lambda} = 2.17 \unit{K} $. 
+where $\zeta(3/2)\approx 2.612$ is the value of Riemann zeta-function. If we substitute to (\ref{tc}) the values of $ N, V$ and $ m $, specific for $ \He $, we would predict that the critical temperature  should be $ T_c \approx 3.15\unit{K} $, which is not far from the observed superfluid transition at $ T_{\lambda} = 2.17 \unit{K} $.
 
 As temperature $T<T_c$ decreases, more and more particles, a macroscopic number $N_0$, will occupy a single quantum state and form the so-called \textit{Bose-Einstein condensate}.
 
@@ -102,7 +102,7 @@ More evidence proving the close relation between superfluidity of $ \He $  and B
 \caption{Heat capacity of an ideal BEC (dashed line) and that measured for $\He$ (full line) as a function of temperature.}
 \vspace{-0.5cm}
 \end{wrapfigure}
-From figure {\sffamily\textbf{Figure 1.1}} one can see that derivatives of both heat capacities (predicted by BEC and observed using $ \He $) are not continuous around critical temperatures $(T_c, T_{\lambda})$. Such discontinuities are often one of the characteristic properties of a phase transition in an infinite system. Since heat capacity is partial derivative of energy $ C_V = \partial E /\partial T \big\vert_V $, the second derivative would be discontinuous in this case, so therefore we classify the transition to the superfluid state as a $2^{\unit{nd}}$ order phase transition. Note that the shape of heat capacity plot as a function of temperature is reminiscent of the Greek letter $ \lambda $. This is the reason we call the superfluid transition   \textit{the $ \lambda$-transition} and denote the transition temperature as $ T_{\lambda}$. 
+From figure {\sffamily\textbf{Figure 1.1}} one can see that derivatives of both heat capacities (predicted by BEC and observed using $ \He $) are not continuous around critical temperatures $(T_c, T_{\lambda})$. Such discontinuities are often one of the characteristic properties of a phase transition in an infinite system. Since heat capacity is partial derivative of energy $ C_V = \partial E /\partial T \big\vert_V $, the second derivative would be discontinuous in this case, so therefore we classify the transition to the superfluid state as a $2^{\unit{nd}}$ order phase transition. Note that the shape of heat capacity plot as a function of temperature is reminiscent of the Greek letter $ \lambda $. This is the reason we call the superfluid transition   \textit{the $ \lambda$-transition} and denote the transition temperature as $ T_{\lambda}$.
 
 Transition to a superfluid phase can be also found in ${}^3\!\unit{He}$ (a fermion) at much lower temperatures $ \sim 1 \unit{mK} $. Although fermions cannot condense, they can form \textit{Cooper pairs}, in analogy with superconductors. These bound states are effectively bosons and therefore can undergo condensation.
 
@@ -183,7 +183,7 @@ The most general form of the motion equations for both, the normal and superflui
 
 where $P$ is the applied pressure and $\eta_n$ denotes the viscosity of the normal component. The terms containing $\nabla T$ and $\nabla (\vec{v_{\ind n}} - \vec{v_{\ind s}})^2$ can be viewed as additional pressure effects.
 
-Considering the simplest case, no thermal flow ($\nabla T = 0$), counterflow ($\vec{v_{\ind n}} - \vec{v_{\ind s}} = \vec{0}$) nor mutual friction ($\vec{F_{\ind{ns}}} = \vec{0}$) is present, we have a classical hydrodynamic system. In fact, (\ref{motion_normal}) would reduce to the Navier-Stokes equation for a classical fluid and (\ref{motion_super}) to the Euler equation for an ideal fluid without viscosity. Consequently, the two-fluid model seems to be applicable as a macroscopic approach to the overall behaviour of superfluid $\He$.  
+Considering the simplest case, no thermal flow ($\nabla T = 0$), counterflow ($\vec{v_{\ind n}} - \vec{v_{\ind s}} = \vec{0}$) nor mutual friction ($\vec{F_{\ind{ns}}} = \vec{0}$) is present, we have a classical hydrodynamic system. In fact, (\ref{motion_normal}) would reduce to the Navier-Stokes equation for a classical fluid and (\ref{motion_super}) to the Euler equation for an ideal fluid without viscosity. Consequently, the two-fluid model seems to be applicable as a macroscopic approach to the overall behaviour of superfluid $\He$.
 
 \section{Second Sound}
 
@@ -303,7 +303,7 @@ where $\kappa$ is called the \textit{circulation quantum}: $\kappa \approx 10^{-
 
 \subsection*{Experiment Proving the Existence of Quantized Vortices in He-II}
 
-In 1950, D.V. Osborne prepared an experiment \cite{osborne}, where a cylindrical container filled with He-II rotates around its principal axis. Since the superfluid component cannot rotate in the classical way, only the normal fluid should take the shape of a parabola. Classical mechanics predicts that the meniscus depth should be flatter as the density of liquid decreases. Surprisingly, Osborne did not observe any depth drop, even when the relative density of normal component was relatively small. 
+In 1950, D.V. Osborne prepared an experiment \cite{osborne}, where a cylindrical container filled with He-II rotates around its principal axis. Since the superfluid component cannot rotate in the classical way, only the normal fluid should take the shape of a parabola. Classical mechanics predicts that the meniscus depth should be flatter as the density of liquid decreases. Surprisingly, Osborne did not observe any depth drop, even when the relative density of normal component was relatively small.
 
 \begin{wrapfigure}{l}{0.35\textwidth}
 \vspace{-0.7cm}
@@ -436,7 +436,7 @@ Of course, the distribution of vortex lines could be generally chaotic and unpre
 \label{alpha_mean}\,.
 \end{equation}
 
-As we can see, randomly distributed vortex lines attenuates 2/3-times less when compared with the perpendicular interaction with polarized vortices. 
+As we can see, randomly distributed vortex lines attenuates 2/3-times less when compared with the perpendicular interaction with polarized vortices.
 
 
 \subsection*{Viscous Damping and Resonance Curve}
@@ -486,23 +486,6 @@ L = \frac{6\pi \Delta f_0}{B\kappa}\bigg( \frac{A_0}{A} - 1 \bigg)\,,
 
 which allows us to determine the vortex line density by directly measurable parameters.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \newpage
 
 {\Huge \bfseries Fluid Dynamics}
@@ -525,7 +508,7 @@ Vortices were observed and painted by Leonardo da Vinci and since then, many the
 \caption{Photograph of turbulent flow past a cylinder.}
 \end{figure}
 
-In the following sections, we will present a mathematical description of viscous fluids and their dynamics, focusing on the transition from laminar to turbulent flow and defining the dimensionless \textit{Reynolds number} (Re) and the drag coefficient $ C_D $. Finally, analogical hydrodynamic equations and properties will be defined for He-II as well. 
+In the following sections, we will present a mathematical description of viscous fluids and their dynamics, focusing on the transition from laminar to turbulent flow and defining the dimensionless \textit{Reynolds number} (Re) and the drag coefficient $ C_D $. Finally, analogical hydrodynamic equations and properties will be defined for He-II as well.
 
 \newpage
 
@@ -557,7 +540,7 @@ where the last equation is valid only for incompressible fluids. In this case, t
 In many cases, it is useful to transform the stationary $ (\partial \vec{v}/\partial t = \vec{0}) $ Navier-Stokes equation (\ref{FD_NS}) into a form containing dimensionless parameters. This can be done with the typical (mean) value of the flow velocity $\vec{v}_0$ and with the length scale $L$ at which the velocity changes most significantly. All magnitudes appearing in (\ref{FD_NS}) are scaled as:
 
 $$
-\vec{v^{\prime}} \equiv \frac{\vec{v}}{v_0} 
+\vec{v^{\prime}} \equiv \frac{\vec{v}}{v_0}
 \hspace{5mm} \bigg\vert \hspace{5mm}
 \vec{r}^{\prime} \equiv \frac{\vec{r}}{L}
 \hspace{5mm} \bigg\vert \hspace{5mm}
@@ -608,12 +591,12 @@ In summary, the relation for laminar and turbulent (Newton) cases takes the form
 $$
 C_D \!\propto\! v^\alpha, \hspace{1cm}
 \text{where}
-\left\{ 
+\left\{
   \begin{array}{l l}
     \alpha=-1 & \quad \text{for $\Re \in (0-10)$}\\
     \alpha=0 & \quad \text{for $\Re \in (10^3-10^5)$}
   \end{array}
-\right.\,. 
+\right.\,.
 $$
 
 The full dependence of experimentally measured $C_D(\Re)$ (for constant density, viscosity and similar sizes of objects) is sketched on the graph below for various geometries.
@@ -630,11 +613,11 @@ The full dependence of experimentally measured $C_D(\Re)$ (for constant density,
 
 Since this work concerns vibrating objects (tuning forks) in superfluid He-II, we will briefly discuss the theory of oscillatory fluid behaviour.
 
-\subsection*{Penetration Depth} 
+\subsection*{Penetration Depth}
 
 If an infinite \text{\tt xy}-plane is submerged in a viscous fluid and harmonically oscillating in \text{\tt x}-direction with angular frequency $\omega$, the fluid will also oscillate in the \text{\tt x}-direction with the same frequency as the plane does due to viscous forces. However, the dissipative processes will damp the oscillation as we go further from the plane in the \text{\tt z}-direction (plane is put at $z=0$). Hence we are expecting the solution of Navier-Stokes equation (\ref{FD_NS}) in the
 form of $ \vec{v} = \big[ v_x(z,t), 0, 0 \big] $. The motion equation is in this case much simpler, because the term $ (\vec{v}\cdot \nabla)\vec{v} = 0 $, the pressure is constant everywhere $ P=\text{const.} $ and gravitational force
-can be neglected. 
+can be neglected.
 
 \newpage
 
@@ -656,7 +639,7 @@ The penetration depth decreases with frequency, meaning that for high-frequency 
 
 \subsection*{Oscillatory Reynolds Number}
 
-Because of the extra degree of freedom in oscillatory flow (the period of oscillation), one dimensionless parameter such as Re, as defined for steady flow, cannot fully describe the flow. Hence, two dimensionless numbers are generally needed. 
+Because of the extra degree of freedom in oscillatory flow (the period of oscillation), one dimensionless parameter such as Re, as defined for steady flow, cannot fully describe the flow. Hence, two dimensionless numbers are generally needed.
 
 However, in the special case of the \textit{high-frequency limit} ($ \omega > 2\eta / \rho L^2  $) the situation is simplified. If the penetration depth $ \delta $ becomes significantly smaller than all other relevant dimensions such as body size or surface roughness, then $ L $ should be replaced by $ \delta $ in the process of scaling the Navier-Stokes equation. This is because one of the points of the scaling is to estimate the magnitudes of velocity derivatives in the flow field and we have to take the largest values available. From this re-scaling of the NS equations it follows that in the high frequency limit, all relevant quantities can be again combined into a single dimensionless parameter -- the oscillatory Reynolds number $ \Re_{\delta} $. Using (\ref{penetration}) we obtain:
 
@@ -668,7 +651,7 @@ However, in the special case of the \textit{high-frequency limit} ($ \omega > 2\
 
 \section{Oscillations in Superfluid He-II}
 
-So far, have only considered oscillations in a classical fluid. To apply the theory to two-fluid model, we have to make adjustments so that it will work for both the normal and superfluid component. 
+So far, have only considered oscillations in a classical fluid. To apply the theory to two-fluid model, we have to make adjustments so that it will work for both the normal and superfluid component.
 
 When a high-frequency oscillating body with low velocity amplitude is submerged in superfluid He-II, the drag force is expected to be caused only by the viscous forces of the normal component. However, the density $ \rho_{\ind n} $ of this component decreases with temperature (as introduced in {\sffamily\textbf{Section 1.2, Figure 1.2}}) and we are forced to work with the characteristic penetration depth $\delta_{\ind n}$ and oscillatory Reynolds number $\Re_{\ind n}$:
 
@@ -692,8 +675,8 @@ When a high-frequency oscillating body with low velocity amplitude is submerged 
 \subsection*{Motivation}
 
 The drag coefficient for objects submerged in classical fluids have been explored already. The process and conditions for making the turbulence have been intensively studied for various-shaped objects and wide range of oscillation frequencies.
- 
+
 Because of two-fluid behaviour of He-II, two types of turbulence may occur when an immersed body oscillates - classical and quantum. The first one is an ordinary turbulence caused by the normal component and described by the oscillatory Reynolds number $ \Re_{\delta} $.
 The second, quantum turbulence consists of quantized vortices, for which the complete theoretical description and sufficient number of experiments are still missing, but there are hints that the relevant physical quantity governing vortex nucleation is a critical velocity, which is expected to scale as $\sqrt{\omega \kappa}$ \cite{schoepe}, where $\omega$ is angular frequency and $\kappa$ the circulation quantum.
- 
-We already know that vortex nucleation can be launched if the normal component or a submerged body moves at a high enough velocity relative to the superfluid component, but to this day, experiments are missing that would clearly prove whether both turbulences form simultaneously or not. In this work we present measurements showing that classical and quantum turbulence can form independently. 
+
+We already know that vortex nucleation can be launched if the normal component or a submerged body moves at a high enough velocity relative to the superfluid component, but to this day, experiments are missing that would clearly prove whether both turbulences form simultaneously or not. In this work we present measurements showing that classical and quantum turbulence can form independently.

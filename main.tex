@@ -6,7 +6,7 @@
 
 \usepackage{fullpage}
 \addtolength{\hoffset}{0cm} % extends height of page
-\addtolength{\textwidth}{0.5cm} % extends lenght of written text
+\addtolength{\textwidth}{0cm} % extends lenght of written text
 
 % Everything about page geometry:
 %https://www.sharelatex.com/learn/Page_size_and_margins
@@ -31,7 +31,7 @@
 \usepackage{epigraph}
 \usepackage{graphicx}
 \usepackage{setspace} % setup various spaces
-\usepackage{titlesec}
+%\usepackage{titlesec}
 \usepackage[titles]{tocloft}
 \usepackage[labelfont={sf,bf}]{caption}
 \usepackage{url}
@@ -69,7 +69,7 @@
    \Huge\bfseries #1
    \par\nobreak
    \vskip 20\p@
-}}\newpage
+}}
 \makeatother
 
 % Defining a non-numbered chapter (but included in Summary)
@@ -77,11 +77,6 @@
 \chapter*{#1}
 \addcontentsline{toc}{chapter}{#1}
 }
-
-% Changing font of subsection
-\titleformat{\subsection}
-{\large\sffamily\bfseries}
-{\thesubsection}{1.4em}{}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

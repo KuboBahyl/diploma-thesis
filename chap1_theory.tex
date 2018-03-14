@@ -69,19 +69,28 @@ He properties, total spin, Bose gas, critical temperature, heat capacity
 \vspace{0.3cm}
 
 \section{London's theory}
-\begin{itemize}
-	\item London's theory
-	\item NLSE (Schr eq)
-	\item macroscopic wave function
-	\item no vorticity
-	\item quantized circulation
-\end{itemize}
 
-Non-linear Schrodinger equation:
+Gross-Pitaevskii NLSE:
 
-$$
-i \hbar \frac{\partial \psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2 \psi - m\eps \psi + V_0 \psi \vert \psi \vert^2
-$$
+\begin{equation}
+i \hbar \frac{\partial \psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2 \psi - m\eps \psi + V_0 \vert \psi \vert^2 \psi
+\end{equation}
+
+Macroscopic wave function:
+
+\begin{equation}
+\psi(\vec{r},t) = \sqrt{\frac{\rho_{\ind s}}{m_4}}\, e^{i \phi (\vec{r},t)}\,,
+\label{psi}
+\end{equation}
+
+London's idea, properties of $\psi$, zero vorticity
+
+Circulation:
+
+\begin{equation}
+\Gamma = \oint_{\mathcal{C}} \vec{v_{\ind s}} \cdot \unit{d}\vec{\boldsymbol{\ell}}
+\label{gamma}
+\end{equation}
 
 \begin{figure}[h]
 	\centering
@@ -99,12 +108,25 @@ $$
 	\item quantum turbulence
 \end{itemize}
 
+tiny vortex of size 1A, created with energetic excitation and $\psi$ collapse, core contains pure normal component, superfluid is circulating around, limitation by Landau critical velocity
+
+Quantized circulation:
+
+\begin{equation}
+\Gamma = \frac{\hbar}{m_4} 2\pi n = \equiv n \kappa
+\label{gamma}
+\end{equation}
+
+Ordering of vortices in rotating container:
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{graphics/theory/rotating-helium}
 	\caption{Quantized vortices in rotating container}
 	\label{rotating-helium}
 \end{figure}
+
+Superfluid velocity distirbution around vortex core:
 
 \begin{figure}[h]
 	\centering
@@ -115,14 +137,51 @@ $$
 
 
 \section{Vortex filament model}
-\begin{itemize}
-	\item graph model
-	\item state definition
-	\item curve coordinates
-	\item derivatives
-	\item self-induced velocity
-	\item LIA approximation
-\end{itemize}
+each segment know its position and neighbours, defining vectors $\vec{s}$, $\vec{s}^{\prime}$, $\vec{s}^{\prime\prime}$ + physical meaning, state definition
+
+Associated vectors with segment:
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/filament}
+	\caption{vortex filament}
+	\label{filament}
+\end{figure}
+
+Incompressibility:
+
+\begin{equation}
+\nabla \dot \vec{v}_s = 0
+\end{equation}
+
+Biot-Savart law:
+
+\begin{equation}
+\vec{v}_i(\vec{s}) = \frac{\Gamma}{4\pi} \int_{\mathcal{L}} \frac{(\vec{r} - \vec{s}) \times \text{d}\vec{r}}{\vert \vec{r} - \vec{s} \vert^3}
+\end{equation}
+
+Problems if $\vec{s}$ lies on the line
+
+LIA approximation:
+
+\begin{equation}
+\vec{v}_i(\vec{s}) = \beta \vec{s}^{\prime} \times \vec{s}^{\prime \prime} + \frac{\Gamma}{4\pi} \int_{\mathcal{L}^{\prime}} \frac{(\vec{r} - \vec{s}) \times \text{d}\vec{r}}{\vert \vec{r} - \vec{s} \vert^3}
+\end{equation}
+
+LIA with substitued beta:
+
+\begin{equation}
+\vec{v}_i \approx \frac{\Gamma}{4\pi} \ln\Big(\frac{R}{a_0}\Big) \vec{\hat{b}}
+\end{equation}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/filament2}
+	\caption{vortex filament 2}
+	\label{filament2}
+\end{figure}
+
+
 
 \section{Vortex dynamics}
 \begin{itemize}
@@ -133,27 +192,47 @@ $$
 	\item Kelvis waves (?)
 \end{itemize}
 
-$$
-\vec{f}_M = \rho_s \Gamma \vec{s}^{\prime} \times (\vec{v}_L - \vec{v}_{tot})
-$$
+Magnus force:
 
-$$
+\begin{equation}
+\vec{f}_M = \rho_s \Gamma \vec{s}^{\prime} \times (\vec{v}_i - \vec{v}_{tot})
+\end{equation}
+
+Total velocty:
+
+\begin{equation}
 \vec{v}_{tot} = \vec{v}_s + \vec{v}_i
-$$
-
-$$
-\vec{v}_i(\vec{s}) = \frac{\Gamma}{4\pi} \int_{\text{line}} \frac{(\vec{r} - \vec{s}) \times \text{d}\vec{r}}{\vert \vec{r} - \vec{s} \vert^3}
-$$
-
-$$
-\vec{v}_i \approx \beta \vec{s}^{\prime} \times \vec{s}^{\prime \prime}
-$$
-
-$$
-\vec{v}_i \approx \frac{\Gamma}{4pi} \ln\Big(\frac{R}{a_0}\Big) \vec{\hat{b}}
-$$
+\end{equation}
 
 
+Drive force (mutual friction):
+
+\begin{equation}
+\vec{f}_D = - \alpha\rho_s\Gamma\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_i - \vec{v}_{tot})] - \alpha^{\prime}\Gamma\vec{s}^{\prime} \times (\vec{v}_i - \vec{v}_{tot})
+\end{equation}
+
+Assuming no mass of vortex core:
+
+\begin{equation}
+\vec{f}_D + \vec{f}_M = 0
+\end{equation}
+
+Shwarz's equation:
+
+\begin{equation}
+\frac{\text{d}\vec{s}}{\text{d}t} = \vec{v}_s + \vec{v}_i + \alpha\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i) - \alpha^{\prime}\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i)]
+\end{equation}
+
+Quantized vortex rings, its dynamics, velocity, life expectancy
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/vortex-ring}
+	\caption{dynamics of quantum vortex ring}
+	\label{vortex-ring}
+\end{figure}
+
+Kelvin waves (?)
 
 \newpage
 
@@ -169,6 +248,35 @@ $$
 	\item dynamical similarity
 	\item Reynolds number
 \end{itemize}
+
+HVBK equations:
+
+\begin{align}
+\frac{\partial\vec{v}_n}{\partial t} + (\vec{v}_n\cdot \nabla)\vec{v}_n =& -\frac{1}{\rho} \nabla P - \frac{\rho_s}{\rho_n} S \nabla T + \nu_n \nabla^2 \vec{v}_n + \vec{F}_{ns}\,,
+\label{motion_normal}\\
+\frac{\partial\vec{v}_s}{\partial t} + (\vec{v}_s\cdot \nabla)\vec{v}_s =& -\frac{1}{\rho} \nabla P + S \nabla T + \vec{T} - \frac{\rho_n}{\rho} \vec{F}_{ns}\,,
+\hspace{15mm}
+\label{motion_super}
+\end{align}
+
+, where we have defined:
+
+\begin{equation}
+\vec{\Omega}_s = \nabla \times \vec{v}_s\,,
+\end{equation}
+\begin{equation}
+\vec{F} = \frac{B}{2} \vec{\hat{\Omega}} \times [\vec{\hat{\Omega}}_s \times (\vec{v}_n - \vec{v}_s - \nu_s\nabla \times \vec{\hat{\Omega}})]
++ \frac{B^{\prime}}{2} \vec{\Omega}_s \times (\vec{v}_n - \vec{v}_s - \nu_s\nabla \times \vec{\hat{\Omega}}_s)\,,
+\end{equation}
+\begin{equation}
+\vec{\hat{\Omega}}_s = \vec{\Omega}_s / \vert \vec{\Omega}_s \vert\,,
+\end{equation}
+\begin{equation}
+\vec{T} = -\nu_s \vec{\Omega}_s \times (\nabla \times \vec{\hat{\Omega}}_s)
+\end{equation}
+\begin{equation}
+\nu_s = \frac{\Gamma}{4\pi} \log(b_0 / a_0)
+\end{equation}
 
 \begin{figure}[h]
 	\centering
@@ -214,30 +322,27 @@ $$
 	\item vortex line density estimate
 \end{itemize}
 
+First and second sounds:
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/ss_1}
+	\includegraphics[width=0.7\textwidth]{graphics/theory/ss_1}
 	\caption{first mode of second sound}
 	\label{ss_1}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/ss_2}
+	\includegraphics[width=0.7\textwidth]{graphics/theory/ss_2}
 	\caption{second mode of second sound}
 	\label{ss_2}
 \end{figure}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/ss_1}
-	\caption{first mode of second sound}
-	\label{ss_1}
-\end{figure}
+Velocity of second sound:
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/ss_velocity}
+	\includegraphics[width=0.3\textwidth]{graphics/theory/ss_velocity}
 	\caption{velocity of ss with temperature}
 	\label{ss_velocity}
 \end{figure}
