@@ -225,6 +225,23 @@ Shwarz's equation:
 
 Quantized vortex rings, its dynamics, velocity, life expectancy
 
+Center motion:
+
+\begin{equation}
+v_{\text{center}} = \frac{\Gamma}{4\pi R} (\eta - 1/4)
+\end{equation}
+
+\begin{equation}
+\eta = \ln(8R/a)
+\end{equation}
+
+Energy:
+
+\begin{equation}
+E = \frac{\rho \Gamma^2 R}{2} (\eta - 7/4)
+\end{equation}
+
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{graphics/theory/vortex-ring}
@@ -292,6 +309,19 @@ HVBK equations:
 	\label{C-Re}
 \end{figure}
 
+Drag coeff:
+
+$$
+C_D \!\propto\! v^\alpha, \hspace{1cm}
+\text{where}
+\left\{
+  \begin{array}{l l}
+    \alpha=-1 & \quad \text{for $\Re \in (0-10)$}\\
+    \alpha=0 & \quad \text{for $\Re \in (10^3-10^5)$}
+  \end{array}
+\right.\,.
+$$
+
 
 \section{Oscillatory motion in superfluid}
 \begin{itemize}
@@ -300,12 +330,49 @@ HVBK equations:
 	\item defining depth and Re separately for normal and superfluid components
 \end{itemize}
 
+Attenuated wave:
+
+\begin{equation}
+\vec{v} \propto e^{-\vert\vec{r}\vert/\delta} \vec{\hat{e}}_{\vec{r}}(\omega, t)\,,
+\label{v_pen}
+\end{equation}
+
+Penetration depth:
+
+\begin{equation}
+\delta = \sqrt{\frac{2\nu}{\omega}}\,.
+\label{penetration}
+\end{equation}
+
+Oscillatory Reynolds number:
+
+\begin{equation}
+\Re_{\delta} = \frac{v_0 \delta}{\nu} = \frac{v_0}{\sqrt{\nu \pi f}} \,.
+\label{Re*}
+\end{equation}
+
+Depth and $\Re$ for normal component:
+
+\begin{equation}
+\delta_{\ind n} = \sqrt{\frac{2\eta}{\rho_{\ind n}\omega}}\,,
+\hspace{1cm}
+\Re_{\ind n} = \frac{v_0 \delta_{\ind n} \rho_{\ind n}}{\eta}
+\label{twofluid}\,.
+\end{equation}
+
+
 \section{Quantum turbulence}
 \begin{itemize}
 	\item critical velocity according to landau
 	\item critical velocity scaling in oscillatory case
 	\item T dependence of critical velocities (Bc. results)
 \end{itemize}
+
+Critical velocity scaling:
+
+\begin{equation}
+v_{\text{crit}} \propto \sqrt{\omega}
+\end{equation}
 
 \begin{figure}[h]
 	\centering
@@ -321,6 +388,16 @@ HVBK equations:
 	\item attenuation
 	\item vortex line density estimate
 \end{itemize}
+
+\begin{equation}
+\vec{v}_{\ind{ns}} \propto e^{-\alpha z} \vec{\hat{e}}_{\vec{r}}(\vec{k},\vec{r},\omega,t)\,,
+\end{equation}
+
+\begin{equation}
+\alpha = \frac{B\kappa L}{6 c_2}
+\label{alpha_mean}\,.
+\end{equation}
+
 
 First and second sounds:
 
@@ -338,7 +415,7 @@ First and second sounds:
 	\label{ss_2}
 \end{figure}
 
-Velocity of second sound:
+Velocity of second sound with temperature:
 
 \begin{figure}[h]
 	\centering
@@ -346,6 +423,13 @@ Velocity of second sound:
 	\caption{velocity of ss with temperature}
 	\label{ss_velocity}
 \end{figure}
+
+Vortex line density:
+
+\begin{equation}
+L = \frac{6\pi \Delta f_0}{B\kappa}\bigg( \frac{A_0}{A} - 1 \bigg)\,,
+\label{L}
+\end{equation}
 
 
 \newpage
