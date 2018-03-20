@@ -1,5 +1,13 @@
-\chapter*{Introduction / Motivation (3 pgs)}
+\chapter*{Introduction (3 pgs)}
 \addcontentsline{toc}{chapter}{Introduction}
+
+	The liquid state of $\He$ exists in two phases:
+	\begin{item}
+		\item Helium I - a high temperature phase ($2.17\unit{K}<T<4.2\unit{K}$)
+		\item Helium II - a low temperature phase ($T<2.17\unit{K}$)
+	\end{item}
+
+	These two phases are connected with the \textit{lambda transition}, which occurs at the critical temperature $T_{\lambda} = 2.17 \unit{K}$.
 
 	liquid helium discovery, 1908, Heike Onnes, liquid state at 4.2K, superfluid state below 2.17K, full phase diagram:
 
@@ -13,6 +21,10 @@
 	labelling He-I, He-II, no solid state at 0K (weak van der Waals), only at 2.5MPa
 
 	strange properties, thermal conductivity, negligible viscosity through capillaries
+
+	He properties, total spin, Bose gas, critical temperature, heat capacity
+
+
 
 	Landau, Tisza: phenomenology, two-fluid model, proved bz rotating discs:
 
@@ -42,6 +54,8 @@
 
 	Simulations: filament model, boundaries
 
+	\subsection*{Motivations and Goals}
+
 	Motivations: investigate critical velocities and vortex density, create numeric model
 
 	Goals: measure hydrodynamic profiles for more temperatures with oscillating object, transition from CT to QT, investifate numerically vortex rings
@@ -58,9 +72,9 @@ The theoretical part of this Thesis is composed of two chapters:
 
 \end{itemize}
 
-Many of this is covered in textbooks and papers.
+The aim of this part of thesis is to introduce the basic properties of quantized vortex lines in Helium II and summarize the main experimental observations of superfluid turbulence. Then there is discussed the theoretical methods used to study quantized vorticity, quantum turbulence and the results obtained using such methods.
 
-He properties, total spin, Bose gas, critical temperature, heat capacity
+
 
 \newpage
 
@@ -89,7 +103,7 @@ i \hbar \frac{\partial \Psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2 \Psi - 
 
 where $\eps$ is the energy per unit mass and $\Psi = A e^{i\Phi}$ is a macroscopic wave function of condensate. In this way one can define the condensate's density $\rho_{BEC} = m\Psi\Psi^* =  mA^2$ and velocity $\vec{v}_{BEC} = (\hbar / m)\nabla \Psi$. Note that equation (\ref{GP}) is equivalent to a continuity equation and an modified Euler equation (by the so called quantum pressure term).
 
-Even the superfluid is irrotational $\omega = \nabla \times \vec{v}_{BEC} = \vec{0}$, the NLSE has a vortex-like solution: $\vec{v}_s = \Gamma / 2\pi r\, \vec{e_{\theta}}$, where $\theta$ is the azimuthal angle and $\Gamma=9.97 \times 10^{-4} \unit{cm^2 \dot s^{-1}}$ is the \textit{quantum of circulation}, obtained from:
+Even the superfluid is irrotational $\omega = \nabla \times \vec{v}_{BEC} = \vec{0}$, the NLSE has a vortex-like solution: $\vec{v}_s = \Gamma / 2\pi r\, \vec{e_{\theta}}$, where $\theta$ is the azimuthal angle and $\Gamma=9.97 \times 10^{-4} \unit{cm^2 \dotprod s^{-1}}$ is the \textit{quantum of circulation}, obtained from:
 
 \begin{equation}
 \Gamma = \oint_{\mathcal{C}} \vec{v}_{BEC} \cdot \unit{d}\vec{\boldsymbol{\ell}} = \frac{h}{m}
@@ -151,7 +165,7 @@ Within our context, $\vec{s}^{\prime}$ is a tangent vector and $\vert \vec{s}^{\
 \end{figure}
 
 
-We suppose that the superfluid component is incompressible $\nabla \dot \vec{v}_s = 0$. Moreover, superfluid vorticity $\omega_s$ is localized only at positions of vortex filaments:
+We suppose that the superfluid component is incompressible $\nabla \dotprod \vec{v}_s = 0$. Moreover, superfluid vorticity $\omega_s$ is localized only at positions of vortex filaments:
 
 \begin{equation}
 \omega_s(\vec{r},t) = \nabla \times \vec{v}_s
@@ -190,79 +204,76 @@ Since there could be also external flow source of superfluid component, we defin
 \end{equation}
 
 \section{Vortex dynamics}
-\begin{itemize}
-	\item magnus force
-	\item mutual friction
-	\item Schwarz's equation
-	\item special case - quantum ring (properties)
-	\item Kelvis waves (?)
-\end{itemize}
+
+To determine the equation of motion of $\vec{s}$ we must recognize the forces acting upon the line - the magnus force $\vec{f}_M$ and (at temperature $T>0$), the drag force $\vec{f}_D$ (both are per unit length).
+
+The magnus force always arises when a rotating body moves in a flow - the rotation creates an increased velocity on one side and decreased velocity on the other one. This causes a pressure difference, which in our case of moving vortex line with circulation quantum $\Gamma$, exerts a force:
+
+\begin{equation}
+\vec{f}_M = \rho_s \Gamma \vec{s}^{\prime} \times (\vec{\dot{s}} - \vec{v}_{s,tot})\,,
+\end{equation}
+
+where $\vec{dot{s}} = \text{d}\vec{s} / \vec{d} t$ is the velocity of the line filament in the laboratory frame.
+
+The drag force $\vec{f}_D$ arises from the \textit{mutual friction}, the interaction between the normal component and superfluid component. According to Vinen and Hall foundings, the normal fluid flowing with velocity $\vec{v}_n$ past a vortex core exerts a frictional force $\vec{f}_D$ on the superfluid, given by:
+
+\begin{equation}
+\vec{f}_D = - \alpha(T)\rho_s\Gamma\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_n - \vec{v}_{s,tot})] - \alpha^{\prime}(T)\Gamma\vec{s}^{\prime} \times (\vec{v}_n - \vec{v}_{s,tot})
+\end{equation}
+
+The temperature dependent dimensionless parameters $\alpha(T)$ and $\alpha^{\prime}(T)$ are written in terms of \textit{mutual friction parameters} $B$ and $B^{\prime}$, which are known from experiments by Samuels and Donnelly:
+
+\begin{equation}
+\alpha(T) = \frac{\rho_n B(T)}{2\rho}
+\hspace{1cm}
+\alpha^{\prime}(T) = \frac{\rho_n B^{\prime}(T)}{2\rho}
+\end{equation}
+
+The precise calculation of the mutual friction parameters over the entire temperature range is still an open problem. Although, we already know that friction arises from the scattering process of rotons in the area of high temperatures.
+
+Since the mass of vortex core is usually neglected, the two forces $\vec{f}_M$ and $\vec{f}_D$ sum up into zero: $\vec{f}_M + \vec{f}_D = \vec{0}$. Hence, solving for $\text{d}\vec{s} / \text{d} t$, we obtain the Schwarz's equation:
+
+\begin{equation}
+\dot{s} = \vec{v}_s + \vec{v}_i
++ \alpha\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i)
+- \alpha^{\prime}\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i)]\,,
+\end{equation}
+
+where $\vec{v}_{ns} = \vec{v}_n - \vec{v}_s$ is the difference between the average velocity of normal fluid and the applied superfluid velocity.
+
+On the basis of Schwarz's equation there can be developed an algorithm to numerically simulate vortex time evolution of an arbitrary configuration. More on this is written later in Simulation part of thesis.
+
+\subsection*{Quantized vortex rings}
+
+A special case of vortex line configuration is a freely moving vortex ring. Such rings are usually created as a result of multi-vortex interconnection and have limited life expectancy. The exact expressions derived by classical hydrodynamics for the energy $E_{\text{ring}}$ and center velocity $v_{\text{ring}}$, moving in a Helium II of density $\rho$ and
+having a radius $R$ much greater than its core radius $R >> a_0$, are
+
+\begin{equation}
+E_{\text{ring}} = \frac{1}{2}\Gamma^2 \rho R \Big(\ln(8R/a_0) - 2 + c\Big)
+\label{ring-energy}
+\end{equation}
+
+\begin{equation}
+v_{\text{ring}} = \frac{\Gamma}{4\pi R} \Big(\ln(8R/a_0) - 1 + c\Big)\,,
+\label{ring-velocity}
+\end{equation}
+
+where $c$ is a constant based on inner structure of the vortex. Since we work with hollow core, we use
+$c = 0$. Note that (\ref{ring-energy}) and (\ref{ring-velocity}) depend on $a_0$ only logarithmically.
+The behavior of the vortex ring is thus quite insensitive to the exact value of $a_0$ (expected to be of the order of atomic dimension).
+
+\todo Life expectancy
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/filament2}
-	\caption{vortex filament 2}
-	\label{filament2}
-\end{figure}
-
-Magnus force:
-
-\begin{equation}
-\vec{f}_M = \rho_s \Gamma \vec{s}^{\prime} \times (\vec{v}_i - \vec{v}_{tot})
-\end{equation}
-
-Total velocty:
-
-\begin{equation}
-\vec{v}_{tot} = \vec{v}_s + \vec{v}_i
-\end{equation}
-
-
-Drive force (mutual friction):
-
-\begin{equation}
-\vec{f}_D = - \alpha\rho_s\Gamma\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_i - \vec{v}_{tot})] - \alpha^{\prime}\Gamma\vec{s}^{\prime} \times (\vec{v}_i - \vec{v}_{tot})
-\end{equation}
-
-Assuming no mass of vortex core:
-
-\begin{equation}
-\vec{f}_D + \vec{f}_M = 0
-\end{equation}
-
-Shwarz's equation:
-
-\begin{equation}
-\frac{\text{d}\vec{s}}{\text{d}t} = \vec{v}_s + \vec{v}_i + \alpha\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i) - \alpha^{\prime}\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i)]
-\end{equation}
-
-Quantized vortex rings, its dynamics, velocity, life expectancy
-
-Center motion:
-
-\begin{equation}
-v_{\text{center}} = \frac{\Gamma}{4\pi R} (\eta - 1/4)
-\end{equation}
-
-\begin{equation}
-\eta = \ln(8R/a)
-\end{equation}
-
-Energy:
-
-\begin{equation}
-E = \frac{\rho \Gamma^2 R}{2} (\eta - 7/4)
-\end{equation}
-
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/vortex-ring}
-	\caption{dynamics of quantum vortex ring}
+	\includegraphics[width=0.3\textwidth]{graphics/theory/vortex-ring}
+	\caption{Depiction of quantized vortex ring motion}
 	\label{vortex-ring}
 \end{figure}
 
-Kelvin waves (?)
+\section{Kelvin waves}
+
+\todo
 
 \newpage
 
