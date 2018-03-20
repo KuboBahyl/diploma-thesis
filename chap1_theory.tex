@@ -68,120 +68,126 @@ He properties, total spin, Bose gas, critical temperature, heat capacity
 \addcontentsline{toc}{chapter}{Mesoscopic model}
 \vspace{0.3cm}
 
-\section{London's theory}
+One of the most useful ways of describing superfluid helium at $T=0$ starts with nonlinear Schrodinger equation (NLSE) for the one-particle wave function $\psi$. Since superfluid helium is a strongly correlated system dominated by collective effects, this imperfect Bose condensate is described by Gross-Pitaevskii equation.
 
-Gross-Pitaevskii NLSE:
+\section{Gross Pitaevskii model}
+
+In terms of single-particle wavefunction $\psi(\vec{r},t)$:
 
 \begin{equation}
-i \hbar \frac{\partial \psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2 \psi - m\eps \psi + V_0 \vert \psi \vert^2 \psi
+i \hbar \frac{\partial \psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2 \psi
++ \psi \int \vert \psi(\vec{r}^{\prime},t) \vert^2 V(\vert \vec{r} - \vec{r}^{\prime} \vert)
+\text{d}\vec{r}^{\prime}\,,
 \end{equation}
 
-Macroscopic wave function:
+where $V(\vert \vec{r} - \vec{r}^{\prime} \vert)$ is the potential of two-body interaction between bosons. The normalization is set as $\int \vert \psi \vert^2 \text{d}\vec{r} = N$, where $N$ is number of bosons. By replacing potential with repulsive $\delta$-function of strength $V_0$ one obtains:
 
 \begin{equation}
-\psi(\vec{r},t) = \sqrt{\frac{\rho_{\ind s}}{m_4}}\, e^{i \phi (\vec{r},t)}\,,
-\label{psi}
+i \hbar \frac{\partial \Psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2 \Psi - m\eps \Psi + V_0 \vert \Psi \vert^2 \Psi\,,
+\label{GP}
 \end{equation}
 
-London's idea, properties of $\psi$, zero vorticity
+where $\eps$ is the energy per unit mass and $\Psi = A e^{i\Phi}$ is a macroscopic wave function of condensate. In this way one can define the condensate's density $\rho_{BEC} = m\Psi\Psi^* =  mA^2$ and velocity $\vec{v}_{BEC} = (\hbar / m)\nabla \Psi$. Note that equation (\ref{GP}) is equivalent to a continuity equation and an modified Euler equation (by the so called quantum pressure term).
 
-Circulation:
+Even the superfluid is irrotational $\omega = \nabla \times \vec{v}_{BEC} = \vec{0}$, the NLSE has a vortex-like solution: $\vec{v}_s = \Gamma / 2\pi r\, \vec{e_{\theta}}$, where $\theta$ is the azimuthal angle and $\Gamma=9.97 \times 10^{-4} \unit{cm^2 \dot s^{-1}}$ is the \textit{quantum of circulation}, obtained from:
 
 \begin{equation}
-\Gamma = \oint_{\mathcal{C}} \vec{v_{\ind s}} \cdot \unit{d}\vec{\boldsymbol{\ell}}
+\Gamma = \oint_{\mathcal{C}} \vec{v}_{BEC} \cdot \unit{d}\vec{\boldsymbol{\ell}} = \frac{h}{m}
 \label{gamma}
 \end{equation}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{graphics/theory/singularity}
-	\caption{singularities within fluid}
+	\caption{topological singularities within superfluid}
 	\label{singularity}
 \end{figure}
 
+\newpage
+
 \section{Quantum vortex}
-\begin{itemize}
-	\item definition
-	\item induced velocity
-	\item energy
-	\item quantized circulation
-	\item quantum turbulence
-\end{itemize}
 
-tiny vortex of size 1A, created with energetic excitation and $\psi$ collapse, core contains pure normal component, superfluid is circulating around, limitation by Landau critical velocity
+Superfluid vortex lines appear when helium II moves faster than a critical velocity. Such \textit{nucleation} is the subject of many investigations and is introduced widely later in this work.
 
-Quantized circulation:
-
-\begin{equation}
-\Gamma = \frac{\hbar}{m_4} 2\pi n = \equiv n \kappa
-\label{gamma}
-\end{equation}
-
-Ordering of vortices in rotating container:
+The simplest way to create quantum vortices is to rotate cylinder with superfluid Helium II with high enough angular velocity $\Omega$. Created vortex lines form an ordered array of density $L=2\Omega / \Gamma$, all aligned along the axis of rotation. \textit{Vortex line density} $L$ can be also interpreted as a total vortex length in an unit volume.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/rotating-helium}
-	\caption{Quantized vortices in rotating container}
+	\includegraphics[width=0.4\textwidth]{graphics/theory/rotating-helium}
+	\caption{Array of quantized vortices in a rotating container}
 	\label{rotating-helium}
 \end{figure}
 
-Superfluid velocity distirbution around vortex core:
+The key properties of Onsager-Feynman vortex are the quantized circulation $\Gamma$, superfluid rotational velocity field $\vec{v}_s = \Gamma / 2\pi r\, \vec{e_{\theta}}$ and the \textit{vortex core parameter} $a_0$. The core size $a_0$ can be estimated by substituting $\vec{v}_s$ back into (\ref{GP}) and solving differential equation for $\rho_s$. One finds that $\rho_s$ tends to the value $m^2 \eps / V_0$ for $r \rightarrow \infty$ and to zero density for $r \rightarrow 0$.
+The characteristic distance over which $\Psi$ collapses (superfluid density $\rho_s$ drops from bulk value to zero) is $a_0 \approx 10^{-10} \unit{m} = 1 \unit{\AA}$.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/vortex_velocity}
-	\caption{decrease of rotational velocity around vortex}
-	\label{vortex_velocity}
-\end{figure}
+From this, there is a conclusion that the vortex is hollow at its core and therefore, the topological defect occurs. Although, it must be noted that real Helium II is a dense fluid, not weakly interacting Bose gas described by NLSE.
 
+Taking $a$ as core radius and $b$ as characteristic distance between two vortices, one can derive the unit length energy for vortex line:
+
+\begin{equation}
+\eps_n
+= \int_{S_a}^{S_b} \eps_{kin}\unit{d}S
+= \frac{\pi \hbar^2 \rho_{\ind s} \ln(b/a)}{m^2}\, n^2
+\label{eps_n}
+\end{equation}
+
+Since $E_{\ind{vortex}} \sim n^2$, it is less expensive to have two ground-state vortices than one quantized one.
+
+Clearly, vortex lines don't have to be aligned in general. In most cases , the superfluid flow is strongly chaotic, better known as \textit{quantum turbulence}. This topic is covered in more detail later in this work.
+
+\newpage
 
 \section{Vortex filament model}
-each segment know its position and neighbours, defining vectors $\vec{s}$, $\vec{s}^{\prime}$, $\vec{s}^{\prime\prime}$ + physical meaning, state definition
 
-Associated vectors with segment:
+The vortex line can be represented as a curve via positional vector $\vec{s} = \vec{s}(\xi, t)$ in three-dimensional space. Here, $\xi$ is arclength along the vortex line. Next we label $\vec{s}^{\prime}$ as $\text{d}\vec{s} / \text{d} \xi$ and $\vec{s}^{\prime\prime}$ as $\text{d}\vec{s}^{\prime} / \text{d} \xi$.
+Within our context, $\vec{s}^{\prime}$ is a tangent vector and $\vert \vec{s}^{\prime\prime} \vert$ is a local curvature $R^{-1}$ at a given point. The triad of vectors $\vec{s}$, $\vec{s}^{\prime}$, $\vec{s}^{\prime} \times \vec{s}^{\prime\prime}$ are perpendicular to each other and point along the tangent, normal and binormal respectively:
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{graphics/theory/filament}
-	\caption{vortex filament}
+	\caption{Schematic of the vortex filament and the triad vectors}
 	\label{filament}
 \end{figure}
 
-Incompressibility:
+
+We suppose that the superfluid component is incompressible $\nabla \dot \vec{v}_s = 0$. Moreover, superfluid vorticity $\omega_s$ is localized only at positions of vortex filaments:
 
 \begin{equation}
-\nabla \dot \vec{v}_s = 0
+\omega_s(\vec{r},t) = \nabla \times \vec{v}_s
+= \Gamma \int_{\mathcal{L}} \text{d}\xi \, \vec{s}^{\prime}(\xi, t) \delta (\vec{r} - \vec{s}(\xi,t))\,,
+\label{omega_s}
 \end{equation}
 
-Biot-Savart law:
+where the integral path $\mathcal{L}$ represents curves along all vortex filaments. From incompressibility and (\ref{omega_s}), we obtain Biot-Savart law for the superfluid velocity:
 
 \begin{equation}
-\vec{v}_i(\vec{s}) = \frac{\Gamma}{4\pi} \int_{\mathcal{L}} \frac{(\vec{r} - \vec{s}) \times \text{d}\vec{r}}{\vert \vec{r} - \vec{s} \vert^3}
+\vec{v}_s(\vec{r}) = \frac{\Gamma}{4\pi} \int_{\mathcal{L}} \frac{(\vec{r^{\prime}} - \vec{r}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{r} \vert^3}
 \end{equation}
 
-Problems if $\vec{s}$ lies on the line
-
-LIA approximation:
+This law determines the superfluid velocity field via the arrangement of the vortex
+filaments. Now we define the \textit{self-induced} velocity $\vec{v}_i$, describing the motion which a vortex line induces onto itself due to its own curvature:
 
 \begin{equation}
-\vec{v}_i(\vec{s}) = \beta \vec{s}^{\prime} \times \vec{s}^{\prime \prime} + \frac{\Gamma}{4\pi} \int_{\mathcal{L}^{\prime}} \frac{(\vec{r} - \vec{s}) \times \text{d}\vec{r}}{\vert \vec{r} - \vec{s} \vert^3}
+\vec{v}_i(\vec{s}) = \frac{\Gamma}{4\pi} \int_{\mathcal{L}} \frac{(\vec{r^{\prime}} - \vec{s}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s} \vert^3}
 \end{equation}
 
-LIA with substitued beta:
+Although, this integral diverges as $\vec{r}^{\prime} \rightarrow \vec{s}$ because the core structure
+of the quantized vortex was neglected. We avoid this divergence by splitting the integral into two parts - direct neighborhood of the point $\vec{s}$ (local part) and the rest part $\mathcal{L}^{\prime}$ (nonlocal part). The Taylor expansion of the local part leads to finite result and thus:
 
 \begin{equation}
-\vec{v}_i \approx \frac{\Gamma}{4\pi} \ln\Big(\frac{R}{a_0}\Big) \vec{\hat{b}}
+\vec{v}_i(\vec{s})
+= \vec{v}_{\text{s,local}} + \vec{v}_{\text{s,nonlocal}}
+\approx \beta \vec{s}^{\prime} \times \vec{s}^{\prime \prime} + \frac{\Gamma}{4\pi} \int_{\mathcal{L}^{\prime}} \frac{(\vec{r^{\prime}} - \vec{s}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s} \vert^3}\,,
 \end{equation}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/filament2}
-	\caption{vortex filament 2}
-	\label{filament2}
-\end{figure}
+where $\beta = (\Gamma / 4\pi) \ln(1/\vert\vec{s}^{\prime}\vert a_0)$. This process is called Local Induction Approximation (LIA). Numerical study of Adachi et al. showed that the nonlocal term plays an important role even for homogeneous quantum turbulence.
 
+Since there could be also external flow source of superfluid component, we define the total superfluid velocity, in laboratory frame, as:
 
+\begin{equation}
+\vec{v}_{s,tot} = \vec{v}_{s,ext} + \vec{v}_i
+\end{equation}
 
 \section{Vortex dynamics}
 \begin{itemize}
@@ -191,6 +197,13 @@ LIA with substitued beta:
 	\item special case - quantum ring (properties)
 	\item Kelvis waves (?)
 \end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/theory/filament2}
+	\caption{vortex filament 2}
+	\label{filament2}
+\end{figure}
 
 Magnus force:
 
