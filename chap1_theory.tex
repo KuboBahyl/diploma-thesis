@@ -2,59 +2,72 @@
 \addcontentsline{toc}{chapter}{Introduction}
 
 	The liquid state of $\He$ exists in two phases:
-	\begin{item}
+	\begin{itemize}
 		\item Helium I - a high temperature phase ($2.17\unit{K}<T<4.2\unit{K}$)
 		\item Helium II - a low temperature phase ($T<2.17\unit{K}$)
-	\end{item}
+	\end{itemize}
 
-	These two phases are connected with the \textit{lambda transition}, which occurs at the critical temperature $T_{\lambda} = 2.17 \unit{K}$.
-
-	liquid helium discovery, 1908, Heike Onnes, liquid state at 4.2K, superfluid state below 2.17K, full phase diagram:
+	These two phases are connected with the \textit{lambda transition}, which occurs at the critical temperature $T_{\lambda} = 2.17 \unit{K}$ at saturated vapour pressure. Helium I is a classical fluid described by ordinary Navier-Stokes (N-S) equations, whereas Helium II indicates the Bose-Einstein condensate (BEC) in much more way.
 
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.5\textwidth]{graphics/theory/phase_diag}
-		\caption{p-T diagram}
+		\caption{Pressure-Temperature diagram of Helium}
 		\label{phase}
 	\end{figure}
 
-	labelling He-I, He-II, no solid state at 0K (weak van der Waals), only at 2.5MPa
+	A simple, phenomenological model of the Helium II motion was proposed by Tisza and Landau - the \textit{two-fluid theory}. Within this model, Helium II is depicted as a mixture of two fluid components, able to penetrate each other:
 
-	strange properties, thermal conductivity, negligible viscosity through capillaries
+	\begin{itemize}
+		\item normal component - density $\rho_n$, velocity field $\vec{v}_n$, ordinary viscous N-S equation of motion, carrying entropy and thermal excitations represented by \textit{phonons} and \textit{rotons}
+		\item superfluid component - density $\rho_s$, velocity field $\vec{v}_s$, modified Euler equation (without viscosity) of motion by quantum terms, no entropy, represented by macroscopic wave function
+	\end{itemize}
 
-	He properties, total spin, Bose gas, critical temperature, heat capacity
-
-
-
-	Landau, Tisza: phenomenology, two-fluid model, proved bz rotating discs:
+	The total density of Helium II sums up to $\rho = \rho_n + \rho_s$ and the relative proportion of normal/superfluid component is determined by the temperature. Near $T \rightarrow 0$ Helium II becomes entirely superfluid $\rho_s/\rho \rightarrow 1$. The temperature dependence of this ratio is pretty nonlinear. For example, the ratio $\rho_n/\rho$ drops from $100\%$ at $2.17\unit{K}$ to $50\%$ at $1.95\unit{K}$, to $<5\%$ at $1.3\unit{K}$, and is effectively negligible under $1\unit{K}$.
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.5\textwidth]{graphics/theory/densities}
-		\caption{temperature dependence of densities}
+		\includegraphics[width=0.7\textwidth]{graphics/theory/densities}
+		\caption{Temperature dependence of density proportions}
 		\label{densities}
 	\end{figure}
 
-	London: similarity of superfluid component with orbiting electorns, macroscopic wave func
+	The two-fluid model explains many observed phenomena - among others we pick \textit{second sound} and \textit{thermal counterflow} due to their importance in the study pf turbulence.
 
-	irrotational fluid, quantum vortices, tangle:
+	\textit{Second sound}: Ordinary sound (the wave of density $\rho$ and pressure $P$) in Helium II is called \textit{first sound}. In such process, temperature $T$ and entropy $S$ is conserved and $\vec{v}_n$ and $\vec{v}_s$ oscillate in phase with each others. On the contrary, a second sound is an antiphase oscillation of $\vec{v}_n$ and $\vec{v}_s$, causing the oscillation of $T$ and $S$ and reamining $\rho$ and $P$ constant. In this work, this phenomena is used for detection of quantized vortices, which naturally appear within Helium II.
+
+	\textit{Thermal counterflow}: Helium II is able to transfer heat in a special way. Let's consider a closed channel filled with Helium II and a dissipating resistor localised at one end of the channel. In normal fluid, the heat is transferred away from the resistor by conduction mechanism. However, in Helium II the heat is carried away only by the normal component. To conserve the total mass flux, some superfluid fluid flow toward the resistor. In this way, a counterflow is generated. If the counterflow is strong enough, the superfluid turbulence is generated.
+
+	It arises from the quantum nature of superfluid, that such fluid cannot perform any rotation. It is called then \textit{irrotational}. However, when Helium II rotates or moves faster than a critical velocity, the circulation is \textit{quantized} and so-called \textit{quantized vortices} are created, which makes the hydrodynamics of Helium II particularly interesting. The vortex nucleation process is still a subject of many current investigations. Superfluid vortex lines can be spatially organized (laminar flows) or completely disorganized (turbulent flows).
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.5\textwidth]{graphics/theory/QT-tangle}
-		\caption{Quantum Turbulence}
+		\includegraphics[width=0.4\textwidth]{graphics/theory/QT-tangle}
+		\caption{Small simulation cube of tangle of quantum vortices}
 		\label{QT}
 	\end{figure}
 
-	CT experiments: transition to turbulence, drag coeffs
+	It has only recently been relized that helium II is an attractive candidate for investigating classical turbulence problems. Quantum turbulence (QT) can be achieved in many traditional ways - driving a mass flow, spinning discs, oscillating grids and forks, ultrasound, jets. Considering all these methods together, the general trend is that the slow, laminar flow of Helium II (with or without vortices) tends to be rather different from the classical fluid flow. In case of fast motion, the turbulent Helium II seems to behave similar to classical turbulent flow.\\
+	To characterize the turbulence we use the dimensionless Reynolds number. Examples of the observed classical features of Helium II QT (regardless on temperature) were found during experiments with flow strength of $\Re \approx 10^6$ (pressure drops), of $\Re \approx 10^5$ (sphere drag crisis), of $\Re \approx 4 \times 10^4$ (whole fluid vorticity) and of $\Re \approx 4 \times 10^3$ (structures of turbulence).
 
-	QT experiments: coflow, counterflow, second sound
+	In classical fluid dynamics (solutions of motion equations), the useful tool for understanding the geometry and dynamics of flow is \textit{vortex filament model}. With the rapid development of available computational power, large simulations have become the methods of choice for calculating the motion of fluids. In superfluids like Helium II, due to the quantization of circulation, vorticity can only exist within vortex filaments with a certain core size, which makes the model a way more applicable than in fields of classical fluids.
 
-	QT vs CT: complicated N-S equations, critical velocity or Reynolds number, QT has probably more critical velocities
-
-	Simulations: filament model, boundaries
 
 	\subsection*{Motivations and Goals}
+
+	Motivations:
+	\begin{itemize}
+		\item no 1
+		\item no 2
+		\item no 2
+	\end{itemize}
+
+	Goals:
+	\begin{itemize}
+		\item no 1
+		\item no 2
+		\item no 2
+	\end{itemize}
 
 	Motivations: investigate critical velocities and vortex density, create numeric model
 
@@ -146,7 +159,7 @@ Taking $a$ as core radius and $b$ as characteristic distance between two vortice
 \label{eps_n}
 \end{equation}
 
-Since $E_{\ind{vortex}} \sim n^2$, it is less expensive to have two ground-state vortices than one quantized one.
+Since $E_{\ind{vortex}} \sim n^2$, an $N$ quantum vortices contains more energy than $N$ single quantum vortices, and it is generally assumed that only single quantum vortices are commonly observed.
 
 Clearly, vortex lines don't have to be aligned in general. In most cases , the superfluid flow is strongly chaotic, better known as \textit{quantum turbulence}. This topic is covered in more detail later in this work.
 
