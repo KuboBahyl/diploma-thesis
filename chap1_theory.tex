@@ -32,7 +32,7 @@
 		\label{densities}
 	\end{figure}
 
-	The two-fluid model explains many observed phenomena - among others we pick \textit{second sound} and \textit{thermal counterflow} due to their importance in the study pf turbulence.
+	The two-fluid model explains many observed phenomena - among others we pick \textit{second sound} and \textit{thermal counterflow} due to their importance in the study of turbulence.
 
 	\textit{Second sound}: Ordinary sound (the wave of density $\rho$ and pressure $P$) in Helium II is called \textit{first sound}. In such process, temperature $T$ and entropy $S$ is conserved and $\vec{v}_n$ and $\vec{v}_s$ oscillate in phase with each others. On the contrary, a second sound is an antiphase oscillation of $\vec{v}_n$ and $\vec{v}_s$, causing the oscillation of $T$ and $S$ and reamining $\rho$ and $P$ constant. In this work, this phenomena is used for detection of quantized vortices, which naturally appear within Helium II.
 
@@ -130,7 +130,6 @@ Even the superfluid is irrotational $\omega = \nabla \times \vec{v}_{BEC} = \vec
 	\label{singularity}
 \end{figure}
 
-\newpage
 
 \section{Quantum vortex}
 
@@ -163,7 +162,6 @@ Since $E_{\ind{vortex}} \sim n^2$, an $N$ quantum vortices contains more energy 
 
 Clearly, vortex lines don't have to be aligned in general. In most cases , the superfluid flow is strongly chaotic, better known as \textit{quantum turbulence}. This topic is covered in more detail later in this work.
 
-\newpage
 
 \section{Vortex filament model}
 
@@ -413,6 +411,15 @@ In low-frequency mode, when $\delta \ll$ than oscillating body size, the Helium 
 C_{DN} \propto \sqrt{\nu \omega \propto D_N^{-1}}
 \end{equation}
 
+Since the density of normal component is decreasing with temperature, the critical Reynolds number of normal component shifts to higher numbers:
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{graphics/theory/C-Re_normal}
+	\caption{Drag coefficients vs Reynolds numbers of normal component. The non-constant behaviour of low-temperature curves in turbulent mode are caused due to additional QT.}
+	\label{C-Re_normal}
+\end{figure}
+
 For the superfluid component, the drag coefficient $C_{DS}$ is defined directly from the hydrodynamic desciption:
 
 \begin{equation}
@@ -422,76 +429,68 @@ C_{DS} = \frac{2F_{drag,s}}{A\rho_s U^2}\,,
 where $A$ is a surface, dragged by the flow.
 
 \section{Quantum turbulence}
+
+Superfluid turbulence can be viewed as a tangle of vortex lines and can be generated many ways. The first successful try was done using turbulent thermal counterflow by Vinen. Other popular ways to generate turbulence are
+
+The instability leading to the quantized vorticity is amplified by the self-reconnecting property of vortex loops and the critical velocity $U_{crit}$ is expected to scale with frequency as $U_{crit} \propto \sqrt{\omega}$. Hence we define the dimensionless velocity $\hat{U} = U / \sqrt{\omega}$.\\
+A couple of experimental studies in milliKelvin temperatures reported the existence of more critical velocities related with superfluid component flow within single experiment:
+
 \begin{itemize}
-	\item critical velocity according to landau
-	\item critical velocity scaling in oscillatory case
-	\item T dependence of critical velocities (Bc. results)
+	\item \underline{First critical velocity} is related with the formation of quantum vortex rings near the surface of oscillating body - possibly forming a thin layer of different hydrodynamic behaviour. Such critical velocity is hard to observe at higher than ultra-low temperature.
+
+	\item \underline{Second critical velocity} is a consequence of escaping vortex rings from the oscillator body and forming a superfluid bulk or, eventually, the whole turbulent tangle. Here the sudden raise of drag is observed, usually with hysteresis effect.
+
+	\item \underline{Third critical velocity} is the highest critical velocity, which can be observed. The origin of this velocity is hidden in the development of larger quantized vortex structures, which in larger scale become to mimic the classical turbulence. Such velocity is in order $\approx \unit{m/s}$ and therefore, not likely reachable within experiments reported in this thesis.
 \end{itemize}
 
+When both velocities of Helium II are high enough, we expect the turbulent regime on both sides to be coupled due to mutual friction and contributing to the drag. In such situation, we are forced to use classical hydrodynamic metrics: drag coefficient $C_D = 2F / (A\rho U^2)$ and Donnelly number $D = U \delta / \nu$. Recent researches also hint that both classical turbulent and quantum turbulent regimes can exist separately with low interaction.
 
-
-Critical velocity scaling:
-
-\begin{equation}
-v_{\text{crit}} \propto \sqrt{\omega}
-\end{equation}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/C-Re_normal}
-	\caption{drag coeffs vs Reynolds number of normal component}
-	\label{C-Re_normal}
-\end{figure}
+Note that all presented approches are only approximate, since they are neglecting flows near the oscillating body, evaporation processes, sound emissions and other corner-case effects.
 
 \section{Second sound}
 \begin{itemize}
-	\item what it is
-	\item velocity of second sound
 	\item attenuation
 	\item vortex line density estimate
 \end{itemize}
 
-\begin{equation}
-\vec{v}_{\ind{ns}} \propto e^{-\alpha z} \vec{\hat{e}}_{\vec{r}}(\vec{k},\vec{r},\omega,t)\,,
-\end{equation}
-
-\begin{equation}
-\alpha = \frac{B\kappa L}{6 c_2}
-\label{alpha_mean}\,.
-\end{equation}
-
-
-First and second sounds:
+Ordinary sound (the wave of density $\rho$ and pressure $P$) in Helium II is called \textit{first sound}. In such process, temperature $T$ and entropy $S$ is conserved and $\vec{v}_n$ and $\vec{v}_s$ oscillate in phase with each others ($\vec{v}_n(t) \approx \vec{v}_s(t)$). On the contrary, by combination of two-fluid motion and continuity equations, one obtains the wave equation also for the temperature $T$ and entropy $S$. In such case the velocities obey an antiphase oscillation ($\rho_n(t) \vec{v}_n(t) \approx - \rho_s(t) \vec{v}_s(t)$) and remains $\rho$ and $P$ constant.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{graphics/theory/ss_1}
-	\caption{first mode of second sound}
+	\includegraphics[width=0.99\textwidth]{graphics/theory/ss_1}
+	\caption{here will come more proper picture}
 	\label{ss_1}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{graphics/theory/ss_2}
-	\caption{second mode of second sound}
+	\includegraphics[width=0.99\textwidth]{graphics/theory/ss_2}
+	\caption{here will come more proper picture}
 	\label{ss_2}
 \end{figure}
 
-Velocity of second sound with temperature:
+In early Vinen's observations, the exponentially dumped velocity of second sound wave, propagating through two-fluid medium, was derived from motion equations:
+
+\begin{equation}
+\vec{v}_{\ind{ns}} \propto e^{-\alpha \vert \vec{r} \vert} \vec{\hat{e}}_{\vec{r}}(\vec{k},\vec{r},\omega,t)\,,
+\end{equation}
+
+where $\alpha$ is the attenuation coefficient. When considering homogeneous chaotic distribution of vortex tangle, one can also derive the formula for the attenuation factor:
+
+\begin{equation}
+\alpha = \frac{B\kappa L}{6 \vert \vec{c}_2\vert}
+\label{alpha_mean}\,,
+\end{equation}
+
+where $B$ is the first mutual friction parameter and $\vec{c_2}$ is the initial second sound velocity. This velocity was experimentally examined and there was found a plateau near the value $20 \unit{m/s}$, which is desirable during experiments (stability against small temperature changes):
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.3\textwidth]{graphics/theory/ss_velocity}
-	\caption{velocity of ss with temperature}
+	\includegraphics[width=0.4\textwidth]{graphics/theory/ss_velocity}
+	\caption{velocity of the second sound with temperature}
 	\label{ss_velocity}
 \end{figure}
 
-Vortex line density:
-
-\begin{equation}
-L = \frac{6\pi \Delta f_0}{B\kappa}\bigg( \frac{A_0}{A} - 1 \bigg)\,,
-\label{L}
-\end{equation}
-
+In this work, the phenomenon of second sound attenuation is used for detection of quantized vortices, which naturally appear within Helium II. There is written much more about the method itself within the Experimental Approach part.
 
 \newpage
