@@ -176,19 +176,14 @@ Within our context, $\vec{s}^{\prime}$ is a tangent vector and $\vert \vec{s}^{\
 \end{figure}
 
 
-We suppose that the superfluid component is incompressible $\nabla \dotprod \vec{v}_s = 0$. Moreover, superfluid vorticity $\omega_s$ is localized only at positions of vortex filaments:
+We suppose that the superfluid component is incompressible $\nabla \dotprod \vec{v}_s = 0$. Moreover, superfluid vorticity $\omega_s$ is localized only at positions of vortex filament $\omega_s(\vec{r},t) = \nabla \times \vec{v}_s$. Combining these two properties gives the Poisson equation $\Delta \phi = \omega_s$ for the potential $\phi$.
+Using Fourier transformation one obtains the Biot-Savart law for the superfluid velocity:
 
 \begin{equation}
-\omega_s(\vec{r},t) = \nabla \times \vec{v}_s
-= \Gamma \int_{\mathcal{L}} \text{d}\xi \, \vec{s}^{\prime}(\xi, t) \delta (\vec{r} - \vec{s}(\xi,t))\,,
-\label{omega_s}
+\vec{v}_s(\vec{r}) = \frac{\Gamma}{4\pi} \int_{\mathcal{L}} \frac{(\vec{r^{\prime}} - \vec{r}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{r} \vert^3}\,,
 \end{equation}
 
-where the integral path $\mathcal{L}$ represents curves along all vortex filaments. From incompressibility and (\ref{omega_s}), we obtain Biot-Savart law for the superfluid velocity:
-
-\begin{equation}
-\vec{v}_s(\vec{r}) = \frac{\Gamma}{4\pi} \int_{\mathcal{L}} \frac{(\vec{r^{\prime}} - \vec{r}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{r} \vert^3}
-\end{equation}
+where the integral path $\mathcal{L}$ represents curves along all vortex filaments.
 
 This law determines the superfluid velocity field via the arrangement of the vortex
 filaments. Now we define the \textit{self-induced} velocity $\vec{v}_i$, describing the motion which a vortex line induces onto itself due to its own curvature:
