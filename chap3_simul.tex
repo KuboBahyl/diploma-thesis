@@ -18,7 +18,7 @@ The \texttt{PyVort} code is based on vortex filament (VF) model, a technique pio
 \todo vortex picture
 
 More precisely we define the VF as a three dimensional curve
-$\vec{s}(\xi, t)$. Here $\xi$ represents arc-lengths and $t$ is time. Each mesh point is given by its coordinates $\vec{s}$, direct neighbour indices (previous and next mesh point). This resolves in an oriented graph, which a good starting point for the initial data structure.
+$\vec{s}(\xi, t)$. Here $\xi$ represents arc-lengths and $t$ is time. Each mesh point is given by its coordinates $\vec{s}$, direct neighbour indices (previous and next mesh point). This resolves in a directed digraph, which a good starting point for the initial data structure.
 
 We can construct the tangent vector $\vec{s}^{\prime}$, then normal vector, $\vec{s}^{\prime\prime}$, and the binormal vector, $\vec{s}^{\prime} \times \vec{s}^{\prime\prime}$ by taking numerical derivatives. Note $\vec{s}^{\prime} = \text{d}\vec{s} / \text{d}\xi$,
 and so on. We denote the velocity at a point $\vec{s}$ as $\vec{v}(\vec{s})$ and consider the velocity field to be made up of two parts:
