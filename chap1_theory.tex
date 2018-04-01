@@ -188,6 +188,7 @@ of the quantized vortex was neglected. We avoid this divergence by splitting the
 \vec{v}_i(\vec{s})
 = \vec{v}_{\text{s,local}} + \vec{v}_{\text{s,nonlocal}}
 \approx \beta \vec{s}^{\prime} \times \vec{s}^{\prime \prime} + \frac{\varkappa}{4\pi} \int_{\mathcal{L}^{\prime}} \frac{(\vec{r^{\prime}} - \vec{s}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s} \vert^3}\,,
+\label{lia+biot}
 \end{equation}
 
 where $\beta = (\varkappa / 4\pi) \ln(1/\vert\vec{s}^{\prime}\vert a_0)$. This process is called Local Induction Approximation (LIA). Numerical study of Adachi et al. showed that the nonlocal term plays an important role even for homogeneous quantum turbulence.
@@ -232,6 +233,7 @@ Since the mass of vortex core is usually neglected, the two forces $\vec{f}_M$ a
 \dot{s} = \vec{v}_s + \vec{v}_i
 + \alpha\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i)
 - \alpha^{\prime}\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i)]\,,
+\label{schwarz}
 \end{equation}
 
 where $\vec{v}_{ns} = \vec{v}_n - \vec{v}_s$ is the difference between the average velocity of normal fluid and the applied superfluid velocity.
