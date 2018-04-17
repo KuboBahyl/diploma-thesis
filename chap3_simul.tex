@@ -1,20 +1,20 @@
-\chapter{Simulations (10 pgs)}
+\chapter{Simulations}
 
-This part of thesis serves as a widen documentation for the \texttt{PyVort} codebase, a new platform to simulate quantum vortex rings. The code is written in well commented Python 3, arranged in a modular structure. The primary aim of this documentation is to highlight which module(s) are involved and how they work.
-In appendix, one can find a table of the parameters (user's options) which can be set in the \texttt{config.py} file.
+This part of thesis serves as a general description of the \texttt{PyVort} codebase, a new platform to simulate quantum vortex rings. The code is written in well commented Python 3, arranged in a modular structure. The primary aim of this chapter is to highlight which module(s) are involved and how they work.
+In appendix, one can find a table of the parameters (user's options) which can be set in the \texttt{config.py} file to run simulation.
 
-To run the code, there has to be installed only Python 3 (with various libraries) on any OS. All the Python code can be found in the directory \texttt{src/}. The entire project is open-source and can be found as a public \href{https://github.com/KuboBahyl/superfluid}{GitHub} repository. Pull requests of any further development would be definitely appreciated.
-
-At present, we use infinite boundary conditions. Therefore, only closed-loop vortices can be realized using simulation. However, the codebase is flexible and supports the potential implementation of unclosed loops.
+At present, we use infinite boundary conditions. Therefore, only closed-loop vortices can be realized in simulation. However, the codebase is flexible and supports the potential implementation of unclosed loops.
 
 \section{Vortex filament model}
 
-The \texttt{PyVort} code is based on vortex filament (VF) model, a technique pioneerd by Schwarz in the early 1980s. Superfluid vortex filament is represented by a series of mesh points (segments) distributed along the centerline of the VF. The motion of the whole VF is summed up by the motion of each mesh point.
+The \texttt{PyVort} code is based on vortex filament (VF) model, a technique pioneerd by Schwarz in the early 1980s \cite{schwarz_filament}. Superfluid vortex filament is represented by a series of mesh points (segments) distributed along the centerline of the filament (\textbf{Figure \ref{example_ring}}). The motion of the whole VF is summed up by the motion of each mesh point.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{graphics/simul/ring_init_crop}
-	\caption{Example of vortex ring segments}
+	\caption{Visualisation of vortex ring segments right
+after their initialisation.}
+	\label{example_ring}
 \end{figure}
 
 As introduced in Theoretical Background, we define the VF more precisely as a three dimensional curve $\vec{s}(\xi, t)$. Here, $\xi$ represent an arc-lengths and $t$ is time. Each segment is given by its coordinates $\vec{s}_i$, direct neighbour indices (previous $(i-1)$ and next $(i+1)$). This resolves in a directed digraph of segments, which is a good starting point for the initial data structure.
@@ -25,14 +25,15 @@ and so on. Numerical derivatives are achieved using Finite Differences method, a
 
 \subsection*{Finite differences}
 
-In order to properly calculate the numerical derivatives $\vec{s}^{\prime}$ and $\vec{s}^{\prime\prime}$, belonging to the directed curve in 3D, we need to use a sophisticated numerical method. At a particular segment with position $\vec{s}_i$ , we define the distance to the particle in-front $\vec{s}_{i+1}$ as $l_{i} = \vert \vec{s}_i - \vec{s}_{i+1} \vert$ and the distance to the particle behind
-$\vec{s}_{i-1}$ as $l_{i-1} = \vert \vec{s}_{i-1} - \vec{s}_i \vert$.
-By in-front/behind we refer to the particles next/previous along the filament. Similarly, we can define the $l_{i+1}$ and $l_{i-2}$ for the farther segment lines.
+In order to properly calculate the numerical derivatives $\vec{s}^{\prime}$ and $\vec{s}^{\prime\prime}$, belonging to the directed curve in 3D, we need to use a sophisticated numerical method. At a particular segment with position $\vec{s}_i$ , we define the distance to the particle in-front $\vec{s}_{i+1}$ as $l_{i} = \vert \vec{s}_{i+1} - \vec{s}_i \vert$ and the distance to the particle behind
+$\vec{s}_{i-1}$ as $l_{i-1} = \vert \vec{s}_i - \vec{s}_{i-1} \vert$ (\textbf{Figure \ref{FD}}).
+By in-front/behind we refer to the particles next/previous along the filament.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{graphics/simul/finite-diff}
-	\caption{Depiction of a few segments and corresponding lengths}
+	\caption{Depiction of $i$-th segment vector and its corresponding lengths. Source: \cite{filament}}
+	\label{FD}
 \end{figure}
 
 For accuracy, we approximate all the spatial derivatives $\vec{s}_i^{\prime}$, $\vec{s}_i^{\prime\prime}$ by a
@@ -50,11 +51,12 @@ D_i\vec{s}_{i+1} +
 E_i\vec{s}_{i+2}
 \hspace{1cm}
 \text{for} \,n\in\{1,2\}
+\label{FDcoeffs}
 \end{equation}
 
-Calculation of coefficients $A, B, C, D, E$ can be done in many ways. In code, we use both the analytical solution (closed form) and the solution by inverting the Vandermonde matrix. The first one is obviously faster, but the second one is scalable. By \textit{scalability}, we mean that if we would decide to calculate derivatives based on nearest $n>4$ neighbours, the Vandermonde method can be still used, whereas the closed-form solutions won't be more available. However, the inverting process of Vandermonde matrix is computationally expensive and doesn't have to converge sometimes.
-
-In this work, we used the closed-form solution (4 neighbours) and left the Vandermonde method as an \texttt{except} case for the higher-level mode.
+Calculation of coefficients $A, B, C, D, E$ can be done using analytical solution of \textit{Vandermonde matrix} invertion. This invertion can be done also numerically, which is a more scalable way of implementation, however, this method often meets with problems when the Vandermonde matrix becomes
+singular.
+In code, there is implemented both the analytical solution (closed form) and the solution by inverting the Vandermonde matrix. The closed form works for exactly our form of approximation (\ref{FDcoeffs}), whereas the numerical method works generally for any approximation level.
 
 \subsection*{Biot-Savart discretisation}
 
@@ -78,7 +80,7 @@ The first difficulty in the VF model comes from the calculation of term $\vec{v}
 where $l_{i-1}$ and $l_i$ are the arc lengths of the curve between
 points $\vec{s}_{i-1}$ and $\vec{s}_i$ and between $\vec{s}_i$ and $\vec{s}_{i+1}$ respectively, and $\mathcal{L}^{\prime}$ is the original vortex line without the two segment lines between $\vec{s}_{i-1}$ and $\vec{s}_{i+1}$.
 
-Using the segment discretisation, the Biot-Savart integral can be rewritten into the sum of single-line contributions between each $j$-th and $j+1$-th segment (except for the ones attached to the $i$-th point):
+Using the segment discretisation, the Biot-Savart integral can be rewritten \cite{filament} into the sum of single-line contributions (\textbf{Figure \ref{element}}) between each $j$-th and $j+1$-th segment (except for the ones attached to the $i$-th point):
 
 \begin{equation}
 \vec{v}_{\text{BIOT}}^{(i)} \approx
@@ -92,10 +94,11 @@ where $\vec{R}_j = \vec{s}_j - \vec{s}_i$ and $\vec{R}_{j+1} = \vec{s}_{j+1} - \
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{graphics/simul/biot}
-	\caption{The infinitesimal contribution of a segment line between two points $\vec{s}_j$ and $\vec{s}_{j+1}$ at a given point $\vec{r}$.}
+	\caption{An infinitesimal contribution of a $j$-th segment line between two points $\vec{s}_j$ and $\vec{s}_{j+1}$ at a given point $\vec{r}$. Source: \href{http://docs.desktop.aero/appliedaero/potential3d/BiotSavart.html}{Internet}}
+	\label{element}
 \end{figure}
 
-Note that, if one takes in account the Biot-Savart law for $N$ mesh points, the computational time is proportional to $\mathcal{O}(N^2)$, while, if one uses just the LIA term, it is only $\mathcal{O}(N)$. Numerical simulations based on Biot-Savart are therefore far expensive and not practical, even with the speed of today's computers.
+Note that, if one takes in account the Biot-Savart law for $N$ mesh points, the computational time is proportional to $\mathcal{O}(N^2)$, while, if one uses just the LIA term, it is only $\mathcal{O}(N)$. Numerical simulations based on Biot-Savart are therefore significantly more computationally expensive, even with the speed of today's computers.
 
 One way to get around this difficulty is to update the LIA term. In this method we neglect completely the non-local Biot-Savart integral and keep just the local term. This is typically done with a minor adjustments within the log term:
 
@@ -105,18 +108,19 @@ One way to get around this difficulty is to update the LIA term. In this method 
 \ln{\Bigg(\frac{2 R_i}{a}\Bigg)}\,,
 \end{equation}
 
-where $R_i$ is a filament length scale - may be taken as a local curvature of $i-th$ segment: $R_i = 1 / \vert \vec{s}^{\prime \prime}_i \vert$. Updated LIA is a very convenient approximation and works very well for calculating the motion of a single vortex ring.
+where $R_i$ is a filament length scale - may be taken \cite{schwarz_filament} as a local curvature of $i-th$ segment: $R_i = 1 / \vert \vec{s}^{\prime \prime}_i \vert$. Updated LIA is a very convenient approximation and works very well for calculating the motion of a single vortex ring.
 
 \subsection*{State definition}
 
-In code, a single vortex ring object is represented using the \texttt{class} structure. This structure is partially updated after each time step and works as a source of truth. We will call it as the \textit{state} of the vortex ring and it is defined (and initialised) with following properties:
+In code, a single vortex ring object is represented using the \texttt{class} structure. This structure is updated after each time step. We will call it as a \textit{state} of the vortex ring and it is defined (and initialised) with following properties:
 
 \begin{itemize}
 	\item \underline{shape} - a dictionary of three parameters: ring center coordinates $[x_c,y_c,z_c]$, radius $R$ and the direction of desired motion $\{x, y, z\}$ (three possible axis)
 	\item \underline{velocity} - the actual velocity magnitude of vortex ring center $\vert \vec{v}_c \vert$
-	\item \underline{number of segments} - number of segments $N$ the vortex ring is composed of
+	\item \underline{number of active segments} - number of segments $N$ the vortex ring is composed of
 	\item \underline{segments} - an array of all segments, each one with following attributes:
 	\begin{itemize}
+		\item \underline{active} - a logical value whether a particular segment should be considered as a part of vortex object
 		\item \underline{coordinates} - an array of segment coordinates $\vec{s}_i = [x_i,y_i,z_i]$
 		\item \underline{previous/next neighbour} - array localisation indices of the \textit{previous} $(i-1)$ and the \textit{next} $(i+1)$ segment within the context of the directed vortex
 		\item \underline{tangent/curvature} - a tangential and normal vectors $\vec{s}^{\prime}_i$ and $\vec{s}^{\prime\prime}_i$
@@ -186,9 +190,11 @@ The time step $\text{d}t$ is chosen so that the vortex ring cannot move faster t
 
 \section{Re-segmentation of vortex}
 
-Since the CPU time cost of a vortex simulation rises rapidly as the number of segments $N$ increases, it is importnant to manage this number so that the simulation can run as fast as possible. As the distance between neighbouring segments is compressed/enlarged with time, there is need to remove/add segments to conserve the mesh resolution. The closeness (in terms of arclength) of neighbouring segments has to be measured at each step and the criteria for \textit{re-segmentation} heavily depends on the simulation itself and a scale at which we desire to observe any phenomena.
+To obtain the most realistic simulation (to catch effects on any length scale), the natural tendency would be to set the resolution parameter $\delta$ as low as possible. However, the CPU time cost rises rapidly as the number of segments $N$ increases, so there is need to find the best trade-off.
 
-The simplest re-segmenting criteria is to attempt to keep an approximately \textit{uniform distance} between the segments. To ensure  this, two important conditions were implemented:
+As the distance between neighbouring segments is compressed/enlarged with time due to the physics and numerical inaccuracies, there is need for remove/add segments (\textit{re-segment}) in order to conserve the vortex resolution $\delta$. The closeness (in terms of arclength) of neighbouring segments is therefore measured after each simulation time-step.
+
+We used the simplest re-segmenting criteria - keeping an approximately \textit{uniform distance} between the segments. To ensure this, two boundary conditions were implemented:
 
 \begin{itemize}
 	\item[1.] The segment $\vec{s}_{j+1}$ would be removed if:
@@ -209,7 +215,19 @@ The simplest re-segmenting criteria is to attempt to keep an approximately \text
 	where $\delta_{\text{max}}$ is the maximal allowed distance between two segments.
 \end{itemize}
 
-This will keep all the distances along the vortex rougly in the range $\delta_{\text{min}}$ to $\delta_{\text{max}}$ and also will keep the geometrical properties. However, when adding/removing points from the segment array, one has to also shift the indices of all segments, which adds unnecessary complexity into the simulation.
+This method keeps all the distances along the vortex roughly in the range $\delta \in \langle \delta_{\text{min}}, \delta_{\text{max}} \rangle$ and also keeps the geometrical properties.
+
+\subsection*{Real-time tests}
+
+After each time step is done, a few tests are performed, to ensure that vortex itself is behaving according to our expectations. The tests are following:
+
+\begin{itemize}
+	\item \underline{Length test} - This test calculates the vortex circumference as $l = \sum_j \vert \vec{s}_j - \vec{s}_{j+1} \vert$ and compare it with the theoretical one $2\pi R$. If the deviation from the theoretical value is too high $>1\%$, the segments are noisy and the process is killed. In case of deviation below $<-1\%$, there is clearly too less segments and resegmentation is called.
+
+	\item \underline{Segmentation test} - Here we check the value $l_j \vert \vec{s}_j - \vec{s}_{j+1} \vert$ for each $j$ and ask whether $l_j \in \langle \delta_{\text{min}}, \delta_{\text{max}} \rangle$. If not, resegmentation is called.
+
+	\item \underline{Smallness test} - If the vortex ring radius would decrease below $R < \delta_{\text{min}}$, the ring is deleted from the simulation.
+\end{itemize}
 
 \section{Future implementations}
 
@@ -217,14 +235,16 @@ To make \texttt{Pyvort} a full-fledged quantum vortex simulation, there should b
 
 \subsection*{Complexity speedup}
 
-Recent numerical research presented \cite{tree_alg} a new numerical method to compute the evolution of vortex filament. The method is based on a \textit{tree algorithm} which considerably speeds up the calculation of Biot-Savart integrals - computational cost scales as $\mathcal{O}(N \log(N))$ rather than $N^2$. Properties of the tree method was tested for a variety of vortex configurations, ranging from simple vortex rings to a counterflow vortex tangle and compared with the LIA approac and the exact Biot-Savart's law.
+Recent numerical research presented \cite{tree_alg} a new numerical method to compute the evolution of vortex filament. The method is based on an N-body cosmological simulation by Barnes and Hut \cite{barnes}, a \textit{tree algorithm} which considerably speeds up the calculation of Biot-Savart integrals - computational cost scales as $\mathcal{O}(N \log(N))$ rather than $N^2$. Properties of the tree method was tested for a variety of vortex configurations, ranging from simple vortex rings to a counterflow vortex tangle and compared with the LIA approac and the exact Biot-Savart's law.
 
-Implementation of such algorithm is not easy, but definitely worth to obtain higher precision.
+Implementation of such algorithm is not easy, but definitely worth for the speed-up property.
 
 
 \subsection*{Re-connection process}
 
-If any two lines become very close (less than the minimal separation $\delta_{\text{min}}$ along the line) the filaments can reconnect, changing the topology of the system. Many researchers claim this can happen, from analogies with vortex dynamics in the Navier–Stokes equation. Also, numerical studies of Gross–Pitaevskii equation showed that quantized vortices can reconnect.
+If any lines of two vortices (or even the single one) become very close,
+the filaments can reconnect, changing the topology of the system.
+Many researchers experimentally reported this is happening and also found analogies with vortex dynamics in the Navier–Stokes equation.
 
 \begin{figure}[h]
 	\centering
@@ -238,9 +258,9 @@ The main criteria for reconnection is that the total length (this is correspondi
 
 \subsection*{High-order tests}
 
-Once the code of interacting vortex filaments is developed, one has to face with the analysis of all that mass of data. The simplest measurable quantity is the total lenght of all vortex lines. In a finite volume this would be $L = (1/V) \int \text{d}\xi$ for the vortex line per unit volume.
+Once the code of interacting vortex filaments is developed, the analysis of all that data has to be improved. The simplest measurable quantity is the total lenght of all vortex lines. In a finite volume this would be $L = (1/V) \int \text{d}\xi$ for the vortex line per unit volume.
 
-Of course, there can be defined more complicated metrics, measuring the isotrophy of the vortex tangle. One of them is the length of line projected along a given vector $\vec{\hat{r}}$, give as:
+Of course, there can be defined more complicated metrics, measuring the isotropy of the vortex tangle. One of them is the length of line projected along a given vector $\vec{\hat{r}}$, give as:
 
 \begin{equation}
 J(\vec{\hat{r}}) = \frac{1}{VL} \int_{\mathcal{L}} \sqrt{1 - (\vec{s}^{\prime}(\xi) \dotprod \vec{\hat{r}})^2} \text{d}\xi
