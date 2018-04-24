@@ -1,93 +1,103 @@
-\chapter*{Introduction (3 pgs)}
+\chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
-	The liquid state of $\He$ exists in two phases:
+	To this day, turbulent motion of fluids remains the last unresolved problem of classical physics. They present many practical challenges across different areas of industry (f.e. weather prediction). Quantum turbulence, in contrast, may occur only in superfluids and was first observed in superfluid state of $\He$. Compared to classical turbulence, it can be regarded as a simpler system from the theoretical and numerical point of view. Also, it shares many of the general properties of turbulence in classical viscous fluids.
+
+	In very low temperatures, the liquid state of $\He$ exists in two phases:
 	\begin{itemize}
-		\item Helium I - a high temperature phase ($2.17\unit{K}<T<4.2\unit{K}$)
-		\item Helium II - a low temperature phase ($T<2.17\unit{K}$)
+		\item \underline{Helium-I}: a high temperature phase ($2.17\unit{K}<T<4.2\unit{K}$)
+		\item \underline{Helium-II}: a low temperature phase ($T<2.17\unit{K}$)
 	\end{itemize}
 
-	These two phases are connected with the \textit{lambda transition}, which occurs at the critical temperature $T_{\lambda} = 2.17 \unit{K}$ at saturated vapour pressure. Helium I is a classical fluid described by ordinary Navier-Stokes (N-S) equations, whereas Helium II indicates the Bose-Einstein condensate (superfluid) in much more way.
+	These two phases are connected with the \textit{lambda transition}, which occurs at the critical temperature $T_{\lambda} = 2.17 \unit{K}$ at saturated vapour pressure (\textbf{Figure \ref{phase_diag}}). Helium-I is a classical fluid described by ordinary Navier-Stokes (N-S) equations, whereas Helium-II is a superfluid and behaves partly like a Bose-Einstein condensate.
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.5\textwidth]{graphics/theory/phase_diag}
-		\caption{Pressure-Temperature diagram of Helium}
-		\label{phase}
+		\includegraphics[width=0.6\textwidth]{graphics/theory/phase_diag}
+		\caption{Pressure-Temperature diagram of $\He$. Fixing pressure on an atmospheric value, a gas-liquid transition is present at $4.2\unit{K}$ (He-I) and a superfluid transition at $2.17\unit{K}$.}
+		\label{phase_diag}
 	\end{figure}
 
-	A simple, phenomenological model of the Helium II motion was proposed by Tisza and Landau - the \textit{two-fluid model}. Within this model, Helium II is depicted as a mixture of two interpenetrating fluid components:
+	A simple, phenomenological model of the Helium-II motion was proposed by Tisza \cite{tisza} and Landau \cite{landau} - the \textit{two-fluid model}. According to two-fluid model, it behaves as if composed of two inter-penetrating liquids - the normal and superfluid components - with corresponding velocity fields and temperature-dependent densities:
 
 	\begin{itemize}
-		\item normal component - density $\rho_n$, velocity field $\vec{v}_n$, ordinary viscous N-S equation of motion, carrying entropy and thermal excitations represented by \textit{phonons} and \textit{rotons}
-		\item superfluid component - density $\rho_s$, velocity field $\vec{v}_s$, modified Euler equation (without viscosity) of motion by quantum terms, no entropy, represented by macroscopic wave function
+		\item \underline{normal component}: density $\rho_n (T)$, velocity field $\vec{v}_n (\vec{r}, t)$, motion described by an ordinary viscous Navier-Stokes equation, carrying entropy and represented as a collection of thermal excitations such as \textit{phonons} and \textit{rotons}
+		\item \underline{superfluid component}: density $\rho_s (T)$, velocity field $\vec{v}_s(\vec{r}, t)$, motion described by a modified Euler equation (without viscosity) with quantum terms, no entropy and represented by a macroscopic wave function
 	\end{itemize}
 
-	The total density of Helium II sums up to $\rho = \rho_n + \rho_s$ and the relative proportion of normal/superfluid component is determined by the temperature. Near $T \rightarrow 0$ Helium II becomes entirely superfluid $\rho_s/\rho \rightarrow 1$. The temperature dependence of this ratio is highly nonlinear. For example, the ratio $\rho_n/\rho$ drops from $100\%$ at $2.17\unit{K}$ to $50\%$ at $1.95\unit{K}$, to $<5\%$ at $1.3\unit{K}$, and is effectively negligible under $1\unit{K}$.
+	The total density of Helium-II sums up to $\rho = \rho_n(T) + \rho_s(T) \approx \text{const}$ and the relative proportion of normal/superfluid component is determined mainly by the temperature (\textbf{Figure \ref{densities}}). Near $T \rightarrow 0$ Helium-II becomes entirely superfluid $\rho_s/\rho \rightarrow 1$. The temperature dependence of this ratio is highly nonlinear. For example, the ratio $\rho_n/\rho$ drops from $100\%$ at $2.17\unit{K}$ to $50\%$ at $1.95\unit{K}$, to $<5\%$ at $1.3\unit{K}$, and is effectively negligible under $1\unit{K}$.
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.7\textwidth]{graphics/theory/densities}
-		\caption{Temperature dependence of two-fluid density proportions}
+		\includegraphics[width=0.6\textwidth]{graphics/theory/densities}
+		\caption{Temperature dependence of fractional densities of the normal (red) and superfluid (blue) components. Source: \cite{svoc2016}}
 		\label{densities}
 	\end{figure}
 
-	The two-fluid model explains many observed phenomena - among other we pick \textit{second sound} and \textit{thermal counterflow} due to their importance in the study of turbulence.
+	It arises from the quantum nature of superfluid, that the superfluid component should not perform any rotation. However, when this component moves faster than a critical velocity, the circulation is \textit{quantized} and so-called \textit{quantized vortices} are created, which makes the hydrodynamics of Helium-II particularly interesting. The vortex nucleation process is still a subject of many current investigations. Superfluid vortex lines were observed spatially organized, but also completely disorganized as simulated in \textbf{Figure \ref{sim_cube}}. Quantum turbulence therefore takes the form of a tangle of quantized vortices in the superfluid component which typically coexist with classical turbulent flow of the normal component.
 
-	\textit{Second sound}: Ordinary sound (the wave of density $\rho$ and pressure $P$) in Helium II is called \textit{first sound}. In such process, temperature $T$ and entropy $S$ is conserved and $\vec{v}_n$ and $\vec{v}_s$ oscillate in phase with each others. On the contrary, a second sound is an antiphase oscillation of $\vec{v}_n$ and $\vec{v}_s$, causing the oscillation of $T$ and $S$ while $\rho$ and $P$ are constant. In this work, the second sound phenomenon is used for detection of quantized vortices, which naturally appear within Helium II.
-
-	\textit{Thermal counterflow}: Helium II is able to transfer heat in a special way. Let's consider a closed channel filled with Helium II and a dissipating resistor localised at one end of the channel. In normal fluid, the heat is transferred away from the resistor by conduction and convection mechanism. However, in Helium II the heat is carried away only by the normal component. To conserve the total mass flux, some superfluid fluid flow toward the resistor. In this way, a counterflow is generated. If the counterflow is strong enough, the superfluid turbulence is generated.
-
-	It arises from the quantum nature of superfluid, that such fluid should not perform any rotation. It is called then \textit{irrotational}. However, when Helium II rotates or moves faster than a critical velocity, the circulation is \textit{quantized} and so-called \textit{quantized vortices} are created, which makes the hydrodynamics of Helium II particularly interesting. The vortex nucleation process is still a subject of many current investigations. Superfluid vortex lines can be spatially organized (laminar flows) or completely disorganized (turbulent flows).
+	In the presence of quantized vortices, the independent normal and superfluid velocity fields become coupled by the \textit{mutual friction} force which arises due to quasiparticles scattering off the cores of vortices.
 
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.4\textwidth]{graphics/theory/QT-tangle}
-		\caption{small simulation cube of tangle of quantum vortices\ref{tangle}}
-		\label{QT}
+		\caption{Cube of numerically simulated tangle of randomly distributed quantised vortices. Source: \cite{svoc2016}}
+		\label{sim_cube}
 	\end{figure}
 
-	It has only recently been relized that helium II is an attractive candidate for investigating classical turbulence (CT) problems. Quantum turbulence (QT) can be achieved in many traditional ways - driving a mass flow, spinning discs, oscillating grids and forks, ultrasound, jets. Considering all these methods together, the general trend is that the slow, laminar flow of Helium II (with or without vortices) tends to be rather different from the classical fluid flow. In case of fast motion, the turbulent Helium II seems to behave similar to classical turbulent flow.\\
-	To characterize the turbulence we use the dimensionless Reynolds number. Examples of the observed classical features of Helium II QT (regardless on temperature) were found during experiments with flow strength of $\Re \approx 10^6$ (pressure drops)\ref{Re106}, of $\Re \approx 10^5$ (sphere drag crisis)\ref{Re105}, of $\Re \approx 4 \times 10^4$ (whole fluid vorticity)\ref{Re104} and of $\Re \approx 4 \times 10^3$ (structures of turbulence)\ref{Re103}.
+	Also we note that for a typical experiment, below $\sim 0.7\unit{K}$, a transition to ballistic regime occurs in the normal component, as the mean free path of phonons exceeds the characteristic dimensions of the experimental setup. This situation is similar to the one of dilute classical gases.
 
-	In classical fluid dynamics (solutions of motion equations), one of the useful tools for understanding the geometry and dynamics of flow is \textit{vortex filament model}. With the rapid development of available computational power, large simulations have become the methods of choice for calculating the motion of fluids. In superfluids like Helium II, due to the quantization of circulation, vorticity can only exist within vortex filaments with a certain core size, which makes the model a way more applicable than in fields of classical fluids.
+	Quantum turbulence can be experimentally achieved in many traditional ways - driving a mass flow, spinning discs, oscillating grids and forks, ultrasound and jets.\\
+	To characterize the turbulence one may use a superfluid Reynolds number for a steady flows, or a newly introduced \cite{universal_scaling} Donnelly number for high-frequency oscillatory flows.
+	We find that for quantum turbulence originated in high-frequency regime above temperature $T > 1\unit{K}$, the measured drag forces are described in terms of a single dimensionless parameter and exhibit an universal scaling behaviour. We identify and compare the critical conditions related to the production of both quantized vorticity and instabilities occuring in normal component.
 
+	Besides experimental approaches on quantum fluids, one of the useful tools for understanding the geometry and flow of quantum turbulence, is the \textit{vortex filament model}, pioneered by Schwarz \cite{schwarz}. With the rapid development of available computational power, large simulations have become the methods of choice for calculating the motion of fluids. In superfluids like Helium-II, due to the quantization of circulation, vorticity can only exist within vortex filaments with a certain core size, which makes the model highly applicable.
 
-	\subsection*{Motivations and Goals}
+	We propose an efficient numerical method to compute the time evolution of vortex filaments in superfluid Helium-II. We studied the performance and stability and well replicated the physical processes such as the annihilation of quantized vortex rings \cite{vortex_ring} while travelling across superfluid.\\
+	We also present the \texttt{PyVort} code, a new platform in Python 3 to simulate quantized rings phenomena. More on the implementation part can be found in \textbf{Simulation} and \textbf{Appendix}.
 
-	Motivations:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\section*{Motivations and Goals}
+
+	Here we briefly collect all motivations and goals that led us to our investigations.
+
+	\subsection*{Experimental approach}
+
 	\begin{itemize}
-		\item ivestigate transition from CT to QT at various temperatures
-		\item prepare clear and reusable codebase for QT simulation
-		\item ??
+		\item ivestigate transition from laminar and potential flow of normal and superlfuid components, respectively, to classical or quantum turbulence at various temperatures above $>1\unit{K}$ in high-frequency regime.
+		\item construct an experiment using flow generators such as vibrating wire, tuning fork and oscillating disc and observe the drag phenomena
+		\item apply universal scaling theory and prove the concept on collected experimental data
 	\end{itemize}
 
-	Goals:
+	\subsection*{Simulation}
 	\begin{itemize}
-		\item prepare superfluid Helium II and subsequently generate and detect second sound
-		\item generate QT with an oscillating object and measure attenuations
-		\item simulate qunatum vortex rings and compare its properties with the theoretical ones
+		\item build modular and reusable codebase in Python 3 with that simulates the dynamics of quantized vortices using the \textit{Vortex Filament} modell
+		\item implement stable time-step methods and a reliable re-segmentation process that allows keeping a good resolution of quantized vortices in different situations
+		\item simulate a real-time quantum vortex ring motion and compare its properties and evolution in time with the theoretical approaches, thus validating the new codebase
 	\end{itemize}
-
-	Motivations: investigate critical velocities and vortex density, create numeric model
-
-	Goals: measure hydrodynamic profiles for more temperatures with oscillating object, transition from CT to QT, investifate numerically vortex rings
 
 \newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \chapter{Theoretical Background}
 
 The theoretical part of this Thesis is composed of two chapters:
 
 \begin{itemize}
-	\item[1.] Mesoscopic view - theoretically cover London's theory, creation and numerical modelling of quantum vortex, vortex dynamics.
+	\item[1.] \underline{Micro/Meso-scopic view} - provides a theoretical cover of Gross-Pitaevskii model, creation and numerical modelling of the quantized vortex and its dynamics.
 
-	\item[3.] Macroscopic view - hydrodynamics of two-fluid model, oscillatory motion in such fluid, creation of QT, existence and usage of second sound
+	\item[3.] \underline{Macroscopic view} - provides a hydrodynamics description of two-fluid model, oscillatory motion in He-II, creation of quantum turbulence, dynamical and universal scaling principles
 
 \end{itemize}
 
-The aim of this part of thesis is to introduce the basic properties of quantized vortex lines in Helium II and summarize the state of the art knowledge of superfluid turbulence. Then there is discussed the theoretical methods used to study quantized vorticity, quantum turbulence and the results obtained using such methods.
+The aim of the theoretical part is to introduce the basic properties of quantized vortex lines in Helium-II and summarize the state of art of current knowledge on superfluid turbulence. We also discuss the theoretical methods used to study quantized vorticity, quantum turbulence and the results obtained using such methods.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
 
@@ -95,16 +105,19 @@ The aim of this part of thesis is to introduce the basic properties of quantized
 \addcontentsline{toc}{chapter}{Micro/Meso-scopic model}
 \vspace{0.3cm}
 
-One of the most useful ways of describing superfluid helium at $T=0$ starts with nonlinear Schrodinger equation (NLSE) for the one-particle wave function $\psi$. Since the superfluid helium is a strongly correlated system dominated by collective effects, this imperfect Bose-Einstein condensate (BEC) is approximately described by Gross-Pitaevskii equation. Although, it must be noted that the real Helium II is a dense fluid, not a weakly interacting Bose gas described by NLSE.
+One of the most useful ways of describing superfluid $\He$ at $T=0\unit{K}$ starts with nonlinear Schrodinger equation (NLSE) for the one-particle wave function $\psi$. Since the superfluid $\He$ is a strongly correlated system dominated by collective effects, this imperfect Bose-Einstein condensate (BEC) is approximately described by Gross-Pitaevskii equation (\ref{gross-pit}). Although, it must be noted that the real Helium-II is a dense fluid, not a weakly interacting Bose gas described by NLSE.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Gross-Pitaevskii model}
 
-In terms of single-particle wavefunction $\psi(\vec{r},t)$:
+In terms of single-particle wavefunction $\psi(\vec{r},t)$ we write the Gross-Pitaevskii model:
 
 \begin{equation}
 i \hbar \frac{\partial \psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2 \psi
 + \psi \int \vert \psi(\vec{r}^{\prime},t) \vert^2 V(\vert \vec{r} - \vec{r}^{\prime} \vert)
 \text{d}\vec{r}^{\prime}\,,
+\label{gross-pit}
 \end{equation}
 
 where $V(\vert \vec{r} - \vec{r}^{\prime} \vert)$ is the potential of two-body interaction between bosons. The normalization is set as $\int \vert \psi \vert^2 \text{d}\vec{r} = N$, where $N$ is number of bosons. By replacing potential with repulsive $\delta$-function of strength $V_0$ one obtains:
@@ -116,26 +129,33 @@ i \hbar \frac{\partial \Psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2 \Psi - 
 
 where $\eps$ is the energy per unit mass and $\Psi = A e^{i\Phi}$ is a macroscopic wave function of condensate. In this way one can define the condensate's density $\rho_{BEC} = m\Psi\Psi^* =  mA^2$ and velocity $\vec{v}_{BEC} = (\hbar / m)\nabla \Psi$. Note that equation (\ref{GP}) is equivalent to a continuity equation and an modified Euler equation (by the so called quantum pressure term).
 
-Even though the superfluid is irrotational $\omega = \nabla \times \vec{v}_{BEC} = \vec{0}$, the NLSE has a vortex-like solution: $\vec{v}_s = \varkappa / 2\pi r\, \vec{e_{\theta}}$, where $\theta$ is the azimuthal angle and $\varkappa=9.97 \times 10^{-4} \unit{cm^2 \dotprod s^{-1}}$ is the \textit{quantum of circulation}, obtained from:
+Hereafter we identify $\rho_{BEC}$ with $\He$ superfluid component's $\rho_s$ at absolute zero and $\vec{v}_{BEC}$ with $\vec{v}_s$. It must be noted that this identification is convenient from the point of view of having a simple hydrodynamics model but is not entirely correct. The reason is
+that Helium-II is a dense fluid, not the weakly interacting Bose gas described
+by the NLSE (\ref{gross-pit}), so the condensate is not the same as the superfluid component.
+
+\newpage
+
+Even though the superfluid is irrotational: $\omega = \nabla \times \vec{v}_s = \vec{0}$, the NLSE has a vortex-like solution: $\vec{v}_s = \varkappa / 2\pi r\, \vec{e_{\theta}}$, where $\theta$ is the azimuthal angle and $\varkappa=9.97 \times 10^{-4} \unit{cm^2 \dotprod s^{-1}}$ is the \textit{quantum of circulation}, obtained from:
 
 \begin{equation}
-\varkappa = \oint_{\mathcal{C}} \vec{v}_{BEC} \cdot \unit{d}\vec{\boldsymbol{\ell}} = \frac{h}{m}
+\varkappa = \oint_{\mathcal{C}} \vec{v}_{BEC} \cdot \unit{d}\vec{\boldsymbol{\ell}} = \frac{h}{m}\,,
 \label{varkappa}
 \end{equation}
 
+where $\mathcal{C}$ is a closed loop surrounding the vortex core - a topological defect (\textbf{Figure {\ref{singularity}}}) within macroscopic wavefunction $\Psi$
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/singularity}
-	\caption{topological singularities within superfluid}
+	\includegraphics[width=0.6\textwidth]{graphics/theory/singularity}
+	\caption{An illustration of topological singularities within a superfluid $\He$. Left: A singly-connected irrotational region with circulation along $\mathcal{C}$ loop equal to zero. Right: A multiply-connected region with depicted cores of quantized vortices with a finite circulation along $\mathcal{C}$ loop.}
 	\label{singularity}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Quantum vortex}
+\section{Quantized vortex}
 
-Superfluid vortex lines appear when helium II moves faster than a certain critical velocity. Such \textit{nucleation} is the subject of many investigations and described widely later in this work.
-
-The simplest way to create quantum vortices is to rotate cylinder with superfluid Helium II with high enough angular velocity $\Omega$. Created vortex lines form an ordered array of density $L=2\Omega / \varkappa$, all aligned along the axis of rotation. \textit{Vortex line density} $L$ can be also interpreted as a total vortex length in an unit volume.
+As Feynman showed \cite{feynman}, superfluid vortex lines appear when Helium-II moves faster than a certain critical velocity. The simplest way to create quantum vortices is to rotate cylinder with superfluid Helium-II with high enough angular velocity $\Omega$. Created vortex lines form an ordered array of density $L=2\Omega / \varkappa$, all aligned along the axis of rotation (\textbf{Figure \ref{rotating-helium}}). \textit{Vortex line density} $L$ can be also interpreted as a total vortex length in an unit volume.
 
 \begin{figure}[h]
 	\centering
@@ -144,80 +164,100 @@ The simplest way to create quantum vortices is to rotate cylinder with superflui
 	\label{rotating-helium}
 \end{figure}
 
-The key properties of Onsager-Feynman vortex are the quantized circulation $\varkappa$, superfluid rotational velocity field $\vec{v}_s = \varkappa / 2\pi r\, \vec{e_{\theta}}$ and the \textit{vortex core parameter} $a_0$. The core size $a_0$ can be estimated by substituting $\vec{v}_s$ back into (\ref{GP}) and solving differential equation for $\rho_s$. One finds that $\rho_s$ tends to the value $m^2 \eps / V_0$ for $r \rightarrow \infty$ and to zero density for $r \rightarrow 0$.
-The characteristic distance over which $\Psi$ collapses (superfluid density $\rho_s$ drops from bulk value to zero) is $a_0 \approx 10^{-10} \unit{m} = 1 \unit{\AA}$. From this, there is a conclusion that the vortex is hollow at its core and therefore, the topological defect occurs.
+The key properties of Onsager-Feynman vortex \cite{onsager} are the quantized circulation $\varkappa$, superfluid rotational velocity field $\vec{v}_s = \varkappa / 2\pi r\, \vec{e_{\theta}}$ and the \textit{vortex core parameter} $a_0$. The core size $a_0$ can be estimated by substituting $\vec{v}_s$ back into (\ref{GP}) and solving differential equation for $\rho_s$. One finds that $\rho_s$ tends to the value $m^2 \eps / V_0$ for $r \rightarrow \infty$ and to zero density for $r \rightarrow 0$.
+The characteristic distance over which $\Psi$ collapses (superfluid density $\rho_s$ drops from bulk value to zero) is $a_0 \approx 10^{-10} \unit{m} = 1 \unit{\AA}$. From this, there is a conclusion that the vortex is hollow at its core and therefore, a topological defect occurs.
 
-Taking $a_0$ as core radius, the energetical calculations showed that $N$ quantum vortices contains more energy than $N$ single quantum vortices. Hence it is generally assumed that only single quantum vortices are commonly observed.
+Taking $a_0$ as core radius, the energy considerations showed that a single vortex containing $N$ circulation quanta owns more energy than $N$ singly-quantized vortices. Hence it is generally assumed that only ground-state vortices are commonly observed.
 
 Clearly, vortex lines don't have to be aligned in general. In most cases , the superfluid flow is strongly chaotic, better known as \textit{quantum turbulence}. This topic is covered in more detail later in this work.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Vortex filament model}
 
-The vortex line can be represented as a curve via positional vector $\vec{s} = \vec{s}(\xi, t)$ in three-dimensional space. Here, $\xi$ is arclength along the vortex line. Next we label $\vec{s}^{\prime}$ as $\text{d}\vec{s} / \text{d} \xi$ and $\vec{s}^{\prime\prime}$ as $\text{d}\vec{s}^{\prime} / \text{d} \xi$.
-Within our context, $\vec{s}^{\prime}$ is a tangent vector and $\vert \vec{s}^{\prime\prime} \vert$ is a local curvature $R^{-1}$ at a given point. The triad of vectors $\vec{s}^{\prime}$, $\vec{s}^{\prime\prime}$, $\vec{s}^{\prime} \times \vec{s}^{\prime\prime}$ are perpendicular to each other and point along the tangent, normal and binormal respectively:
+The vortex line can be represented as a curve via position vector $\vec{s} = \vec{s}(\xi, t)$ in three-dimensional space. Here, $\xi$ is arclength along the vortex line. Next we label $\vec{s}^{\prime}$ as $\text{d}\vec{s} / \text{d} \xi$ and $\vec{s}^{\prime\prime}$ as $\text{d}\vec{s}^{\prime} / \text{d} \xi$.
+Within our context, $\vec{s}^{\prime}$ is a tangent vector and $\vert \vec{s}^{\prime\prime} \vert$ is a local curvature $R^{-1}$ at a given point.
+The triad of vectors $\vec{s}^{\prime}$, $\vec{s}^{\prime\prime}$, $\vec{s}^{\prime} \times \vec{s}^{\prime\prime}$ are perpendicular to each other (\textbf{Figure \ref{filament}}) and point along the tangent, normal and binormal respectively:
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{graphics/theory/filament}
-	\caption{Schematic of the vortex filament and the triad vectors}
+	\includegraphics[width=0.7\textwidth]{graphics/theory/filament}
+	\caption{Schematic of the vortex filament and the triad vectors $\vec{s}^{\prime}$, $\vec{s}^{\prime\prime}$, $\vec{s}^{\prime} \times \vec{s}^{\prime\prime}$. Source: \cite{tsubota}}
 	\label{filament}
 \end{figure}
 
-
 We suppose that the superfluid component is incompressible $\nabla \dotprod \vec{v}_s = 0$. Moreover, superfluid vorticity $\omega_s$ is localized only at positions of vortex filament $\omega_s(\vec{r},t) = \nabla \times \vec{v}_s$. Combining these two properties gives the Poisson equation $\Delta \phi = \omega_s$ for the potential $\phi$.
-Using Fourier transformation one obtains the Biot-Savart law for the superfluid velocity:
+Using Fourier transform one obtains \cite{barenghi} the Biot-Savart law for the superfluid velocity:
 
 \begin{equation}
 \vec{v}_s(\vec{r}) = \frac{\varkappa}{4\pi} \int_{\mathcal{L}} \frac{(\vec{r^{\prime}} - \vec{r}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{r} \vert^3}\,,
+\label{biot_general}
 \end{equation}
 
 where the integral path $\mathcal{L}$ represents curves along all vortex filaments.
 
-This law determines the superfluid velocity field via the arrangement of the vortex
-filaments. Now we define the \textit{self-induced} velocity $\vec{v}_i$, describing the motion which a vortex line induces onto itself due to its own curvature:
+This law determines the superfluid velocity field $\vec{v}_s(\vec{r})$ via the arrangement of the vortex filaments. Now we define the \textit{self-induced} velocity $\vec{v}_{\text{ind}}$, describing the motion which a vortex line induces onto itself ($\vec{r} \rightarrow \vec{s}$ in (\ref{biot_general})) due to its own curvatures:
 
 \begin{equation}
-\vec{v}_i(\vec{s}) = \frac{\varkappa}{4\pi} \int_{\mathcal{L}} \frac{(\vec{r^{\prime}} - \vec{s}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s} \vert^3}
+\vec{v}_{\text{ind}}(\vec{s}) = \frac{\varkappa}{4\pi} \int_{\mathcal{L}} \frac{(\vec{r^{\prime}} - \vec{s}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s} \vert^3}
+\label{biot_ind}
 \end{equation}
 
-However, this integral diverges as $\vec{r}^{\prime} \rightarrow \vec{s}$ because the core structure
-of the quantized vortex was neglected. We avoid this divergence by splitting the integral into two parts - direct neighborhood of the point $\vec{s}$ (local part) and the rest part $\mathcal{L}^{\prime}$ (nonlocal part). The Taylor expansion of the local part leads to finite result and thus:
+However, this integral (\ref{biot_ind}) diverges as $\vec{r}^{\prime} \rightarrow \vec{s}$ because the core structure
+of the quantized vortex was initially neglected. We avoid this divergence by splitting the integral into two parts - direct neighbourhood of the point $\vec{s}$ (local part) and the rest $\mathcal{L}^{\prime}$ (nonlocal part). The Taylor expansion of the local part leads \cite{schwarz} to a finite result:
 
-\begin{equation}
-\vec{v}_i(\vec{s})
-= \vec{v}_{\text{s,local}} + \vec{v}_{\text{s,nonlocal}}
-\approx \beta \vec{s}^{\prime} \times \vec{s}^{\prime \prime} + \frac{\varkappa}{4\pi} \int_{\mathcal{L}^{\prime}} \frac{(\vec{r^{\prime}} - \vec{s}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s} \vert^3}\,,
+\begin{align}
+\vec{v}_{\text{ind}}(\vec{s})
+= \vec{v}_{\text{ind,local}} + \vec{v}_{\text{ind,nonlocal}}
+\approx& \beta \vec{s}^{\prime} \times \vec{s}^{\prime \prime} + \frac{\varkappa}{4\pi} \int_{\mathcal{L}^{\prime}} \frac{(\vec{r^{\prime}} - \vec{s}) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s} \vert^3}\,,
 \label{lia+biot}
-\end{equation}
+\\
+\text{where}\, \beta =& \frac{\varkappa}{4\pi} \ln(R / a_0)\,,
+\label{beta}
+\end{align}
 
-where $\beta = (\varkappa / 4\pi) \ln(1/\vert\vec{s}^{\prime}\vert a_0)$. This process is called Local Induction Approximation (LIA). Numerical study of Adachi et al. showed that the nonlocal term plays an important role even for homogeneous quantum turbulence.
+where $\mathcal{L}^{\prime}$ is the original vortex line without a close area of the studied vortex point and $R$ is a \textit{local curvature} and often is calculated as $1 / \vert \vec{s}^{\prime\prime} \vert$ \cite{schwarz}.
 
-Since there could be also external flow source of superfluid component, we define the total superfluid velocity, in laboratory frame, as:
+Since the local part of induced velocity (\ref{lia+biot}) is a dominant term (and also computationally faster), the nonlocal part can be neglected. Such approximation process is called as \textit{Local Induction Approximation} (LIA). LIA represents the contribution of local curvature to the induced velocity, whereas nonlocal Biot-Savart part represents the global filament curvature.
+
+Since in the system there could be present also external flow sources of superfluid component (e.g. heat resistors causing \textit{counterflows}), we define the total superfluid velocity $\vec{v}_{s,tot}$, in a laboratory frame, as:
 
 \begin{equation}
-\vec{v}_{s,tot} = \vec{v}_{s,ext} + \vec{v}_i
+\vec{v}_{s,tot} = \vec{v}_{s,ext} + \vec{v}_{\text{ind}}
 \end{equation}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Vortex dynamics}
 
-To determine the equation of motion of $\vec{s}$ we must recognize the forces acting upon the line - the magnus force $\vec{f}_M$ and (at temperature $T>0$), the drag force $\vec{f}_D$ (both are per unit length).
+To determine the equation of motion of $\vec{s}(t)$ we recognize the forces acting upon the line - the magnus force $\vec{f}_M$ and (at non-zero temparature $T>0\unit{K}$ )the drag force $\vec{f}_D$ (both are per unit length).
 
-The magnus force always arises when a rotating body moves in a flow. This emerges a pressure difference, which in our case of moving vortex line with circulation quantum $\varkappa$, exerts a force:
+The magnus force $\vec{f}_M$ always arises when a rotating body moves in a flow. This causes a pressure difference, which in our case of moving vortex line with circulation quantum $\varkappa$, exerts a force:
 
 \begin{equation}
 \vec{f}_M = \rho_s \varkappa \,\vec{s}^{\prime} \times (\vec{\dot{s}} - \vec{v}_{s,tot})\,,
+\label{magnus}
 \end{equation}
 
-where $\vec{\dot{s}} = \text{d}\vec{s} / \text{d} t$ is the velocity of the line filament in the laboratory frame.
+where $\vec{\dot{s}} = \text{d}\vec{s} / \text{d} t$ is the velocity of a particular point on a vortex line.
 
-The drag force $\vec{f}_D$ arises from the \textit{mutual friction}, the interaction between the normal component and superfluid component. According to the findings of Vinen and Hall, the normal fluid flowing with velocity $\vec{v}_n$ past a vortex core exerts a frictional force $\vec{f}_D$ on the superfluid, given by:
+The drag force $\vec{f}_D$ arises from the \textit{mutual friction}, the interaction between the normal component and vortex lines (quantized superfluid component). According to the findings of Vinen and Hall \cite{vinen}, the normal fluid flowing with velocity $\vec{v}_n$ past a vortex core exerts a frictional force $\vec{f}_D$ on the vortex line, given by:
 
-\begin{equation}
-\vec{f}_D = - \alpha(T)\rho_s\varkappa\,\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_n - \vec{v}_{s,tot})] - \alpha^{\prime}(T)\varkappa\,\vec{s}^{\prime} \times (\vec{v}_n - \vec{v}_{s,tot})
-\end{equation}
+\begin{align}
+\vec{f}_D = -& \alpha(T)\rho_s\varkappa\,\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_{\text{ind}})]
+\label{alpha1}
+\\
+-& \alpha^{\prime}(T)\rho_s\varkappa\,\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_{\text{ind}})
+\,,
+\label{alpha2}
+\end{align}
 
-The temperature dependent dimensionless parameters $\alpha(T)$ and $\alpha^{\prime}(T)$ are written in terms of \textit{mutual friction parameters} $B$ and $B^{\prime}$, which are known from experiments by Samuels and Donnelly:
+where $\vec{v}_{ns} = \vec{v}_{n} - \vec{v}_{s,ext}$ is the difference between the average velocity of normal component and the applied superfluid velocity.
+
+The temperature dependent dimensionless parameters $\alpha(T)$ and $\alpha^{\prime}(T)$ are often written in terms of measured \textit{mutual friction parameters} $B$ and $B^{\prime}$, which are known from experiments by Samuels and Donnelly \cite{donnelly}:
 
 \begin{equation}
 \alpha(T) = \frac{\rho_n B(T)}{2\rho}
@@ -225,70 +265,110 @@ The temperature dependent dimensionless parameters $\alpha(T)$ and $\alpha^{\pri
 \alpha^{\prime}(T) = \frac{\rho_n B^{\prime}(T)}{2\rho}
 \end{equation}
 
-The precise calculation of the mutual friction parameters over the entire temperature range is still an open problem. Although, we already know that in the area of high temperatures, the friction arises from the scattering process of rotons - an elementary excitation.
+The precise calculation of the mutual friction parameters $B(T), B^{\prime}(T)$ over the entire temperature range is still an open problem. Although, we already know that in the area of high temperatures, the friction arises mainly from the scattering processes of rotons.
 
-Since the mass of vortex core is usually neglected, the two forces $\vec{f}_M$ and $\vec{f}_D$ sum up into zero: $\vec{f}_M + \vec{f}_D = \vec{0}$. Hence, solving for $\text{d}\vec{s} / \text{d} t$, we obtain the Schwarz's equation:
+\newpage
+
+Since the mass of vortex core is usually neglected, the two forces $\vec{f}_M$ and $\vec{f}_D$ add up to zero: $\vec{f}_M + \vec{f}_D = \vec{0}$. Hence, solving for $\text{d}\vec{s} / \text{d} t$, we obtain \cite{schwarz} the Schwarz's equation:
 
 \begin{equation}
-\dot{s} = \vec{v}_s + \vec{v}_i
-+ \alpha\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i)
-- \alpha^{\prime}\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_i)]\,,
+\dot{s} = \vec{v}_{\text{s, ext}} + \vec{v}_{\text{ind}}
++ \alpha\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_{\text{ind}})
+- \alpha^{\prime}\vec{s}^{\prime} \times [\vec{s}^{\prime} \times (\vec{v}_{ns} - \vec{v}_{\text{ind}})]\,,
 \label{schwarz}
 \end{equation}
 
-where $\vec{v}_{ns} = \vec{v}_n - \vec{v}_s$ is the difference between the average velocity of normal fluid and the applied superfluid velocity.
+On the basis of Schwarz's equation (\ref{schwarz}), algorithms to numerically simulate vortex time evolution of an arbitrary configuration can be developed. Also, the vortex parametrisation $\vec{s}(\xi, t)$ and dynamics description provide the baseline of what we call as Vortex Filament (VF) model. More on VF model is written later in \textbf{Simulation} chapter.
 
-On the basis of Schwarz's equation there can be developed an algorithm to numerically simulate vortex time evolution of an arbitrary configuration. More on this is written later in Simulation part of thesis.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \subsection*{Quantized vortex rings}
 
-A special case of vortex line configuration is a freely moving vortex ring. Such rings are usually created as a result of multi-vortex interconnection and have limited life expectancy. The exact expressions derived by classical hydrodynamics for the energy $E_{\text{ring}}$ and center velocity $v_{\text{ring}}$, moving in a Helium II of density $\rho$ and having a radius $R$ much greater than its core radius $R >> a_0$, are\ref{ring}
+A special case of vortex line configuration are a freely moving vortex rings. Such rings are usually created as a result of multi-vortex interconnections \cite{vortex_ring} or by the self-reconnection of an oscillating loop pinned to the surface of a vibrating body. The exact expressions derived from the Gross-Pitaevskii equation (\ref{gross-pit}) \cite{roberts} for the energy $E$ and induced center velocity $v_{\text{ind}}$ of a vortex ring, moving in a Helium-II of density $\rho$ and having a radius $R$ much greater than its core radius $R >> a_0$, are:
 
 \begin{equation}
-E_{\text{ring}} = \frac{1}{2}\varkappa^2 \rho R \Big(\ln(8R/a_0) - 2 + c\Big)
+E = \frac{1}{2}\varkappa^2 \rho R \Big(\ln(8R/a_0) - 2 + c\Big)
 \label{ring-energy}
 \end{equation}
 
 \begin{equation}
-v_{\text{ring}} = \frac{\varkappa}{4\pi R} \Big(\ln(8R/a_0) - 1 + c\Big)\,,
+v_{\text{ind}} = \frac{\varkappa}{4\pi R} \Big(\ln(8R/a_0) - 1 + c\Big)\,,
 \label{ring-velocity}
 \end{equation}
 
-where $c$ is a constant based on inner structure of the vortex. Since we work with hollow core, we use
-$c = 0$. Note that (\ref{ring-energy}) and (\ref{ring-velocity}) depend on $a_0$ only logarithmically.
+where $c$ is a constant based on inner structure of the vortex. Since we work with hollow core, we use \cite{donnelly_book}
+$c = 1/2$. Note that (\ref{ring-energy}) and (\ref{ring-velocity}) depend on $a_0$ only logarithmically.
 The behavior of the vortex ring is thus quite insensitive to the exact value of $a_0$ (expected to be of the order of atomic dimension).
 
-\todo Life expectancy
+Relations (\ref{ring-energy}) and (\ref{ring-velocity}) are derived directly from Gross-Pitaevskii description and no dissipative process (mutual friction) was included. Therefore, the relations hold only for temperature $T=0\unit{K}$, Using the explicit dynamical equation \cite{donnelly_book} for vortex ring motion, one can also derive the final ring center velocity $\vec{v}_{\text{ring}}$ and energy $E_{\text{ring}}$ using (\ref{ring-energy}) and (\ref{ring-velocity}) like:
+
+\begin{equation}
+\vec{v}_{\text{ring}} = (1 - \alpha^{\prime}) (\vec{v}_{\text{ind}} - \vec{v}_{\text{s, ext}})
++ \alpha^{\prime} \vec{v}_{\text{n, ext}}
+\label{v_ring}
+\end{equation}
+
+\begin{equation}
+E_{\text{ring}} = \Big( \frac{\alpha}{1 - \alpha^{\prime}} \Big) E
+\label{E_ring}
+\end{equation}
+
+Several other interesting results come from the ring's dynamic motion equation and the mutual friction formula (\ref{alpha1}), (\ref{alpha2}). The second term (\ref{alpha2}) of friction force causes the decrease of vortex ring radius, whereas the first term (\ref{alpha1}) is the dissipative term. The superfluid vortex ring (\textbf{Figure (\ref{vortex-ring})}) living in a mixture of a normal and superfluid component has therefore a limited lifetime expectancy and the travelled distance.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.3\textwidth]{graphics/theory/vortex-ring}
-	\caption{Depiction of quantized vortex ring motion}
+	\includegraphics[width=0.4\textwidth]{graphics/theory/vortex-ring}
+	\caption{Depiction of quantized vortex ring motion and induced velocity field. Source: Huang, Kerson, \textit{Quantum vorticity in nature}, arXiv.}
 	\label{vortex-ring}
 \end{figure}
 
+More explicitly, it was shown \cite{donnelly_book} that in case of weak counterflow velocity $\vec{v}_{\text{ns}}$, the lifetime of vortex ring can be expressed as a simple relation:
+
+\begin{equation}
+\tau_{\text{ring}} = \frac{R_0}{2 \alpha \vert \vec{v}_{\text{ring}}(R_0)\vert}\,,
+\label{ring-lifetime}
+\end{equation}
+
+where $R_0$ is the initial radius of created vortex ring.
+
+By integrating the ring's motion equation from $R_0$ to $R(\tau) \approx a_0$ we obtain the distance travelled by the ring's center:
+
+\begin{equation}
+D_{\text{ring}} = \frac{\alpha}{1 - \alpha^{\prime}} (R_0 - a_0)
+\label{ring-distance}
+\end{equation}
+
+Relations (\ref{ring-lifetime}) and (\ref{ring-distance}) are taken as a baseline in \textbf{Simulation} chapter.
 \newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {\Huge \bfseries Macroscopic view}
 \addcontentsline{toc}{chapter}{Macroscopic model}
 \vspace{0.3cm}
 
-Besides NLSE and Vortex filament model, there is also a third, \textit{macroscopic} model in which the individual vortex lines are invisible. On the other side, Helium II is considered as a continuous flow of vortices.
+Besides NLSE and Vortex filament model, there is also a third, \textit{macroscopic} model in which the individual vortex lines are \textit{invisible} and the superfuid component of Helium-II is considered as a continuous flow of vortices. Many phenomena are similar to those in classical hydrodynamics (\textbf{Figure \ref{laminar-turbulent}}), but there emerge also new and very special type of events that can happen within superfluid Helium-II.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{graphics/theory/laminar-turbulent}
-	\caption{transition from laminar to turbulent flow}
+	\caption{Depiction of a classical steady flow for various Reynolds number values. Many phenomena of laminar, semi-turbulent and turbulent flows are visible in depcitions. Source: \cite{laminar-turbulence}}
 	\label{laminar-turbulent}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Hydrodynamics of superfluid}
 
-Such macroscopic model is called the HVBK model and provides a generalization of Landau's two-fluid model equations, including the presence of vortices. The superfluid is treated as a continuum and we can define a macroscopic superfluid vorticity $\vec{\Omega}_s$, despite the fact that, microscopically, the superfluid velocity field obeys $\nabla \times \vec{v}_s = \vec{0}$. The downside of this model is its assumption of spatially (not randomly) organized vortices. The common example is a rotating cylinder.\\
-The incompressible HVBK equations for normal and superfluid component, respectively:
+Such macroscopic model is called the Hall-Vinen-Bekarevich-Khalatnikov (HVBK) model and provides a generalization of Landau's two-fluid model equations, including the presence of vortices. The superfluid is treated as a continuum and we can define a macroscopic superfluid vorticity $\vec{\Omega}_s$, despite the fact that, microscopically, the superfluid velocity field obeys $\nabla \times \vec{v}_s = \vec{0}$. The downside of this model is its assumption of spatially (not randomly) organized vortices. The common example is a rotating cylinder \cite{osborne}.\\
+
+\newpage
+
+The incompressible HVBK equations for normal component $\vec{v}_n (\vec{r}, t)$ and superfluid component $\vec{v}_s (\vec{r}, t)$, respectively, are \cite{barenghi}:
 
 \begin{align}
-\frac{\partial\vec{v}_n}{\partial t} + (\vec{v}_n\cdot \nabla)\vec{v}_n =& -\frac{1}{\rho} \nabla P - \frac{\rho_s}{\rho_n} S \nabla T + \nu_n \nabla^2 \vec{v}_n + \vec{F}_{ns}\,,
+\frac{\partial\vec{v}_n}{\partial t} + (\vec{v}_n\cdot \nabla)\vec{v}_n =& -\frac{1}{\rho} \nabla P - \frac{\rho_s}{\rho_n} S \nabla T + \frac{\eta}{\rho_n} \nabla^2 \vec{v}_n + \vec{F}_{ns}\,,
 \label{motion_normal}\\
 \frac{\partial\vec{v}_s}{\partial t} + (\vec{v}_s\cdot \nabla)\vec{v}_s =& -\frac{1}{\rho} \nabla P + S \nabla T + \vec{T} - \frac{\rho_n}{\rho} \vec{F}_{ns}\,,
 \hspace{15mm}
@@ -298,148 +378,222 @@ The incompressible HVBK equations for normal and superfluid component, respectiv
 where we have defined:
 
 \begin{equation}
-\vec{\Omega}_s = \nabla \times \vec{v}_s\,,
+\vec{F_{ns}} = \frac{B(T)}{2} \vec{\hat{\Omega}} \times [\vec{\hat{\Omega}}_s \times (\vec{v}_n - \vec{v}_s - \nu_s\nabla \times \vec{\hat{\Omega}})]
++ \frac{B^{\prime}(T)}{2} \vec{\Omega}_s \times (\vec{v}_n - \vec{v}_s - \nu_s\nabla \times \vec{\hat{\Omega}}_s)\,,
 \end{equation}
 \begin{equation}
-\vec{F} = \frac{B}{2} \vec{\hat{\Omega}} \times [\vec{\hat{\Omega}}_s \times (\vec{v}_n - \vec{v}_s - \nu_s\nabla \times \vec{\hat{\Omega}})]
-+ \frac{B^{\prime}}{2} \vec{\Omega}_s \times (\vec{v}_n - \vec{v}_s - \nu_s\nabla \times \vec{\hat{\Omega}}_s)\,,
+\vec{\Omega}_s = \nabla \times \vec{v}_s\,,
 \end{equation}
 \begin{equation}
 \vec{\hat{\Omega}}_s = \vec{\Omega}_s / \vert \vec{\Omega}_s \vert\,,
 \end{equation}
 \begin{equation}
-\vec{T} = -\nu_s \vec{\Omega}_s \times (\nabla \times \vec{\hat{\Omega}}_s)
-\end{equation}
-\begin{equation}
-\nu_s = \frac{\varkappa}{4\pi} \log(b_0 / a_0)
+\vec{T} = - \frac{\varkappa}{4\pi} \log(b_0 / a_0) \, \vec{\Omega}_s \times (\nabla \times \vec{\hat{\Omega}}_s)
 \end{equation}
 
-Here we can identify the quantities as $F$ (mutual friction force), $T$ (tension force) and $\nu_s$ (vortex tension parameter). $b_0$ is the intervortex spacing and can be estimated as $b_0 = (2\Omega_s \varkappa)^{-1/2}$. Note that two-fluid equations by Landau can be achived by neglecting $\vec{F}$ and $\vec{T}$. The HVBK equations have reasonably set the limits:
+Here we can identify the quantities as $\vec{F_{ns}}$ (mutual friction force), $\vec{T}$ (vortex tension) and $\eta$ (viscosity parameter). Usually, $b_0$ is the intervortex spacing and can be estimated as $b_0 = (2\Omega_s \varkappa)^{-1/2}$. %Note that two-fluid equations (\ref{motion_normal}), (\ref{motion_super}) by Landau can be achieved by neglecting $\vec{F}$ and $\vec{T}$.
+The HVBK equations have well-defined limiting cases:
 
 \begin{itemize}
-	\item $T \rightarrow T_{\lambda}$: In this case $\rho_s \rightarrow 0$ and the normal fluid equation (\ref{motion_normal}) becomes the classical Navier-Stokes equation.
+	\item $T \rightarrow T_{\lambda}$: In this case $\rho_s \rightarrow 0$ and the normal fluid motion equation (\ref{motion_normal}) becomes the classical Navier-Stokes equation with viscosity term.
 
-	\item $T \rightarrow 0$: In this case $\rho_n \rightarrow 0$ so the superfluid equation (\ref{motion_super}) describes a pure superflow. Additionally, taking the classical limit ($\hbar \rightarrow 0$) would take us to the pure Euler equation of inviscid fluid.
+	\item $T \rightarrow 0$: In this case $\rho_n \rightarrow 0$ and the superfluid motion equation (\ref{motion_super}) describes a pure (potential) superflow. Additionally, taking the classical limit ($\hbar \rightarrow 0$) would give us the pure Euler equation of inviscid fluid.
 \end{itemize}
 
 The HVBK model has been widely used with success to study the transition to classical or quantum turbulence, for estimations of critical Reynolds numbers and its temperature dependence.
 
-\subsection*{Dynamical similarity of flow}
+\newpage
 
-The important role in the behaviour of fluids is taken by the \textit{fluid dimensional numbers}, which are a set of dynamical quantities representing transport phenomena. In purpose to describe Helium-II with correct equations and with the most precision, we have to choose which dimensionless parameters are useful.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dynamical similarity principle}
+
+An important role in the behaviour of fluids is taken by the \textit{fluid dimensional numbers}, which are used for scalling of motion equations in fluid mechanics.
+
+The principle of \textit{dynamical similarity} states that two flows of similar geometry have the same dynamical behaviour, if they can be characterised by the same set of suitable dimensionless parameters representing transport phenomena. In order to describe Helium-II with correct equations and with the most precision, we have to choose which dimensionless parameters are useful.
 
 \begin{itemize}
-	\item \underline{Knudsen number} (Kn): This number helps determine whether statistical mechanics or the continuum mechanics formulation of fluid should be used to model the system. Kn is defined as the ratio of the molecular mean free path length $\lambda$ (the distance of superfluid atom without excitation) to a representative physical length scale $D$ (container size).
+	\item \underline{Knudsen number} (Kn): This number helps determine whether statistical mechanics or the continuum mechanics formulation of fluid should be used to model the system. Kn is defined as the ratio of the molecular mean free path $\lambda$ to a representative physical length scale $D$ (container size).\\
+	If the temperature of Helium-II is set above $T > 1.0 \unit{K}$, there is a still sufficient amount of normal component and the mean free path of thermal excitations is much smaller, comparing it with container scale $\lambda \ll D$. In that case, continuum mechanics could be used as a macroscopic theory for superfluid Helium-II.
 
-	If temperature of Helium-II rises above $\approx 1.0 \unit{K}$, there is still sufficient amount of normal component and the mean free path of superfluid atoms is much smaller, comparing it with container scale $\lambda \ll D$.
+	However, if temperature is below $T < 0.6 \unit{K}$, the mean free path $\lambda$ becomes comparable with length scale $D$ and the continuum model starts to break down. Here, the system is rather described as a gas of thermal excitations.
 
-	In that case, continuum mechanics could be used as a macroscopic theory for superfluid Helium-II.
+	\item \underline{Weissenberg number} (Wi): This number relates the typical frequency of perturbations, $\omega$ , of the fluid with the characteristic time, $\tau$ that describes the relaxation of the fluid towards a thermodynamic equilibrium. The Weissenberg number is then given as a multiplication of oscillation frequency $\omega$ and the relaxation time $\tau$.\\
+	Since the relaxation time of Helium-II is relatively small in temperatures above $T > 1\unit{K}$, then $\text{Wi} = \omega \tau \ll 1$, so Helium-II can be considered as a Newtonian fluid.
 
-	\item \underline{Weissenberg number} (Wi): This number is used in the study of viscoelasticity of flow. Wi number indicates the degree of anisotropy generated by the deformation, and is appropriate to describe flows with a constant stretch history, such as simple shear. Wi is usually calculated as a multiplication of shear rate $\dot{\gamma}$ and the relaxation time $\tau$.
+	Once again, if temperature is below $T < 0.6 \unit{K}$, relaxation time of thermal excitations rises rapidly, meaning $\text{Wi} \sim 1$, causing the excitations propagating ballistically.
 
-	Since the relaxation time of Helium-II is relatively small, then $\dot{\gamma} \tau \ll 1$, so the superfluid can be considered as a Newtonian fluid.
+	\item \underline{Reynolds number} (Re): Let's consider the continuum and newtonian assumptions ($\text{Kn} \ll 1$ and $\text{Wi} \ll 1$), so the fluid can be described by the raw form of Navier-Stokes (N-S) equation of motion. When we take into account also the incompressibility $\nabla \dotprod \vec{v} = \vec{0}$, the N-S for classical fluid reduces itself to its most simplest form.\\
+	In case of stationary flow ($\partial \vec{v} / \partial t = \vec{0}$), N-S can be rewritten into a dimensionless form. Following these steps, there arises typical values of velocity $U$ and length scale $L$, at which there is the most significant change in velocity. Re can be expressed as a ratio of inertial and dissipative forces as $\text{Re} = U L \rho / \eta$, where $\eta$ is the dynamic viscosity of the flow field.\\
+	The oscillatory case is described more in the next section.
 
-	\item \underline{Reynolds number} (Re): Let's consider the continuum and newtonian assumptions ($\text{Kn} \ll 1$ and $\text{Wi} \ll 1$), so the fluid can be described by the raw form of Navier-Stokes (N-S) equation of motion. When we take into account also the incompressibility $\nabla \dotprod \vec{v} = \vec{0}$, the N-S reduces itself to its most simplest form, as depicted in (\ref{motion_normal}).
-
-	In case of stationary flow ($\partial \vec{v} / \partial t = \vec{0}$), N-S can be rewritten into a dimensionless form. Following these steps, there arises typical values of velocity $U$ and length scale $L$, at which there is the most significant change in velocity. Re can be expressed as a ratio of inertial and dissipative forces as $\text{Re} = U L \rho / \eta$, where $\eta$ is the dynamic viscosity of the flow field.
 \end{itemize}
 
-The dimensionless scalling of motion equations in fluid mechanics is called the principle of \textit{dynamic similarity}. Macroscopically it is a phenomenon when comparing two geometrically similar vessels (same shape, different sizes) with the same boundary conditions and the same Reynolds numbers, then the fluid flows will be identical. The derivation of this phenomenon can be directly seen from inspection of the underlying motion equation (\ref{motion_normal}), with geometrically similar bodies. In the classical fluid dynamics of ordinary fluids, we use dynamical similarity and scaling arguments for expressing experimental data in terms of Reynolds numbers, drag coefficients, lift, and so on.
+The derivation of the \textit{dynamical similarity} phenomenon can be directly seen from inspection of the underlying motion equation (\ref{motion_normal}) with geometrically similar bodies. In the classical fluid dynamics, we use dynamical similarity and scaling arguments for expressing experimental data in terms of Reynolds numbers, drag coefficients, lift, and so on.
 
-The \textit{drag coefficient} $C_D$ is a dimensionless parameter, representing the relation between \textit{drag force} $\vec{f}$ and fluid velocity $\vec{v}$, and usually takes the form:
+Alternatively, the dissipative forces may be described in terms of a dimensionless \textit{drag coefficient} $C_D$, representing the relation between \textit{drag force} $\vec{F}$ and fluid velocity $\vec{U}$, and usually takes the form:
 
 $$
-C_D \!\propto\! v^\alpha, \hspace{1cm}
+C_D \!\propto\! U^\alpha, \hspace{1cm}
 \text{where}
 \left\{
   \begin{array}{l l}
-    \alpha=-1 & \quad \text{for $\Re \in (0-10)$}\\
-    \alpha=0 & \quad \text{for $\Re \in (10^3-10^5)$}
+    \alpha=-1 & \quad \text{for laminar flow $\Re \in (0-10)$}\\
+    \alpha=0 & \quad \text{for turbulent flow $\Re \in (10^3-10^5)$}
   \end{array}
-\right.\,.
+\right.\,,
 $$
 
-It is very common to plot experimentally measured dependence $C_D(\Re)$ for various object past flow:
+where the first case ($C_D \propto 1/U$) represents the viscous skin friction anf the second case ($C_D \approx \text{const.}$) represents the pressu drag.\\
+It is very common to plot experimentally measured dependence of drag coefficient $C_D$ against the Reynolds number, for various objects (sphere, disc, cylinder) past flow:
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{graphics/theory/C-Re}
-	\caption{Drag coefficients of different objects with changing Reynlods number.}
+	\caption{Drag coefficients of different objects in a steady flow with changing Reynlods number. Blue line - thin disc, Green line - cylinder with drag crisis near $\Re \approx 10^6$, Red line - sphere with similar drag crisis as with cylinder, Black dashed line - laminar drag, where $C_D \propto \Re^{-1}$.}
 	\label{C-Re}
 \end{figure}
 
-Dynamical similarity argument also leads to the existence of critical Reynolds number, at which the transition to turbulence occurs. Note that since superfluid Helium-II is composed of two fluids, the mentioned applies only on the normal component.
+Dynamical similarity argument also leads to the existence of critical Reynolds number, at which the transition to turbulence in case of classical fluid occurs. Note that since superfluid Helium-II is composed of two fluids, the mentioned applies only to the normal component. The transition of superfluid component to quantum turbulence is described wider in next chapters
 
-\section{Oscillatory motion in superfluid Helium-II}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In case of oscillating body in classical viscous fluid, described by ordinary Navier-Stokes equation, the typical length scale $L$ is identified as the viscous penetration depth:
+\section{Oscillatory flows}
+
+If a given body is oscillating in a classical viscous fluid, described by ordinary Navier-Stokes equation, there appears another characteristic lenght scale, identified by \cite{landau} as the \textit{viscous penetration depth}:
 
 \begin{equation}
-\delta = \sqrt{\frac{2\eta}{\rho\omega}}\,,
+\delta(\omega) = \sqrt{\frac{2\eta}{\rho\omega}}\,,
 \label{penetration}
 \end{equation}
 
-where $\omega$ is the angular frequency of oscilations. In the high frequency limit, depending on
-body geometry, the substitution $\delta \rightarrow L$ in Reynolds number formula, is correct and
-we can calculate an \textit{oscillatory Reynolds number} $\Re_{\delta} = \delta U \rho / \eta$. The reason
-for not using the body size is the additional degree of freedom in oscillatory flow (the time period of one oscillation).
+where $\omega$ is the angular frequency of oscilations.\\
+To recognize correct characteristic length scale (whether it should be oscillating body dimension $D$ or penetration depth $\delta$), we calculate the ratio of time-dependent term $\partial \vec{v} / \partial t$ from N-S equation (\ref{motion_normal}) to the viscous term $\nabla^2 \vec{v}$. Hence, we define another dimensionless quantity, the \underline{Stokes number} $\beta$.
+We calculate it \cite{stokes} as $\beta = \omega \rho D^2 / (\pi \eta)$, which can be reduced using (\ref{penetration}) to $\beta = D^2 / (\pi \delta^2)$.\\
+From this, we call a situation as the \textit{high-frequency regime}, when $\delta \ll D$, so the Stokes values are $\beta \gg 1$.
 
-Assuming two independent velocity fields $\vec{v}_n$, $\vec{v}_s$ in superfluid Helium-II, the above thoughts are applicable for the oscillatory viscous flow of the normal component $\vec{v}_n$. We therefore define in high frequency limit:
+\subsection*{Classical hydrodynamics}
+
+To describe fully an oscillatory flow, the governing Navier-Stokes equations may be expressed in terms of dimensionless velocity $U$, time $T$ and positions $L$. The independent time scale is given by the angular frequency of oscillations $\omega$. Candidates for characteristic lenght scale $L$ may lead to the body size $D$, surface roughness, or the viscous penetration depth $\delta(\omega)$.
+
+In the high frequency limit (directly from \ref{penetration}) $\omega \gg 2\eta / (\rho D^2)$, depending on body geometry, one can reach $\delta(\omega) \ll D$ and say that fluid oscillates in
+high Stokes regime \cite{universal_scaling} with $\beta = D^2 / (\pi \delta^2) \gg 1 $. Also, when also the surface roughness exceeds $\delta$, the N-S equation may be expressed using only one dimensionless parameter: an \textit{oscillatory Reynolds number} $\Re_{\delta} = \delta U \rho / \eta$.
+
+\subsection*{Superfluid Helium-II}
+
+Assuming two independent velocity fields $\vec{v}_n (\vec{r}, t)$, $\vec{v}_s (\vec{r}, t)$ in superfluid Helium-II, the above thoughts are applicable for the oscillatory viscous flow of the normal component $\vec{v}_n$. We therefore define the high frequency limit for normal component as:
 
 \begin{equation}
 \delta_n = \sqrt{\frac{2\eta}{\rho_n\omega}}\,,
 \hspace{1cm}
-\text{D}_n = \frac{U \delta_n \rho_n}{\eta}
-\label{twofluid}\,,
+\text{Dn} = \frac{U \delta_n \rho_n}{\eta}
+\label{donnelly}\,,
 \end{equation}
 
-We will call the oscillatory Reynolds number for normal component in superfluid Helium-II as a \textit{Donnelly number} $D_n$.
+We will call the oscillatory Reynolds number for normal component in superfluid Helium-II as a \textit{Donnelly number} (Dn, after Russell J. Donnelly, who as first came with this (\ref{donnelly}) idea.
 
-In low-frequency mode, when $\delta \ll$ oscillating body size $L$, the Helium-II flow of normal component is fully potential, so it will exhibit a laminar viscous flow. In this case it is shown that the drag coefficient is square-root dependent on oscillation frequency:
+At low velocities, below the critical thresholds to create either classical or quantum turbulence, the flow of the superfluid component is purely potential and the normal component exhibits laminar viscous flow.
+
+If the typical body curvature is of order $1/D$, the surface may be described as if consisting of many planar elements. In this case it is shown \cite{universal_scaling} that we can write for the average dissipated energy:
 
 \begin{equation}
-C_{Dn} \propto \sqrt{\eta \omega} \propto D_n^{-1}
+\langle \dot{E} \rangle =
+\frac{1}{2} \alpha \xi U_0^2 S_{eff} \sqrt{\frac{\eta \rho_n \omega}{2}}\,,
+\label{energy_loss}
 \end{equation}
 
-Since the density of normal component is decreasing with temperature, the critical Donnelly number of normal component shifts to higher numbers:
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.6\textwidth]{graphics/theory/C-Re_normal}
-	\caption{Drag coefficients vs Reynolds numbers of normal component. The non-constant behaviour of low-temperature curves (in turbulent mode) are caused due to additional QT in the superfluid component.}
-	\label{C-Re_normal}
-\end{figure}
-
-For the superfluid component, the drag coefficient $C_{DS}$ is derived directly from the hydrodynamic description:
+where $U_0$ is the velocity amplitude, $S_{eff}$ the effective surface, $\alpha$ the mutual friction constant and $\xi$ the integral of velocity profile along the resonator. The total energy of an oscillator is given as $E = \xi m U_0^2 / 2$ and moreover, we define a fluidic quality factor $Q_f$ of an oscillator for a single oscillation as:
 
 \begin{equation}
-C_{Ds} = \frac{2F_{drag,s}}{A\rho_s U^2}\,,
+1 / Q_f = \frac{\langle \dot{E} \rangle}{\omega E} = \frac{\alpha \rho_n S_{eff} \delta_n}{2m}
+\label{quality}
 \end{equation}
 
-where $A$ is a surface, dragged by the flow.
+From (\ref{energy_loss}), one can also derive the peak dissipative force (during a period of oscillation) and the dimensionless drag coefficient related to the normal component:
+
+\begin{equation}
+F_0 = \frac{2 \omega \langle \dot{E} \rangle}{U_0}
+= \alpha \xi \omega S_{eff} U_0 \sqrt{\frac{\eta \rho_n \omega}{2}}
+\hspace{5mm}
+\rightarrow
+\hspace{5mm}
+C_D^{\,n} = \frac{2 F}{A \rho_n U_0^2} = \frac{2 S_{eff}}{A U_0} \sqrt{\frac{\eta \omega}{\rho_n}}\,,
+\label{drag_normal}
+\end{equation}
+
+where $A$ is the cross-section of the body perpendicular to flow. According to dynamical similarity principle, the drag coefficient (\ref{drag_normal}) can be expressed as a function of the dimensionless Donnelly number (\ref{donnelly}):
+
+\begin{equation}
+C_D^{\,n} = \Phi / \text{Dn}\,,
+\end{equation}
+
+where number $\Phi$ is determined by the oscillating body geometry. Clearly, the laminar case of normal component is fully described by the hydrodynamic laws. In turbulent case, we expect a constant value for $C_D^{\,n}$ as long, as only normal component contributes to the drag force (no quantum turbulence).
 
 \section{Quantum turbulence}
 
-Superfluid turbulence can be viewed as a tangle of vortex lines and can be generated many ways. The first successful try was done using turbulent thermal counterflow by Vinen. Other popular ways to generate turbulence are
+Turbulence of superfluid component can be viewed as a tangle of vortex lines. In this case quantized vortices can be nucleated either \textit{intrinsically} (such process requires critical velocities of order $10 \unit{m/s}$) or \textit{extrinsically}, by stretching and reconnections of seed vortex loops. The initial vortices in the extrinsical case are the remnant vortices, which always exist in macroscopic samples of Helium-II . In many types of flow the critical velocity for extrinsic vortex nucleation is observed to be in order $\sim\unit{cm/s}$.
 
-The instability leading to the quantized vorticity is amplified by the self-reconnecting property of vortex loops and the critical velocity $U_{crit}$ is expected to scale with frequency as $U_{crit} \propto \sqrt{\omega}$. Hence we define the dimensionless velocity $\hat{U} = U / \sqrt{\omega}$.\\
-A couple of experimental studies in milliKelvin temperatures reported the existence of more critical velocities related with superfluid component flow within single experiment:
+The superfluid component becomes turbulent at some critical velocity $U_C$ and therefore, we expect an increase in drag coefficient $C_D$ much above the possible dependence caused by turbulence of normal component. The process of self-reconecting remnant vortices was well studied \cite{universal_scaling} and the related critical velocity is expected to scale as $U_C \propto \sqrt{\varkappa \omega}$, where $\varkappa$ is the circulation quantum. Hence, it is convenient to define a dimensionless velocity $\hat{U}$ with related drag coefficient $C_D^{\,s}$ as:
+
+\begin{equation}
+\hat{U} = U_0 / \sqrt{\varkappa \omega}
+\hspace{5mm}
+\rightarrow
+\hspace{5mm}
+C_D^{\,s} = \frac{2 F_0}{A \rho_s U_0^2} = \frac{2 F_0}{A \rho_s \varkappa \omega \hat{U}^2}\,,
+\label{drag_super}
+\end{equation}
+
+In case of turbulent superfluid component with velocities sufficiently above critical values, we expect both component to be coupled due to the mutual friction. In this case, both components contribute to the pressure drag, and drag coefficient must be calculated classicaly as $C_D = 2F / (A\rho U^2)$. where $\rho$ is the total density of Helium-II.
+
+\newpage
+
+\subsection*{Ultra-low temperature regime}
+
+In classical fluids, when the mean free path $\lambda$ of particles becomes comparable to a lenght scale $D$ of the system ($\text{Kn} \sim 1$), the continuum model of the fluid starts to break down and the system cannot longer be described by the Navier-Stokes equations. Similar arguments go when the angular frequency of oscillatory flow $\omega$ becomes comparable with the relaxation time $\tau$ of the fluid towards thermodynamic equilibrium ($\text{Wi} = \omega \tau \sim 1$).\\
+Here, the system is described as a gas of thermal quasiparticles propagating
+ballistically through a physical vacuum. Therefore, such system state is called as \textit{ballistic regime}.
+
+In practice with superfluid Helium-II, such situation is usually reached by cooling fluid  down to ultra-low temperatures. Below $T < 1\unit{K}$, the normal component accounts for less than $1\%$ of the total density, but required cooling to obtain ballistic regime (\textbf{Figure (\ref{ballistic})}) is below $T < 0.6\unit{K}$ (here the Helium-II is better described as a gas of thermal quasiparticles than a fluid).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{graphics/theory/ballistic}
+	\caption{Phonon Knudsen number and Weissenberg numbers plotted against temperature for different oscillators. The dashed line separates the interval $T < 0.6\unit{K}$, where the ballistic regime takes a place. Source: \cite{universal_scaling}}
+	\label{ballistic}
+\end{figure}
+
+\newpage
+
+\subsection*{Universal scaling}
+
+A study was conducted in order to solve the Stokes' second problem with an oscillating plane in viscous fluid, using pure Boltzmann kinetic equation. This solution is used to derive a universality relation valid in the high frequency limit (with no turbulence present) across both Newtonian and non-Newtonian regimes of the fluid. Using scaling function $f(\omega \tau)$, the authors derived \cite{universal_scaling} the relation for the quality factor:
+
+\begin{equation}
+1 / Q_f = \frac{\alpha S_{eff}}{m} \sqrt{\frac{\eta \rho_n}{2\omega}} f(\text{Wi})
+\end{equation}
+
+In \textbf{Results} we use this form of universality scaling for comparison against experimental data collected in temperature ranges $T < 0.6\unit{K}$ or $T > 1\unit{K}$.
+
+\subsection*{Multiple critical velocites}
+
+Here is briefly commented the transition to quantum turbulence regime observed at very low temperatures ($T \ll 1\unit{K}$). A couple of experimental studies in milliKelvin temperatures reported \cite{crit-velocity} the existence of more critical velocities related with superfluid component flow within single experiment:
 
 \begin{itemize}
-	\item \underline{First critical velocity} is related with the formation of quantum vortex rings near the surface of oscillating body - possibly forming a thin layer of different hydrodynamic behaviour. Such critical velocity is hard to observe at higher than ultra-low temperature.
+	\item \underline{First critical velocity} is related to the formation of pinned vortex loops at the surface of oscillating body - possibly forming a thin layer with different hydrodynamic behaviour which increases the effective mass of the oscillating object. Such critical velocity is hard to observe at higher than ultra-low temperatures.
 
-	\item \underline{Second critical velocity} is a consequence of escaping vortex rings from the oscillator body and forming a superfluid bulk or, eventually, the whole turbulent tangle. Here the sudden raise of drag is observed, usually with hysteresis effect.
+	\item \underline{Second critical velocity} is a consequence of vortex rings escaping from the oscillator body into the superfluid bulk and eventually forming a vortex tangle. Here the sudden raise of drag is observed, usually with hysteresis effect.
 
-	\item \underline{Third critical velocity} is the highest critical velocity, which can be observed. The origin of this velocity is hidden in the development of larger quantized vortex structures, which in larger scale become to mimic the classical turbulence. Such velocity is in order $\approx \unit{m/s}$ and moreover, very likely screened by the influence of the normal component turbulence. Therefore, not likely reachable within experiments reported in this thesis.
+	\item \underline{Third critical velocity} is the highest critical velocity which can be observed. The origin of this velocity is linked to the development of larger quantized vortex structures, which in larger scale start to mimic the classical turbulence. Such velocity is in order $\approx \unit{m/s}$ and moreover, very likely screened by the influence of the normal component turbulence. Therefore, not likely reachable within experiments reported in this Rhesis.
 \end{itemize}
 
-When both velocities of Helium II are high enough, we expect the turbulent regime on both sides to be coupled due to mutual friction and contributing to the drag. In such situation, we are forced to use classical hydrodynamic metrics: drag coefficient $C_D = 2F / (A\rho U^2)$ and Donnelly number $D = U \delta / \nu$. Recent researches also hint that both classical turbulent and quantum turbulent regimes can exist separately with low interaction.
-
-Note that all presented approches are only approximate, since they are neglecting flows near the oscillating body, evaporation processes, sound emissions and other corner-case effects.
+% When both velocities of Helium-II are high enough, we expect the turbulent regime on both sides to be coupled due to mutual friction and contributing to the drag. In such situation, we are forced to use classical hydrodynamic metrics: drag coefficient $C_D = 2F / (A\rho U^2)$ and Donnelly number $D = U \delta / \nu$. Recent researches also hint that both classical turbulent and quantum turbulent regimes can exist separately with low interaction.
+%
+% Note that all presented approches are only approximate, since they are neglecting flows near the oscillating body, evaporation processes, sound emissions and other corner-case effects.
 
 % \section{Second sound}
 %
-% Ordinary sound (the wave of density $\rho$ and pressure $P$) in Helium II is called \textit{first sound}. In such process, temperature $T$ and entropy $S$ is conserved and $\vec{v}_n$ and $\vec{v}_s$ oscillate in phase with each other ($\vec{v}_n(t) \approx \vec{v}_s(t)$). On the contrary, by combination of two-fluid motion and continuity equations, one obtains the wave equation also for the temperature $T$ and entropy $S$. In such case the velocities obey an antiphase oscillation ($\rho_n(t) \vec{v}_n(t) \approx - \rho_s(t) \vec{v}_s(t)$) and remains $\rho$ and $P$ constant.
+% Ordinary sound (the wave of density $\rho$ and pressure $P$) in Helium-II is called \textit{first sound}. In such process, temperature $T$ and entropy $S$ is conserved and $\vec{v}_n$ and $\vec{v}_s$ oscillate in phase with each other ($\vec{v}_n(t) \approx \vec{v}_s(t)$). On the contrary, by combination of two-fluid motion and continuity equations, one obtains the wave equation also for the temperature $T$ and entropy $S$. In such case the velocities obey an antiphase oscillation ($\rho_n(t) \vec{v}_n(t) \approx - \rho_s(t) \vec{v}_s(t)$) and remains $\rho$ and $P$ constant.
 %
 % \begin{figure}[h]
 % 	\centering
@@ -477,6 +631,6 @@ Note that all presented approches are only approximate, since they are neglectin
 % 	\label{ss_velocity}
 % \end{figure}
 %
-% In this work, the phenomenon of second sound attenuation is used for detection of quantized vortices, which naturally appear within Helium II. There is written much more about the method itself within the Experimental Approach part.
+% In this work, the phenomenon of second sound attenuation is used for detection of quantized vortices, which naturally appear within Helium-II. There is written much more about the method itself within the Experimental Approach part.
 
 \newpage
