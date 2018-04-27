@@ -71,13 +71,16 @@ We denote the dynamic external sources of velocity fields (which can be set in \
 
 The first difficulty in the VF model comes from the calculation of term $\vec{v}_{\text{ind}}$. As we shown previously in (\ref{lia+biot}), this advection term can be split into the LIA part and a Biot-Savart integral:
 
-\begin{equation}
+\begin{align}
 \vec{v}_{\text{ind}}^{(i)} =
-\vec{v}_{\text{LIA}}^{(i)} + \vec{v}_{\text{BIOT}}^{(i)} =
+\vec{v}_{\text{LIA}}^{(i)} + \vec{v}_{\text{BIOT}}^{(i)} =&
 \frac{\varkappa}{4\pi} (\vec{s}^{\prime}_i \times \vec{s}^{\prime \prime}_i)
 \ln{\Bigg(\frac{2\sqrt{l_{i-1} l_i}}{a}\Bigg)}
-+ \frac{\varkappa}{4\pi} \int_{\mathcal{L}^{\prime}} \frac{(\vec{r^{\prime}} - \vec{s}_i) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s}_i \vert^3}\,,
-\end{equation}
+\label{LIA}
+\\
++& \frac{\varkappa}{4\pi} \int_{\mathcal{L}^{\prime}} \frac{(\vec{r^{\prime}} - \vec{s}_i) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s}_i \vert^3}\,,
+\label{BIOT}
+\end{align}
 
 where $l_{i-1}$ and $l_i$ are the arc lengths of the curve between
 points $\vec{s}_{i-1}$ and $\vec{s}_i$ and between $\vec{s}_i$ and $\vec{s}_{i+1}$ respectively, and $\mathcal{L}^{\prime}$ is the original vortex line without the two segment lines between $\vec{s}_{i-1}$ and $\vec{s}_{i+1}$.
@@ -93,14 +96,14 @@ Using the segment discretisation, the Biot-Savart integral can be rewritten \cit
 
 where $\vec{R}_j = \vec{s}_j - \vec{s}_i$ and $\vec{R}_{j+1} = \vec{s}_{j+1} - \vec{s}_i$ are the relative vectors from the given point.
 
+Note that, if one takes in account the Biot-Savart law for $N$ mesh points, the computational time is proportional to $\mathcal{O}(N^2)$, while, if one uses just the LIA term, it is only $\mathcal{O}(N)$. Numerical simulations based on Biot-Savart are therefore significantly more computationally expensive, even with the speed of today's computers.
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{graphics/simul/biot}
 	\caption{An infinitesimal contribution of a $j$-th segment line between two points $\vec{s}_j$ and $\vec{s}_{j+1}$ at a given point $\vec{r}$. Source: \href{http://docs.desktop.aero/appliedaero/potential3d/BiotSavart.html}{Internet}}
 	\label{element}
 \end{figure}
-
-Note that, if one takes in account the Biot-Savart law for $N$ mesh points, the computational time is proportional to $\mathcal{O}(N^2)$, while, if one uses just the LIA term, it is only $\mathcal{O}(N)$. Numerical simulations based on Biot-Savart are therefore significantly more computationally expensive, even with the speed of today's computers.
 
 One way to get around this difficulty is to update the LIA term. In this method we neglect completely the non-local Biot-Savart integral and keep just the local term. This is typically done with a minor adjustments within the log term:
 
@@ -111,11 +114,13 @@ One way to get around this difficulty is to update the LIA term. In this method 
 \label{LIAnew}
 \end{equation}
 
-where $R_i$ is a $i-th$ segment local length scale - may be taken \cite{schwarz_filament} as a local curvature: $R_i = 1 / \vert \vec{s}^{\prime \prime}_i \vert$. Updated LIA approach (\ref{LIAnew}) is a very convenient approximation and works very well for calculating the motion of a single vortex ring.
+where $R_i$ is a $i-th$ segment local length scale - may be taken \cite{barenghi} as a local curvature: $R_i = 1 / \vert \vec{s}^{\prime \prime}_i \vert$. Updated LIA approach (\ref{LIAnew}) is a very convenient approximation and works very well for calculating the motion of a single vortex ring.
 
 \section{Implementation}
 
 In code, a system consisting of flow sources and a single vortex ring object is represented using several \texttt{class} structures. These structures are updated after each time step. We will call them as a \textit{state} of the system and it is defined (and initialised) with following properties:
+
+\newpage
 
 \subsection*{Environment class}
 
@@ -157,8 +162,6 @@ This class is initialized only when the purpose of simulation is to collect phys
 
 All functions that are manipulating with segments' attributes are implemented as Vortex class methods. Before each time stepping, all attributes has to be updated and tested. We used numerical methods already introduced in previous section and tests that are described in next section.
 
-\newpage
-
 \subsection*{Initialisation}
 
 The proper initialisation of the \textit{state} in the very beginning of simulation requires several physical inputs. This is done in following steps:
@@ -174,6 +177,8 @@ The proper initialisation of the \textit{state} in the very beginning of simulat
 \end{itemize}
 
 After these four steps, we obtain a fully updated ring object that can be propagated in time.
+
+\newpage
 
 \section{Time evolution}
 
@@ -213,13 +218,12 @@ where $\text{d}t$ is the time step and the velocities $\vec{v}_1^{(i)}, \vec{v}_
 
 Lower-order schemes such as basic Euler method is also implemented in code, however, not recommended to use. More on this is discussed in Results part of thesis.
 
-The time step $\text{d}t$ is chosen so that the vortex ring cannot move faster than a $1\%$ of its size in a single step. As we will see later in Results, in case of vortex rings with changing radius, the time step $\text{d}t$ has to be iteratively changing after each break of the above rule:
+The time step $\text{d}t$ is adaptively changing so that the vortex ring cannot move faster than a $1\%$ of its size in a single step. As we will see later in Results, in case of vortex rings with changing radius, the time step $\text{d}t$ has to be iteratively changing after each break of the above rule:
 
 \begin{equation}
 \text{d}t \leftarrow \frac{0.01 R}{\vert \vec{v}_c \vert}
+\label{adaptive_dt}
 \end{equation}
-
-\newpage
 
 \section{Re-segmentation of vortex}
 
