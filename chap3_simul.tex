@@ -1,13 +1,13 @@
 \chapter{Simulations}
 
-This part of thesis serves as a general description of the \texttt{PyVort} codebase, a new platform to simulate quantum vortex rings. The code is written in well commented Python 3, arranged in a modular structure. The primary aim of this chapter is to highlight which module(s) are involved and how they work.
-In appendix, one can find a table of the parameters (user's options) which can be set in the \texttt{config.py} file to run simulation.
+This part of Thesis serves as a general description of the \texttt{PyVort} codebase, a new platform to simulate quantum vortices. The code is written in well commented \texttt{Python 3}, arranged in a modular structure. The primary aim of this chapter is to highlight which modules are involved and how they work.
+On \href{https://github.com/KuboBahyl/superfluid}{GitHub}, one can find a table of the parameters (user's options) which can be set in the \texttt{config.py} file to run the simulation.
 
 At present, we use infinite boundary conditions. Therefore, only closed-loop vortices can be realized in simulation. However, the codebase is flexible and supports the potential implementation of unclosed loops.
 
 \section{Vortex filament model}
 
-The \texttt{PyVort} code is based on vortex filament (VF) model, a technique pioneerd by Schwarz in the early 1980s \cite{schwarz_filament}. Superfluid vortex filament is represented by a series of mesh points (segments) distributed along the centerline of the filament (\textbf{Figure \ref{example_ring}}). The motion of the whole VF is summed up by the motion of each mesh point.
+The \texttt{PyVort} code is based on vortex filament (VF) model, a technique pioneerd by Schwarz \cite{schwarz} in the early 1980s. Superfluid vortex filament is represented by a series of mesh points (segments) distributed along the centerline of the filament (\textbf{Figure \ref{example_ring}}). The motion of the whole VF is summed up by the motion of each mesh point.
 
 \begin{figure}[h]
 	\centering
@@ -17,22 +17,25 @@ after their initialisation.}
 	\label{example_ring}
 \end{figure}
 
-As introduced in Theoretical Background, we define the VF more precisely as a three dimensional curve $\vec{s}(\xi, t)$. Here, $\xi$ represent an arc-lengths and $t$ is time. Each segment is given by its coordinates $\vec{s}_i$, direct neighbour indices (previous $(i-1)$ and next $(i+1)$). This resolves in a directed digraph of segments, which is a good starting point for the initial data structure.
+As introduced in \textbf{Theoretical Background} chapter, we define the VF more precisely as a three dimensional curve $\vec{s}(\xi, t)$, where $\xi$ represent an arc-lengths and $t$ the time.
+Each segment, indexed as $(i)$ ($i$ is increasing as we move along the VF) is localised by its assigned coordinates $\vec{s}_i$ and direct neighbours indices: \textit{previous} $(i-1)$ and \textit{next} $(i+1)$.\\
+This leads to a data structure called as \textit{directed digraph}, which is the array structure we implemented.
 
-Next we define the tangent vector $\vec{s}^{\prime}$, then normal vector $\vec{s}^{\prime\prime}$, and the binormal vector $\vec{s}^{\prime} \times \vec{s}^{\prime\prime}$ by taking numerical derivatives. Note $\vec{s}^{\prime} = \text{d}\vec{s} / \text{d}\xi$,
-and so on. Numerical derivatives are achieved using Finite Differences method, as introduced in next subsection.
+Next we define the tangent vector $\vec{s}^{\prime}$, then normal vector $\vec{s}^{\prime\prime}$, and the binormal vector $\vec{s}^{\prime} \times \vec{s}^{\prime\prime}$, as depicted in \textbf{Figure \ref{filament}}, by taking numerical derivatives.
+Note $\vec{s}^{\prime} = \text{d}\vec{s} / \text{d}\xi$ and $\vec{s}^{\prime\prime} = \text{d}\vec{s^{\prime}} / \text{d}\xi$.
+Numerical derivatives are achieved using \textit{Finite Differences} method, as introduced in next subsection.
 
 
 \subsection*{Finite differences}
 
-In order to properly calculate the numerical derivatives $\vec{s}^{\prime}$ and $\vec{s}^{\prime\prime}$, belonging to the directed curve in 3D, we need to use a sophisticated numerical method. At a particular segment with position $\vec{s}_i$ , we define the distance to the particle in-front $\vec{s}_{i+1}$ as $l_{i} = \vert \vec{s}_{i+1} - \vec{s}_i \vert$ and the distance to the particle behind
+In order to properly calculate the numerical derivatives $\vec{s}^{\prime}$ and $\vec{s}^{\prime\prime}$, belonging to the directed 3D curve, we need to use a sophisticated numerical method. At a particular segment $(i)$ with position $\vec{s}_i$ , we define the distance to the particle in-front $\vec{s}_{i+1}$ as $l_{i} = \vert \vec{s}_{i+1} - \vec{s}_i \vert$ and the distance to the particle behind
 $\vec{s}_{i-1}$ as $l_{i-1} = \vert \vec{s}_i - \vec{s}_{i-1} \vert$ (\textbf{Figure \ref{FD}}).
 By in-front/behind we refer to the particles next/previous along the filament.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{graphics/simul/finite-diff}
-	\caption{Depiction of $i$-th segment vector and its corresponding lengths. Source: \cite{filament}}
+	\caption{Depiction of $i$-th segment vector and its corresponding lengths. Source: \cite{tsubota}}
 	\label{FD}
 \end{figure}
 
@@ -54,20 +57,19 @@ E_i\vec{s}_{i+2}
 \label{FDcoeffs}
 \end{equation}
 
-Calculation of coefficients $A, B, C, D, E$ can be done using analytical solution of \textit{Vandermonde matrix} invertion. This invertion can be done also numerically, which is a more scalable way of implementation, however, this method often meets with problems when the Vandermonde matrix becomes
-singular.
-In code, there is implemented both the analytical solution (closed form) and the solution by inverting the Vandermonde matrix. The closed form works for exactly our form of approximation (\ref{FDcoeffs}), whereas the numerical method works generally for any approximation level.
+Calculation of coefficients $A, B, C, D, E$ can be done using analytical solution of \textit{Vandermonde matrix} invertion. This invertion can be done also numerically, which is a more scalable way of implementation, however, this method often meets with problems when the Vandermonde matrix becomes singular.
+In code, there is implemented both the analytical solution (closed form) and the solution by inverting the Vandermonde matrix. The closed form works for exactly our form of approximation (\ref{FDcoeffs}) and is more described in \cite{FDclosed}, whereas the numerical method works generally for any approximation level.
 
 \subsection*{Biot-Savart discretisation}
 
-We denote the static external sources of velocity fields (which can be set in \texttt{config.py}) as $\vec{v}_{n,ext}$ and $\vec{v}_{s,ext}$. The equation of motion for given segment is then given directly by Schwarz's equation(\ref{schwarz}):
+We denote the dynamic external sources of velocity fields (which can be set in \texttt{config.py}) as $\vec{v}_{n,ext}(\vec{r}, t)$ and $\vec{v}_{s,ext} (\vec{r}, t)$. The equation of motion for a given segment is then given directly by Schwarz's equation(\ref{schwarz}):
 
 \begin{equation}
 \frac{\text{d}\vec{s}_i}{\text{d}t} =
 \vec{v}_{s,ext} + \vec{v}_{\text{ind}}^{(i)} + \vec{v}_{\text{drive}}^{(i)}
 \end{equation}
 
-The first difficulty in the VF model comes from the calculation of term $\vec{v}_{\text{ind}}$. As we shown previously (\ref{lia+biot}), this advection term can be split into the LIA part and a Biot-Savart integral:
+The first difficulty in the VF model comes from the calculation of term $\vec{v}_{\text{ind}}$. As we shown previously in (\ref{lia+biot}), this advection term can be split into the LIA part and a Biot-Savart integral:
 
 \begin{equation}
 \vec{v}_{\text{ind}}^{(i)} =
@@ -80,7 +82,7 @@ The first difficulty in the VF model comes from the calculation of term $\vec{v}
 where $l_{i-1}$ and $l_i$ are the arc lengths of the curve between
 points $\vec{s}_{i-1}$ and $\vec{s}_i$ and between $\vec{s}_i$ and $\vec{s}_{i+1}$ respectively, and $\mathcal{L}^{\prime}$ is the original vortex line without the two segment lines between $\vec{s}_{i-1}$ and $\vec{s}_{i+1}$.
 
-Using the segment discretisation, the Biot-Savart integral can be rewritten \cite{filament} into the sum of single-line contributions (\textbf{Figure \ref{element}}) between each $j$-th and $j+1$-th segment (except for the ones attached to the $i$-th point):
+Using the segment discretisation, the Biot-Savart integral can be rewritten \cite{samuels} into the sum of single-line contributions (\textbf{Figure \ref{element}}) between each $j$-th and $j+1$-th segment (except for the ones attached to the $i$-th point):
 
 \begin{equation}
 \vec{v}_{\text{BIOT}}^{(i)} \approx
@@ -103,24 +105,44 @@ Note that, if one takes in account the Biot-Savart law for $N$ mesh points, the 
 One way to get around this difficulty is to update the LIA term. In this method we neglect completely the non-local Biot-Savart integral and keep just the local term. This is typically done with a minor adjustments within the log term:
 
 \begin{equation}
-\vec{v}_{\text{LIA}}^{(i)} =
+\vec{v}_{\text{LIA}}^{*(i)} =
 \frac{\varkappa}{4\pi} (\vec{s}^{\prime}_i \times \vec{s}^{\prime \prime}_i)
 \ln{\Bigg(\frac{2 R_i}{a}\Bigg)}\,,
+\label{LIAnew}
 \end{equation}
 
-where $R_i$ is a filament length scale - may be taken \cite{schwarz_filament} as a local curvature of $i-th$ segment: $R_i = 1 / \vert \vec{s}^{\prime \prime}_i \vert$. Updated LIA is a very convenient approximation and works very well for calculating the motion of a single vortex ring.
+where $R_i$ is a $i-th$ segment local length scale - may be taken \cite{schwarz_filament} as a local curvature: $R_i = 1 / \vert \vec{s}^{\prime \prime}_i \vert$. Updated LIA approach (\ref{LIAnew}) is a very convenient approximation and works very well for calculating the motion of a single vortex ring.
 
-\subsection*{State definition}
+\section{Implementation}
 
-In code, a single vortex ring object is represented using the \texttt{class} structure. This structure is updated after each time step. We will call it as a \textit{state} of the vortex ring and it is defined (and initialised) with following properties:
+In code, a system consisting of flow sources and a single vortex ring object is represented using several \texttt{class} structures. These structures are updated after each time step. We will call them as a \textit{state} of the system and it is defined (and initialised) with following properties:
+
+\subsection*{Environment class}
 
 \begin{itemize}
-	\item \underline{shape} - a dictionary of three parameters: ring center coordinates $[x_c,y_c,z_c]$, radius $R$ and the direction of desired motion $\{x, y, z\}$ (three possible axis)
-	\item \underline{velocity} - the actual velocity magnitude of vortex ring center $\vert \vec{v}_c \vert$
-	\item \underline{number of active segments} - number of segments $N$ the vortex ring is composed of
+	\item \underline{external normal component} - defines an external source of normal component flow
+	\item \underline{external normal component} - defines an external source of superfluid component flow
+\end{itemize}
+
+\subsection*{Ring class}
+
+This class is initialized only when the purpose of simulation is to collect physical and statistical data about vortex rings.
+
+\begin{itemize}
+	\item \underline{center} - an array of ring center coordinates
+	\item \underline{radius} - current radius of the ring object
+	\item \underline{direction} - a normal vector pointing in a direction toward which the ring is moving
+	\item \underline{velocity} - measured velocity of the ring center
+\end{itemize}
+
+
+\subsection*{Vortex class}
+
+\begin{itemize}
+	\item \underline{number of active segments} - number of active segments $N$ the vortex ring is composed of
 	\item \underline{segments} - an array of all segments, each one with following attributes:
 	\begin{itemize}
-		\item \underline{active} - a logical value whether a particular segment should be considered as a part of vortex object
+		\item \underline{activity} - a logical value whether a particular segment should be considered as a part of vortex object
 		\item \underline{coordinates} - an array of segment coordinates $\vec{s}_i = [x_i,y_i,z_i]$
 		\item \underline{previous/next neighbour} - array localisation indices of the \textit{previous} $(i-1)$ and the \textit{next} $(i+1)$ segment within the context of the directed vortex
 		\item \underline{tangent/curvature} - a tangential and normal vectors $\vec{s}^{\prime}_i$ and $\vec{s}^{\prime\prime}_i$
@@ -133,20 +155,29 @@ In code, a single vortex ring object is represented using the \texttt{class} str
 	\end{itemize}
 \end{itemize}
 
-The proper initialisation of the \textit{state} in the very beginning of simulation includes the following steps:
-\begin{itemize}
-	\item[1.] an input from user: \textit{center, radius} and \textit{direction}
-	\item[2.] the gradual initialisation of neigbour indices (to an $i$-th element in segment array will be assigned $i-1$ index as the \textit{previous} and $i+1$ index as the \textit{next} neighbour index )
-	\item[3.] Calculation of all $\vec{s}^{\prime}$ and $\vec{s}^{\prime\prime}$ using Finite differences method
-	\item[4.] Calculation of all segment velocities using motion equations and their approximative forms
-	\item[5.] Calculation of the center velocity by taking the mean of all segments' full velocites in corresponding direction
-\end{itemize}
+All functions that are manipulating with segments' attributes are implemented as Vortex class methods. Before each time stepping, all attributes has to be updated and tested. We used numerical methods already introduced in previous section and tests that are described in next section.
 
 \newpage
 
+\subsection*{Initialisation}
+
+The proper initialisation of the \textit{state} in the very beginning of simulation requires several physical inputs. This is done in following steps:
+\begin{itemize}
+	\item[0.] Symbolically, we expect as a \textit{0-th step} the environmental setup of the system - \textit{external sources, temperature, time-step,...}.
+
+	\item[1.] If interested in quantized ring simulation, we expect several ring inputs from user: \textit{center, radius, direction} and \textit{resolution}.
+	Resolution parameter is the initial desired distance $\delta$ between each two neigbouring segments. This set of 4 inputs makes an unambiguous ring object, ready for next updates.
+
+	\item[2.] After creation, we initialise neigbour indices (to an $i$-th element in segment array will be assigned $i-1$ index as the \textit{previous} and $i+1$ index as the \textit{next} neighbour index)
+	\item[3.] Next we calculate all $\vec{s}^{\prime}$ and $\vec{s}^{\prime\prime}$ using Finite differences method
+	\item[4.] Final step is the calculation of all segment velocities using motion equations and their approximative forms.
+\end{itemize}
+
+After these four steps, we obtain a fully updated ring object that can be propagated in time.
+
 \section{Time evolution}
 
-Now when we defined and ran all the necessary calculations leading to the quantum vortex ring's \textit{state} fulfillment, we can start to propagate it in time.
+Now after we defined and ran all the necessary calculations leading to the quantum vortex ring's \textit{state} fulfillment, we can start to propagate it in time.
 
 \begin{figure}[h]
 	\centering
@@ -187,6 +218,8 @@ The time step $\text{d}t$ is chosen so that the vortex ring cannot move faster t
 \begin{equation}
 \text{d}t \leftarrow \frac{0.01 R}{\vert \vec{v}_c \vert}
 \end{equation}
+
+\newpage
 
 \section{Re-segmentation of vortex}
 
