@@ -1,0 +1,427 @@
+\chapter{Simulations}
+
+This part of Thesis serves as a general description of the \texttt{PyVort} codebase, a new platform to simulate quantum vortices. The code is written in well commented \texttt{Python 3}, arranged in a modular structure. The primary aim of this chapter is to highlight which modules are involved and how they work.
+On \href{https://github.com/KuboBahyl/superfluid}{GitHub}, one can find a table of the parameters (user's options) which can be set in the \texttt{config.py} file to run the simulation.
+
+At present, we use infinite boundary conditions. Therefore, only closed-loop vortices can be realized in simulation. However, the codebase is flexible and supports the potential implementation of unclosed loops.
+
+\section{Vortex filament model}
+
+The \texttt{PyVort} code is based on vortex filament (VF) model, a technique pioneerd by Schwarz \cite{schwarz} in the early 1980s. Superfluid vortex filament is represented by a series of mesh points (segments) distributed along the centerline of the filament (\textbf{Figure \ref{example_ring}}). The motion of the whole VF is summed up by the motion of each mesh point.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{graphics/simul/ring_init_crop}
+	\caption{Visualisation of vortex ring segments right
+after their initialisation.}
+	\label{example_ring}
+\end{figure}
+
+As introduced in \textbf{Theoretical Background} chapter, we define the VF more precisely as a three dimensional curve $\vec{s}(\xi, t)$, where $\xi$ represents an arc-lengths and $t$ the time.
+Each segment, indexed as $(i)$ ($i$ is increasing as we move along the VF) is localised by its assigned coordinates $\vec{s}_i$ and direct neighbours indices: \textit{previous} $(i-1)$ and \textit{next} $(i+1)$.\\
+This leads to a data structure called \textit{directed digraph}, which we found as an useful array structure for vortex segments and thus was implemented.
+
+Next we define the tangent vector $\vec{s}^{\prime}$, then normal vector $\vec{s}^{\prime\prime}$, and the binormal vector $\vec{s}^{\prime} \times \vec{s}^{\prime\prime}$, as depicted in \textbf{Figure \ref{filament}}, by taking numerical derivatives.
+Note $\vec{s}^{\prime} = \text{d}\vec{s} / \text{d}\xi$ and $\vec{s}^{\prime\prime} = \text{d}\vec{s^{\prime}} / \text{d}\xi$.
+Numerical derivatives are achieved using \textit{Finite Differences} method, as introduced in next subsection.
+
+
+\subsection*{Finite differences}
+
+In order to properly calculate the numerical derivatives $\vec{s}^{\prime}$ and $\vec{s}^{\prime\prime}$, belonging to the directed 3D curve, we need to use a sophisticated numerical method.
+At a particular segment $(i)$ with position $\vec{s}_i$ , we define the distance to the next point $\vec{s}_{i+1}$ as $l_{i} = \vert \vec{s}_{i+1} - \vec{s}_i \vert$ and the distance to the previous point $\vec{s}_{i-1}$ as $l_{i-1} = \vert \vec{s}_i - \vec{s}_{i-1} \vert$ (\textbf{Figure \ref{FD}}).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{graphics/simul/finite-diff}
+	\caption{Depiction of $i$-th segment vector and its corresponding lengths. Source: \cite{tsubota}}
+	\label{FD}
+\end{figure}
+
+For accuracy, we approximate all the spatial derivatives $\vec{s}_i^{\prime}$, $\vec{s}_i^{\prime\prime}$ by a
+fourth-order finite difference method (FD), which can also account for the varying distances along the vortex filament. With this, the first and second derivatives can be obtained based on coordinates of 2 closest neigbours (on each side).
+
+Using FD theorem, we can construct the approximations by taking the Taylor's series expansions. We can then write:
+
+\begin{equation}
+\frac{\text{d}^n\vec{s}_i}{\text{d}\xi^n} \approx
+A_i\vec{s}_{i-2} +
+B_i\vec{s}_{i-1} +
+C_i\vec{s}_{i} +
+D_i\vec{s}_{i+1} +
+E_i\vec{s}_{i+2}
+\hspace{1cm}
+\text{for} \,n\in\{1,2\}
+\label{FDcoeffs}
+\end{equation}
+
+Calculation of coefficients $A, B, C, D, E$ can be done using analytical solution of \textit{Vandermonde matrix} invertion. This invertion can be done also numerically, which is a more scalable way of implementation, however, this method often meets with problems when the Vandermonde matrix becomes singular.
+In code, there is implemented both the analytical solution (closed form) and the solution by inverting the Vandermonde matrix. The closed form works for exactly our form of approximation (\ref{FDcoeffs}) and is more described in \cite{FDclosed}, whereas the numerical method works generally for any approximation level.
+
+\subsection*{Biot-Savart discretisation}
+
+We denote the dynamic external sources of velocity fields (which can be set in \texttt{config.py}) as $\vec{v}_{n,ext}(\vec{r}, t)$ and $\vec{v}_{s,ext} (\vec{r}, t)$. The equation of motion for a given segment is then given directly by Schwarz's equation(\ref{schwarz}):
+
+\begin{equation}
+\frac{\text{d}\vec{s}_i}{\text{d}t} =
+\vec{v}_{s,ext} + \vec{v}_{\text{ind}}^{(i)} + \vec{v}_{\text{drive}}^{(i)}
+\end{equation}
+
+The first difficulty in the VF model comes from the calculation of term $\vec{v}_{\text{ind}}$. As we shown previously in (\ref{lia+biot}), this advection term can be split into the LIA part and a Biot-Savart integral:
+
+\begin{align}
+\vec{v}_{\text{ind}}^{(i)} =
+\vec{v}_{\text{LIA}}^{(i)} + \vec{v}_{\text{BIOT}}^{(i)} =&
+\frac{\varkappa}{4\pi} (\vec{s}^{\prime}_i \times \vec{s}^{\prime \prime}_i)
+\ln{\Bigg(\frac{2\sqrt{l_{i-1} l_i}}{a}\Bigg)}
+\label{LIA}
+\\
++& \frac{\varkappa}{4\pi} \int_{\mathcal{L}^{\prime}} \frac{(\vec{r^{\prime}} - \vec{s}_i) \times \text{d}\vec{r^{\prime}}}{\vert \vec{r^{\prime}} - \vec{s}_i \vert^3}\,,
+\label{BIOT}
+\end{align}
+
+where $l_{i-1}$ and $l_i$ are the arc lengths of the curve between
+points $\vec{s}_{i-1}$ and $\vec{s}_i$ and between $\vec{s}_i$ and $\vec{s}_{i+1}$ respectively, and $\mathcal{L}^{\prime}$ is the original vortex line without the two segment lines between $\vec{s}_{i-1}$ and $\vec{s}_{i+1}$.
+
+Using the segment discretisation, the Biot-Savart integral can be rewritten \cite{samuels} into the sum of single-line contributions (\textbf{Figure \ref{element}}) between each $j$-th and $j+1$-th segment (except for the ones attached to the $i$-th point):
+
+\begin{equation}
+\vec{v}_{\text{BIOT}}^{(i)} \approx
+\frac{\varkappa}{4\pi}
+\sum_{j \notin \{i-1, i\}}
+\frac{(R_j + R_{j+1}) (\vec{R}_j \times \vec{R}_{j+1})}{R_j R_{j+1} (R_j R_{j+1} + \vec{R}_j \dotprod \vec{R}_{j+1})}\,,
+\end{equation}
+
+where $\vec{R}_j = \vec{s}_j - \vec{s}_i$ and $\vec{R}_{j+1} = \vec{s}_{j+1} - \vec{s}_i$ are the relative vectors from the given point.
+
+Note that, if one takes into account the Biot-Savart law for $N$ mesh points, the computational time is proportional to $\mathcal{O}(N^2)$, while, if one uses just the LIA term, it is only $\mathcal{O}(N)$. Numerical simulations based on Biot-Savart are therefore significantly more computationally expensive.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{graphics/simul/biot}
+	\caption{An infinitesimal contribution of a $j$-th segment line between two points $\vec{s}_j$ and $\vec{s}_{j+1}$ at a given point $\vec{r}$. Source: \cite{element}}
+	\label{element}
+\end{figure}
+
+One way to get around this difficulty is to update the LIA term. In this method we neglect completely the non-local Biot-Savart integral and keep just the local term. This is typically done with a minor adjustments within the log term:
+
+\begin{equation}
+\vec{v}_{\text{LIA}}^{*(i)} =
+\frac{\varkappa}{4\pi} (\vec{s}^{\prime}_i \times \vec{s}^{\prime \prime}_i)
+\ln{\Bigg(\frac{2 R_i}{a}\Bigg)}\,,
+\label{LIAnew}
+\end{equation}
+
+where $R_i$ is a $i-th$ segment local length scale - may be taken \cite{barenghi} as a local curvature: $R_i = 1 / \vert \vec{s}^{\prime \prime}_i \vert$. Updated LIA approach (\ref{LIAnew}) is a very convenient approximation and works very well for calculating the motion of a single vortex ring.
+
+\section{Implementation}
+
+In code, a system consisting of flow sources and a single vortex ring object is represented using several \texttt{class} structures. These structures are updated after each time step. We will call them as a \textit{state} of the system and it is defined (and initialised) with following properties:
+
+%\newpage
+
+\subsection*{Environment class}
+
+\begin{itemize}
+	\item \underline{external normal component} - defines an external source of normal component flow
+	\item \underline{external superfluid component} - defines an external source of superfluid component flow
+\end{itemize}
+
+\subsection*{Ring class}
+
+This class is initialized only when the purpose of simulation is to collect physical and statistical data about vortex rings.
+
+\begin{itemize}
+	\item \underline{center} - an array of ring center coordinates
+	\item \underline{radius} - current radius $R$ of the ring object
+	\item \underline{direction} - a normal vector $\vec{\hat{n}}$ pointing in a direction toward which the ring is moving
+	\item \underline{velocity} - measured velocity of the ring center $\vec{v}_{\text{ring}}$
+\end{itemize}
+
+
+\subsection*{Vortex class}
+
+\begin{itemize}
+	\item \underline{number of active segments} - number of active segments $N$ the vortex ring is composed of
+	\item \underline{segments} - an array of all segments, each one with following attributes:
+	\begin{itemize}
+		\item \underline{activity} - a logical value whether a particular segment should be considered as a part of vortex object
+		\item \underline{coordinates} - an array of segment coordinates $\vec{s}_i = [x_i,y_i,z_i]$
+		\item \underline{previous/next neighbour} - array localisation indices of the \textit{previous} $(i-1)$ and the \textit{next} $(i+1)$ segment within the context of the directed vortex
+		\item \underline{tangent/curvature} - a tangential and normal vectors $\vec{s}^{\prime}_i$ and $\vec{s}^{\prime\prime}_i$
+
+		\item \underline{LIA velocity} - a self-induced velocity $\vec{v}_{\text{LIA}}^{(i)}$ driven by the local curvature. (\ref{LIA}) or (\ref{LIAnew})
+		\item \underline{BIOT velocity} - a self-induced velocity driven by the farther segment lines of the vortex ring $\vec{v}_{\text{BIOT}}^{(i)}$ (\ref{BIOT})
+
+		\item \underline{Drive velocity} - a velocity given by the mutual friction force $\vec{v}_{\text{drive}}^{(i)}$ (\ref{drive})
+		\item \underline{Full velocity} - the sum of external sources $\vec{v}_{s,ext}$, LIA velocity $\vec{v}_{\text{LIA}}^{(i)}$, BIOT velocity $\vec{v}_{\text{BIOT}}^{(i)}$ and the drive velocity $\vec{v}_{\text{drive}}^{(i)}$, resulting in $\text{d}\vec{s}_i / \text{d}t$
+	\end{itemize}
+\end{itemize}
+
+All functions that are manipulating with segments' attributes are implemented as Vortex class methods. Before each time step, all attributes have to be updated and tested. We used numerical methods already introduced in previous section and tests that are described in next section.
+
+\subsection*{Initialisation}
+
+The proper initialisation of the \textit{state} in the very beginning of simulation requires several physical inputs. This is done in following steps:
+\begin{itemize}
+	\item[0.] Symbolically, we expect as a \textit{0-th step} the environmental setup of the system - \textit{external sources, temperature, time-step,...}.
+
+	\item[1.] If interested in quantized ring simulation, we expect several ring inputs from user: \textit{center, radius, direction} and \textit{resolution}.
+	Resolution parameter is the initial desired distance $\delta$ between each two neigbouring segments. This set of 4 inputs makes an unambiguous ring object, ready for next updates.
+
+	\item[2.] After creation, we initialise neigbour indices (to an $i$-th element in segment array will be assigned $i-1$ index as the \textit{previous} and $i+1$ index as the \textit{next} neighbour index)
+	\item[3.] Next we calculate all $\vec{s}^{\prime}$ and $\vec{s}^{\prime\prime}$ using Finite differences method
+	\item[4.] Final step is the calculation of all segment velocities using motion equations and their approximative forms.
+\end{itemize}
+
+After these four steps, we obtain a fully updated ring object that can be propagated in time.
+
+\section{Time evolution}
+
+After we defined and ran all the necessary calculations leading to the vortex ring's \textit{state} fulfillment, we can start to propagate it in time (visualised example in \textbf{Figure \ref{motion}}).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{graphics/simul/time-example}
+	\caption{Example of a moving vortex ring}
+	\label{motion}
+\end{figure}
+
+\subsection*{Time stepping}
+
+Time evolution is based on an explicit iterative method: the fourth-order Runge-Kutta (RK4) scheme. When we consider the Schwarz's equation $\text{d}\vec{s}_i / \text{d}t \equiv \vec{v}_{\text{full}}^{(i)}$, the stepping algorithm is given as:
+
+\begin{equation}
+\vec{s}_{i}(t+\text{d}t) =
+\vec{s}_{i}(t) +
+\frac{\text{d}t}{6} (\vec{v}_1^{(i)} + 2\vec{v}_2^{(i)} + 2\vec{v}_3^{(i)} + \vec{v}_4^{(i)})\,,
+\end{equation}
+
+where $\text{d}t$ is the time step and the velocities $\vec{v}_1^{(i)}, \vec{v}_2^{(i)}, \vec{v}_3^{(i)}, \vec{v}_4^{(i)}$ are the induced velocites of partial steps:
+
+\begin{align}
+\vec{v}_1^{(i)} =& \vec{v}_{\text{full}}^{(i)}
+(\vec{s}_i, t)\,,
+\\
+\vec{v}_2^{(i)} =& \vec{v}_{\text{full}}^{(i)}
+(\vec{s}_i + \vec{v}_1^{(i)} \text{d}t / 2, t + \text{d}t / 2)\,,
+\\
+\vec{v}_3^{(i)} =& \vec{v}_{\text{full}}^{(i)}
+(\vec{s}_i + \vec{v}_2^{(i)} \text{d}t / 2, t + \text{d}t / 2)\,,
+\\
+\vec{v}_4^{(i)} =& \vec{v}_{\text{full}}^{(i)}
+(\vec{s}_i + \vec{v}_3^{(i)} \text{d}t, t + \text{d}t)
+\end{align}
+
+Lower-order schemes such as basic Euler method is also implemented in code, however, not recommended to use. More on this is discussed in Results part of thesis.
+
+The time step $\text{d}t$ is adaptively changing so that the vortex ring cannot move faster than a $1\%$ of its size in a single step. As we will see later in Results, in case of vortex rings with changing radius, the time step $\text{d}t$ has to be iteratively changing after each break of the above rule:
+
+\begin{equation}
+\text{d}t \leftarrow \frac{0.01 R}{\vert \vec{v}_{\text{ring}} \vert}
+\label{adaptive_dt}
+\end{equation}
+
+\section{Re-segmentation of vortex}
+
+To obtain the most realistic simulation (to capture effects on any length scale), the natural tendency would be to set the resolution parameter $\delta$ as low as possible. However, the CPU time cost rises rapidly as the number of segments $N$ increases, so there is need to find the best trade-off.
+
+As the distance between neighbouring segments is reduced/enlarged with time due to the physics and numerical inaccuracies, there is need to remove/add segments (\textit{re-segment}) in order to conserve the vortex resolution $\delta$. The closeness (in terms of arclength) of neighbouring segments is therefore measured after each simulation time-step.
+
+We used the simplest re-segmenting criteria - keeping an approximately \textit{uniform distance} between the segments. To ensure this, two boundary conditions were implemented:
+
+\begin{itemize}
+	\item[1.] The segment $\vec{s}_{j+1}$ would be removed if:
+
+	\begin{equation}
+	\vert \vec{s}_{j+1} - \vec{s}_j \vert < \delta_{\text{min}}\,,
+	\end{equation}
+
+	where $\delta_{\text{min}}$ is the minimal distance between two segments. Also, the segment $\vec{s}_j$ would take place somewhere between $\vec{s}_{j-1}$ and $\vec{s}_{j+2}$ so that it will conserve the curvature of vortex. Such result can be obtained using any spline interpolation along nearest neighbours. We worked with 3D local spline using 4 points (in our context they would be $\vec{s}_{j-2}$, $\vec{s}_{j-1}$, $\vec{s}_{j+1}$, $\vec{s}_{j+2}$) and create another 11 interpolated knots.
+	Consequently, the new position of $\vec{s}_j$ will be the position of the 6-th knot (the middle one).
+
+	\item[2.] We add a new segment $\vec{s}_{\text{new}}$ between $\vec{s}_{j}$ and $\vec{s}_{j+1}$ if:
+
+	\begin{equation}
+	\vert \vec{s}_{j+1} - \vec{s}_j \vert > \delta_{\text{max}}\,,
+	\end{equation}
+
+	where $\delta_{\text{max}}$ is the maximal allowed distance between two segments.
+\end{itemize}
+
+This method keeps all the distances along the vortex roughly in the range $\delta \in \langle \delta_{\text{min}}, \delta_{\text{max}} \rangle$ and also keeps the geometrical properties.
+
+\subsection*{Real-time tests}
+
+After each time step is done, a few tests are performed, to ensure that vortex itself is behaving according to our expectations. The tests are following:
+
+\begin{itemize}
+	\item \underline{Length test} - This test calculates the segmented vortex circumference as $l = \sum_j \vert \vec{s}_j - \vec{s}_{j+1} \vert$ and compare it with the theoretical one $2\pi R$, where radius $R$ has to be measured as well. If the deviation from the theoretical value is too high $>1\%$, the segments are noisy and the process is killed. In case of deviation below $<-1\%$, there are clearly too few segments and resegmentation process is called.
+
+	\item \underline{Segmentation test} - Here we check the value $l_j = \vert \vec{s}_j - \vec{s}_{j+1} \vert$ for each $j$ and ask whether $l_j \in \langle \delta_{\text{min}}, \delta_{\text{max}} \rangle$. If not, resegmentation process is called.
+
+	\item \underline{Smallness test} - If the vortex ring radius would decrease below $R < \delta_{\text{min}}$, the ring is deleted from the simulation.
+\end{itemize}
+
+\section{Future implementations}
+
+To make \texttt{Pyvort} a full-fledged quantum vortex simulation, there should be implemented following improvements:
+
+\subsection*{Complexity speedup}
+
+Recent numerical research presented \cite{tree_alg} a new numerical method to compute the evolution of vortex filament. The method is based on an N-body cosmological simulation by Barnes and Hut \cite{barnes}, a \textit{tree algorithm} which considerably speeds up the calculation of Biot-Savart integrals - computational cost scales as $\mathcal{O}(N \log(N))$ rather than $N^2$. Properties of the tree method were tested for a variety of vortex configurations, ranging from simple vortex rings to a counterflow vortex tangle and compared with the LIA approach and the exact Biot-Savart's law.
+
+Implementation of such algorithm is not easy, but definitely worth due to the gain in efficiency.
+
+
+\subsection*{Re-connection process}
+
+If any lines of two vortices (or even the single one) become very close,
+the filaments can reconnect, changing the topology of the system.
+Many researchers experimentally reported this is happening and also found analogies with vortex dynamics in the Navier–Stokes equation.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{graphics/simul/reconnection}
+	\caption{Reconnection of quantized vortices. \textbf{(a)} Two vortices before reconnection, about to contact each other. \textbf{(b)} The new vortices after reconnection.}
+\end{figure}
+
+The VF model itself cannot describe the reconnection process because the vortex core structure is neglected. Hence, some artificial procedures must be introduced to simulate such process. For instance, when two vortices approach within a critical distance $\delta_{\text{min}}$, we will artificially reconnect the vortices.
+
+The main criteria for reconnection is that the total length (this is corresponding with energy) will decrease. Self-reconnections (e.g. caused by a twist of vortex) would be treated in the same way. Since recconection involves only antiparallel vortices, one has to check using the inner product whether two vortices could physically reconnect or not.
+
+\subsection*{High-order tests}
+
+Once the code of interacting vortex filaments is developed, the data analysis needs to be improved. The simplest measurable quantity is the total lenght of all vortex lines. In a finite volume this would be $L = (1/V) \int \text{d}\xi$ for the vortex length per unit volume.
+
+Of course, one may define more complicated metrics, measuring the isotropy of the vortex tangle. One of them is the length of line projected along a given vector $\vec{\hat{r}}$, given as:
+
+\begin{equation}
+J(\vec{\hat{r}}) = \frac{1}{VL} \int_{\mathcal{L}} \sqrt{1 - (\vec{s}^{\prime}(\xi) \dotprod \vec{\hat{r}})^2} \text{d}\xi
+\end{equation}
+
+\newpage
+
+\chapter{Simulation Results}
+% \begin{itemize}
+% 	\item does num segments affect the initial ring velocity?
+% 	\item does energy (and velocity) changes if Quantum=False?
+% 	\item for a given R and euler method, what is the life of stability for various num segments
+% 	\item when is it good to resegment?
+% 	\item which config leads to the death of the ring for various R
+% 	\item measure death time and distance for various R
+%
+% \end{itemize}
+%
+% \section{Vortex ring}
+% \begin{itemize}
+% 	\item compare rings with various radii
+% 	\item theoretical vs simulation velocity / range
+% 	\item stability tests
+% 	\item initialisation
+% 	\item movement, decreasing radius
+% 	\item comparison with theory
+% \end{itemize}
+
+In this chapter, we analyse the functionality of new codebase. We made several tests on energy conservation, precision of numerical methods and stability, to ensure that simulation is reliable and stable for further development.
+
+All presented measurements and optimisations were conducted in order to recommend the best simulation parameters for future investigations, which is ensured by the correct setup of the \texttt{config} file. We performed tests with physical motivation and also tests focused on precision and stability. With presented findings, the reliability and stability of any further large-scale simulation should be ensured.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Zero-temperature test}
+
+In case of zero temperature $T=0\unit{K}$, the \textit{normal component} in superfluid He-II is not present anymore and therefore also no mutual friction. Even the mutual friction is not the only present dissipation process (we neglect phonon emissions), we expect for out numerical model to conserve the velocity and energy of the vortex ring.
+
+We plotted in \textbf{Figure \ref{Tzero}} the ring velocity $\vert \vec{v}_{\text{ring}} \vert $ and energy $E_{\text{ring}}$ evolving in time, for the case of temperature $T=0$ (pure superfluid, no normal component) and $T=1.5\unit{K}$ (considerable ratio of present normal and superfluid component $\rho_s / \rho_n \approx 8$).\\
+We tested the mutual friction effect during 1000 time-steps (refered to as \textit{epochs}) with adapting timestep $\text{d}t$ according to (\ref{adaptive_dt}).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{graphics/results/Tzero}
+	\caption{Evolution of ring velocity and energy in time. \underline{Blue lines} - measured velocity data, \underline{Black lines} - measured energy data,
+	\underline{Dashed lines} - the constant behaviour for temperature $T=0\unit{K}$, \underline{Full lines} - the dissipative process for temperature $T=1.5\text{K}$.\\
+	On \texttt{x} axis, we plot the number of elapsed epochs (time steps) and on \texttt{y} axis the velocity of the ring center $\vert \vec{v}_{\text{ring}} \vert $ and ring energy $E_{\text{ring}}$.}
+	\label{Tzero}
+\end{figure}
+
+As we see, at $T=0\unit{K}$ the velocity and energy is conserved even after 1000 epochs of simulation due to missing dissipation process (mutual friction). In case of $T=1.5\unit{K}$, energy is descreasing as expected, whereas the velocity is increasing. This increase is physically well-explained by the fact that the radius is decreasing with time due to the non-dissipative term of mutual friction. Also, it can be seen directly from the theoretical formula (\ref{ring-velocity}).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Velocity precision test}
+
+Our first velocity test compares the various approaches how can the ring velocity $\vert \vec{v}_{\text{ring}} \vert $ be calculated. Here, we compare four approaches, recognizing their theoretical motivation, computational complexity and precision:
+\begin{itemize}
+	\item LIA (\ref{LIA}): motivated \cite{barenghi}, computationally cheap, not precise
+	\item LIA + BIOT (\ref{LIA} + \ref{BIOT}): motivated \cite{barenghi}, but computationally expensive
+	\item updated LIA (\ref{LIAnew}): not well motivated \cite{samuels}, but computationally cheap and precise
+	\item Theoretical (\ref{ring-velocity}): well motivated \cite{roberts} and most precise
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{graphics/results/vels_radius}
+	\caption{Comparison of all implemented velocity approaches (\underline{full lines}) with the theoretical one (\underline{black dashed line}) according to (\ref{ring-velocity}), with decreasing radius in time.\\
+	Velocity values $\vert \vec{v}_{\text{ring}} \vert$ on \texttt{y} axis are computed always using the measured decreasing radius value (\texttt{x} axis)}
+	\label{vels-radius}
+\end{figure}
+
+The theoretical values of ring velocity from (\ref{ring-velocity}) are taken as a baseline that other velocity calculations are compared with.
+All velocites were measured and evolved over a few thousands epochs (time steps), during which the radius was dissipatively decreasing, as is plotted in \textbf{Figure \ref{vels-radius}}.
+
+We see that the theoretically most precise (LIA + BIOT) approach grows a bit faster than it should according to theory. This inconsistence is caused by too big resolution parameter, which was set at $\delta \approx 70 \mu \unit{m}$\\
+Therefore, for all further measurements we used the updated LIA velocity (LIA*) approach due to its time-scale consistency and computational speed.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Velocity convergence test}
+
+Next, we investigated the magnitude of the ring velocity $\vert \vec{v}_{\text{ring}} \vert$ for various resolutions $\delta \in \langle 50, 200 \rangle \mu\text{m}$, immediately after initialisation and then after 100 epochs. Ring radius was always set at $R=1000\mu\text{m}$ (this is usual working radius \cite{tsubota} \cite{FDclosed}), so the number of discretisation points along the vortex was given by $R$ and $\delta$ as $N \approx 2\pi R/ \delta \in \langle 30,120 \rangle$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{graphics/results/vels_convergence}
+	\caption{The distribution of ring velocity values $\vert \vec{v}_{\text{ring}} \vert$ for a range of resolution paramters $\delta$ in two situations. \underline{Blue dots} - Velocity values immediately after initialisation, \underline{Red dots} - velcotiy values after 100 time-steps.\\
+	On \texttt{x} axis, we plot the resolutions $\delta$ of vortex segments and on \texttt{y} axis the ring velocity $\vert \vec{v}_{\text{ring}} \vert$.}
+	\label{vels-converg}
+\end{figure}
+
+We see in \textbf{Figure \ref{vels-converg}} the expected convergent behaviour of both measured velocities in the range of good resolutions (small values of $\delta$). It seems that below $ \delta < 100 \mu\text{m}$  (corresponding to $\approx 60$ segments along the ring of radius $R=1000 \mu \unit{m}$) the velocites are converged, which provides the upper boundary for a \textit{good-chosen} resolution.
+
+Even if it is intuitive that good resolutions (small $\delta$-s) lead to more precise velocities, the high number of vortex segments $N \propto 1/\delta$ worsens the stability of simulation in time. The reason behind this effect is the assumption of \textit{RK4} stepping method that functions, which \textit{RK4} is approximating, are smooth. With higher number of segments, there is higher chance for the ring to be non-smooth, which leads to exponential errors in \textit{RK4} algorithm.
+
+Therefore, we propose also a lower boundary for  $\delta$, ensuring the stability, in a following test in next subsection.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Stability test}
+
+Stability of simulation in time was measured for a range of resolutions $\delta \in \langle 10, 100 \rangle \mu\text{m}$ and three values of vortex radius $R \in \{500, 1000, 2000\} \mu\text{m}$ using \textit{Euler} and \textit{RK4} stepping method. In all cases, the stability is measured by the maximal number of elapsed epochs, till the simulation was forced to stop.
+This enforcement was determined by the violation of length condition, as was described in \textbf{Real-time tests} subsection- the real vortex circumference $l = \sum_j \vert \vec{s}_j - \vec{s}_{j+1} \vert$ cannot deviate more than $1\%$ from the geometrical value $2\pi R$, where $R$ is the measured radius in current state.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{graphics/results/stability-euler}
+	\caption{Plot of maximal elapsed epoch (time step) of simulation with a given resolution $\delta$, radius $R$ and \textit{Euler} stepping method, till the simulation was forced to stop by violating the length condition.}
+	\label{stab-euler}
+\end{figure}
+
+
+From the plot in \textbf{Figure \ref{stab-euler}}, the \textit{Euler} method seems to be unstable for all resolutions $\delta \in \langle 10, 100 \rangle \mu\text{m}$. Such behaviour was expected and simulated only as an example of inappropriately chosen stepping method.
+
+The next experiment was conducted with \textit{RK4} method, a much more stable method comparing with the \textit{Euler} one, but also suffering from strong assumptions (smoothness of evoluting function). After the same experiment with changed time-step method was performed, we measured a stronger stability:
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{graphics/results/stability-RK4}
+	\caption{Plot of maximal elapsed epoch (time step) of simulation with a given resolution $\delta$, radius $R$ and \textit{RK4} stepping method, till the simulation was forced to stop by violating the length condition. A threshold is set on $2000$ epochs.}
+	\label{stab-rk4}
+\end{figure}
+
+The plot in \textbf{Figure \ref{stab-rk4}} suggests the minimal resolution to be at least $\delta >30\mu\text{m}$. This boundary estimate is still quite conservative, since the radius of vortex is decreasing in time and resegmentation processes will happen.
+Resegmantation process significantly contributes to the stability of simulation since the deletion of some segments behaves as a \textit{smoothing effect} which supports the \textit{RK4} method to be stable.
+
+\newpage
