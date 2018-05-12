@@ -1,7 +1,7 @@
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
-	To this day, turbulent motion of fluids remains the last unresolved problem of classical physics. They present many practical challenges across different areas of industry (f.e. weather prediction). Quantum turbulence, in contrast, may occur only in superfluids and was first observed in superfluid state of $\He$. Compared to classical turbulence, it can be regarded as a simpler system from the theoretical and numerical point of view. Also, it shares many of the general properties of turbulence in classical viscous fluids.
+	To this day, turbulent motion of fluids remains the last unresolved problem of classical physics. They present many practical challenges across different areas of industry (e.g. weather prediction). Quantum turbulence, in contrast, may occur only in superfluids and was first observed in superfluid state of $\He$. Compared to classical turbulence, it can be regarded as a simpler system from the theoretical and numerical point of view. Also, it shares many of the general properties of turbulence in classical viscous fluids.
 
 	In very low temperatures, the liquid state of $\He$ exists in two phases:
 	\begin{itemize}
@@ -18,11 +18,11 @@
 		\label{phase_diag}
 	\end{figure}
 
-	A simple, phenomenological model of the Helium-II composition was proposed by Tisza \cite{tisza} and Landau \cite{landau}, called as \textit{two-fluid model}. According to this model, the Helium-II behaves as if composed of two inter-penetrating liquids - a \textit{normal} and a \textit{superfluid} component - with corresponding velocity fields and temperature-dependent, described as:
+	A simple, phenomenological model of the Helium-II composition was proposed by Tisza \cite{tisza} and Landau \cite{landau}, called as \textit{two-fluid model}. According to this model, Helium-II behaves as if composed of two inter-penetrating liquids - a \textit{normal} and a \textit{superfluid} component - with corresponding velocity fields and temperature-dependent, described as:
 
 	\begin{itemize}
 		\item \underline{normal component}: density $\rho_n (T)$, velocity field $\vec{v}_n (\vec{r}, t)$, motion described by an ordinary viscous Navier-Stokes equation, carrying entropy and represented as a collection of thermal excitations.
-		\item \underline{superfluid component}: density $\rho_s (T)$, velocity field $\vec{v}_s(\vec{r}, t)$, motion described by a modified Euler equation (without viscosity) with quantum terms, no carrying entropy and represented by a macroscopic wave function.
+		\item \underline{superfluid component}: density $\rho_s (T)$, velocity field $\vec{v}_s(\vec{r}, t)$, motion described by a modified Euler equation (without viscosity) with quantum terms, carrying zero entropy and represented by a macroscopic wave function.
 	\end{itemize}
 
 	The total density of Helium-II sums up to $\rho = \rho_n(T) + \rho_s(T) \approx \text{const}$ and the relative proportion of normal/superfluid component is determined mainly by the temperature, as plotted in \textbf{Figure \ref{densities}}.\\
@@ -36,7 +36,7 @@
 	\end{figure}
 
 	It arises from the quantum nature of Helium-II, that the superfluid component should not perform any rotation. However, when this component moves faster than a critical velocity, the circulation is \textit{quantized} and so-called \textit{quantized vortices} are created, which makes the hydrodynamics of Helium-II particularly interesting. However, the vortex nucleation process is still a subject of many current investigations.\\
-	Superfluid vortex lines were observed spatially organized, but also completely disorganized as showed also by a simulation in \textbf{Figure \ref{sim_cube}}. Quantum turbulence therefore usually takes the form of a chaotic tangle of quantized vortices in the superfluid component which typically coexist with classical turbulent flow of the normal component.
+	Superfluid vortex lines were observed spatially organized \cite{bewley}, but also completely disorganized as showed also by a simulation in \textbf{Figure \ref{sim_cube}}. Quantum turbulence therefore usually takes the form of a chaotic tangle of quantized vortices in the superfluid component which typically coexist with classical turbulent flow of the normal component.
 
 	In the presence of quantized vortices, the seemingly independent normal and superfluid velocity fields become coupled by the \textit{mutual friction} force which arises due to quasiparticles scattering off the cores of vortices. More details about this interaction are provided in \textbf{Theoretical Background} chapter.
 
@@ -47,10 +47,10 @@
 		\label{sim_cube}
 	\end{figure}
 
-	Quantum turbulence can be experimentally achieved in many traditional ways - driving a mass flow, spinning discs, oscillating grids and forks, ultrasound and jets. In order to characterize the turbulence, one may use a superfluid Reynolds number for a steady flows, or a newly introduced (the last section of \textbf{Theoretical Background} chapter) \textit{Donnelly number} for high-frequency oscillatory flows.\\
-	We find (see \textbf{Results} chapter) that for quantum turbulence originated in succh high-frequency oscillation regime at temperatures $T > 1\unit{K}$, the measured drag forces are described in terms of a single dimensionless parameter and exhibit an \textit{universal scaling} behavior. We identify and compare the critical conditions related to the production of both quantized vorticity and instabilities occurring in normal component.
+	Quantum turbulence can be experimentally achieved in many traditional ways - driving a mass flow, spinning discs, oscillating grids and forks, ultrasound and jets. In order to characterize the turbulence, one may use a superfluid Reynolds number for steady flows, or a newly introduced (the last section of \textbf{Theoretical Background} chapter) \textit{Donnelly number} for high-frequency oscillatory flows.\\
+	We find (see \textbf{Results} chapter) that for quantum turbulence originated in such high-frequency oscillation regime at temperatures $T > 1\unit{K}$, the measured drag forces are described in terms of a single dimensionless parameter and exhibit an \textit{universal scaling} behavior. We identify and compare the critical conditions related to the production of both quantized vorticity and instabilities occurring in normal component.
 
-	Also we note that if we cool the experimental system below $\lesssim 0.6\unit{K}$, a transition to ballistic regime occurs in the normal component, as the mean free path of phonons exceeds the characteristic dimensions of the experimental setup. This situation is similar to the one of dilute classical gases, so the hydrodynamical decription of the system is no longer valid. We discuss the applicability of \textit{universal scaling} for such system in \textbf{Conclusions} chapter.
+	Also we note that if we cool the experimental system below $\lesssim 0.6\unit{K}$, a transition to ballistic regime occurs in the normal component, as the mean free path of phonons exceeds the characteristic dimensions of the experimental setup. This situation is similar to the one of dilute classical gases, so the hydrodynamical description of the system is no longer valid. We discuss the applicability of \textit{universal scaling} for such system in \textbf{Conclusions} chapter.
 
 	Besides experimental approaches on quantum fluids, one of the useful tools for understanding the geometry and flow of quantum turbulence, is the \textit{vortex filament model}, pioneered by Schwarz \cite{schwarz} in late 80's. With the rapid development of available computational power, large simulations have become the methods of choice for calculating the motion of fluids. In superfluids like Helium-II, due to the quantization of circulation, vorticity can only exist within vortex filaments with a certain core size, which makes the model highly applicable.
 
@@ -69,7 +69,7 @@
 	\begin{itemize}
 		\item \textbf{construct} a low-temperature experiment using flow generators such as \textit{vibrating wire, tuning fork and oscillating disc} in order to observe the drag phenomena
 		\item \textbf{investigate} transition from laminar/potential flow of normal/superfluid components, respectively, to \textit{classical, quantum and mixed turbulence} at various temperatures $T > 1\unit{K}$ in a high-frequency regime.
-		\item \textbf{apply} universal scaling method, \textbf{prove} the concept on collected experimental data and \textbf{set} the limitations using the ultra-low temperature data
+		\item \textbf{apply} universal scaling method, \textbf{prove} the concept on collected experimental data and \textbf{test} the limitations using the ultra-low temperature data
 	\end{itemize}
 
 	\subsection*{Simulation}
@@ -562,15 +562,15 @@ If we consider the superfluid component (a dense tangle of quantized vortices) t
 
 \subsection*{Ultra-low temperature regime}
 
-In classical fluids, when the mean free path $\lambda$ of particles becomes comparable to a length scale $D$ of the system ($\text{Kn} \sim 1$), the continuum model of the fluid starts to break down and the system cannot longer be described by the Navier-Stokes equations. Similar arguments go when time period of oscillatory flow $1/\omega$ becomes comparable with the relaxation time $\tau$ of the fluid towards thermodynamic equilibrium ($\text{Wi} \sim 1$).\\
+In classical fluids, when the mean free path $\lambda$ of particles becomes comparable to a length scale $D$ of the system ($\text{Kn} \sim 1$), the continuum model of the fluid starts to break down and the system can no longer be described by the Navier-Stokes equations. Similar arguments go when time period of oscillatory flow $1/\omega$ becomes comparable with the relaxation time $\tau$ of the fluid towards thermodynamic equilibrium ($\text{Wi} \sim 1$).\\
 Considering this, the system is no longer be described as a continuum, but rather as a gas of thermal quasiparticles propagating ballistically through a physical vacuum. Therefore, we call this state as the \textit{ballistic regime}.
 
-In practice, the ballistic regime is usually reached by cooling fluid down to ultra-low temperatures $T < 0.6\unit{K}$k where the normal component accounts for less than $1\%$ of the total density. However, the Knudsen number increases unusually faster than the Weissenberg number, as plotted in \textbf{Figure \ref{Kn-Wi}}.
+In practice, the ballistic regime is usually reached by cooling fluid down to ultra-low temperatures $T < 0.6\unit{K}$ where the normal component accounts for less than $1\%$ of the total density. However, the Knudsen number increases unusually faster than the Weissenberg number, as plotted in \textbf{Figure \ref{Kn-Wi}}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{graphics/theory/ballistic}
-	\caption{Plot of phonon Knudsen number and Weissenberg numbers against a range of temperatures for different oscillators. The dashed line separates the interval $T < 0.6\unit{K}$, where the ballistic regime takes a place. Source:\cite{universal_scaling}}
+	\caption{Plot of phonon Knudsen number and Weissenberg numbers against a range of temperatures for the fundamental and overtone modes of the tuning fork. The dashed line separates the interval $T < 0.6\unit{K}$, where the description of Helium-II as a gas of phonons is valid. Source:\cite{universal_scaling}}
 	\label{Kn-Wi}
 \end{figure}
 
@@ -578,9 +578,9 @@ In practice, the ballistic regime is usually reached by cooling fluid down to ul
 
 \section{Universal scaling}
 
-A study was conducted in order to solve the Stokes' second problem with an oscillating plane in viscous fluid, using pure Boltzmann kinetic equation. This solution was used to derive a universality relation valid in the high-frequency limit and at low velocities, thus with no turbulence present (neither classical nor quantum). This relation holds across both Newtonian and non-Newtonian regimes of the fluid.
+A study was conducted in order to solve the Stokes' second problem with an oscillating plane in viscous fluid, using the Boltzmann kinetic equation. This solution was used to derive a universality relation valid in the high-frequency limit and at low velocities, thus with no turbulence present (neither classical nor quantum). This relation holds across both Newtonian and non-Newtonian regimes of the fluid.
 
-A newly introduced scaling function $f(\text{Wi})$, derived by the authors in \cite{universal_scaling}, relates the quality factor of the oscillator (\ref{quality}) with the geometric and hydrodynamic parameters as:
+A newly introduced scaling function $f(\text{Wi})$, derived by the authors in \cite{universal_scaling}, relates the quality factor of an oscillator (\ref{quality}) with the geometric and hydrodynamic parameters:
 
 \begin{equation}
 1 / Q_f = \frac{\alpha S_{eff}}{m} \sqrt{\frac{\eta \rho_n}{2\omega}} f(\text{Wi})\,,
@@ -591,16 +591,18 @@ where the scaling function $f(\text{Wi})$ is the added term and is defined as:
 
 \begin{equation}
 f(\text{Wi}) = \frac{(1 + \text{Wi}) \cos{\phi} - (1 - \text{Wi}) \cos{\phi}}{(1+\text{Wi})^{3/4}}
+\label{f-Wi}
 \end{equation}
 \begin{equation}
 \phi = \frac{\tan{\text{Wi}^{-1}}}{2}
 \end{equation}
 
-In hydrodynamic regime, when there is enough normal component present $T > 1\unit{K}$, the limit $\text{Wi} \ll 1$ clearly shows the constant behavior of scaling function $f(\text{Wi}) \rightarrow 1$. However, when Wi reaches the critical ballistic value $\text{Wi} \sim 1$, the scaling function increases and in an extreme ballistic case when $\text{Wi} \ll 1$, the scaling function converges to the relation $f(\text{Wi}) \propto \text{Wi}^{-1/2}$.
+In addition to the authors' original suggestion, we have explicitly included the flow enhancement factor $\alpha$, which is necessary to recover the analytical solutions for drag on a sphere or a cylinder.
 
+In hydrodynamical regime, when there is enough normal component present $T > 1\unit{K}$, the limit $\text{Wi} \ll 1$ clearly shows the constant behavior of scaling function $f(\text{Wi}) \rightarrow 1$. However, when Wi reaches the critical value $\text{Wi} \sim 1$, the scaling function increases and in an extreme non-Newtonian case when $\text{Wi} \ll 1$, the scaling function converges to the relation $f(\text{Wi}) \propto \text{Wi}^{-1/2}$.\\
 In the hydrodynamical regime, the relaxation time of the normal component is closely related with the viscosity, which leads to the estimation of Weissenberg number: $\text{Wi} \approx \eta \omega / (\rho_n c_2^2)$, where $c_2$ is the velocity of second sound wave.
 
-Finally, this allows us to use the scaling relation both for the hydrodynamic regime ($T > 1\unit{K}$) and the phonon gas ($T \lesssim 0.6\unit{K}$) and the fluidic quality factor can be rewritten as:
+Finally, this allows us to use the scaling relation both for the hydrodynamical regime ($T > 1\unit{K}$) and the phonon gas ($T \lesssim 0.6\unit{K}$), so the fluidic quality factor can be rewritten:
 
 \begin{equation}
 1 / Q_f = \frac{\alpha S_{eff} \rho_x c_2}{m\omega} \sqrt{\text{Wi}/2} f(\text{Wi})\,,
@@ -624,9 +626,9 @@ Here is briefly commented the transition to quantum turbulence regime observed a
 
 \subsection*{Additional dissipation mechanisms}
 
-In addition to expected viscous drag and a drag caused by the originated vortex tangle, the losses in energy may be caused also due to the sound emissions through the surrounding fluid.
+In addition to expected viscous drag and a drag caused by the created vortex tangle, the losses in energy may be caused also due to the sound emissions through the surrounding fluid.
 
-In this Thesis, such sound emissions can be completely neglected, based on previous studies of acoustic emissions by oscillating object in Helium-II. Perhaps a very small contribution could occur in the first overtone mode of oscillated tuning fork (explained in more detail in \textbf{Experimental approach})
+In this Thesis, such sound emissions can be completely neglected, based on previous studies \cite{emission} \cite{fork-exp} of acoustic emissions by oscillating object in Helium-II. Perhaps a very small contribution could occur in the first overtone mode of oscillated tuning fork (explained in more detail in \textbf{Experimental approach})
 
 % When both velocities of Helium-II are high enough, we expect the turbulent regime on both sides to be coupled due to mutual friction and contributing to the drag. In such situation, we are forced to use classical hydrodynamic metrics: drag coefficient $C_D = 2F / (A\rho U^2)$ and Donnelly number $D = U \delta / \nu$. Recent researches also hint that both classical turbulent and quantum turbulent regimes can exist separately with low interaction.
 %
